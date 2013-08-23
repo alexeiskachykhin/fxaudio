@@ -1,0 +1,19 @@
+{
+  "name": "Cell.AudioEngine",
+  "version": "0.0.1",
+  "description": "Audio Engine for Cell project.",
+  "main": "bootstrapper.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@bitbucket.org:cell-project/cell.git"
+  },
+  "author": "Cell Team",
+  "license": "BSD",
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-ts": "~1.1.7"
+  }
+}
