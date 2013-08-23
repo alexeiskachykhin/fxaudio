@@ -13,5 +13,5 @@ module FxAudioEngine {
         window.mozAudioContext;
 
 
-    export var context = new AudioContext();
+    export var context: AudioContext = new AudioContext();
 }

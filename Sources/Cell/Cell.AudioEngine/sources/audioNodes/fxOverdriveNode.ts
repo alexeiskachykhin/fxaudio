@@ -62,7 +62,7 @@ module FxAudioEngine {
 
         private _setDrive(value: number): void {
             var k = value;
-            var n_samples = 22050;
+            var n_samples = FxAudioEngine.context.sampleRate;
             var deg = Math.PI / 180;
 
             var wsCurve = new Float32Array(n_samples);
