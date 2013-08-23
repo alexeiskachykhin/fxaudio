@@ -12,30 +12,14 @@ module FxAudioEngine {
 
         private _audioInterface: FxAudioNodeInterface;
 
-
-        constructor() {
-            this._ensureAudioGraph();
-        }
+        private _audioGraph: AudioNode[];
 
 
-        public _buildAudioGraph(): AudioNode[] {
-            return [];
-        }
+        public _setAudioNodeInternals(audioGraph: AudioNode[], audioInterface: FxAudioNodeInterface) {
+            FxAudioUtilities.WebAudioAPI.routeAudioGraph(audioGraph);
 
-        public _buildAudioInterface(audioGraph: AudioNode[]): FxAudioNodeInterface {
-            return null;
-        }
-
-
-        private _ensureAudioGraph(): void {
-            if (!this._audioInterface) {
-                var audioGraph = this._buildAudioGraph();
-                var audioInterface = this._buildAudioInterface(audioGraph);
-
-                FxAudioUtilities.WebAudioAPI.routeAudioGraph(audioGraph);
-
-                this._audioInterface = audioInterface;
-            }
+            this._audioGraph = audioGraph;
+            this._audioInterface = audioInterface;
         }
     }
 }

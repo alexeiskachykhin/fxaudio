@@ -5,6 +5,7 @@
 /// <reference path="../fxAudioEngine.ts" />
 /// <reference path="../fxAudioUtilities.ts" />
 
+
 module FxAudioEngine {
     'use strict';
 
@@ -18,7 +19,17 @@ module FxAudioEngine {
         private _gain: GainNode;
 
 
-        public _buildAudioGraph(): AudioNode[] {
+        constructor() {
+            super();
+
+            var audioGraph: AudioNode[] = this._buildAudioGraph();
+            var audioInterface: FxAudioNodeInterface = this._buildAudioInterface();
+
+            this._setAudioNodeInternals(audioGraph, audioInterface);
+        }
+
+
+        private _buildAudioGraph(): AudioNode[] {
             this._lowPassFilter = FxAudioEngine.context.createBiquadFilter();
             this._lowPassFilter.type = 0;
             this._lowPassFilter.frequency.value = 3000;
@@ -38,7 +49,7 @@ module FxAudioEngine {
             return audioGraph;
         }
 
-        public _buildAudioInterface(audioGraph: AudioNode[]): FxAudioNodeInterface {
+        private _buildAudioInterface(): FxAudioNodeInterface {
             var inputPort = new FxAudioPort(this._lowPassFilter, FxAudioPortDirection.INPUT);
             var outputPort = new FxAudioPort(this._gain, FxAudioPortDirection.OUTPUT);
 
@@ -48,7 +59,6 @@ module FxAudioEngine {
 
             return audioInterface;
         }
-
 
         private _setDrive(value: number): void {
             var k = value;
