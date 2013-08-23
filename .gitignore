@@ -62,4 +62,5 @@ Thumbs.db
 
 Sources/Cell/Cell.AudioEngine/**/*.js
 !Sources/Cell/Cell.AudioEngine/**/gruntfile.js
+!Sources/Cell/Cell.AudioEngine/tests/**/*.js
 Sources/Cell/Cell.AudioEngine/**/*.map
