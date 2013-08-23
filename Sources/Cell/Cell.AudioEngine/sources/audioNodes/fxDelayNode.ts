@@ -20,7 +20,9 @@ module FxAudioEngine {
         }
 
         public set time(value: number) {
+            this._delayNode.delayTime.maxValue = value;
             this._delayNode.delayTime.value = value;
+            this._delayNode.delayTime.minValue = value;
         }
 
 
