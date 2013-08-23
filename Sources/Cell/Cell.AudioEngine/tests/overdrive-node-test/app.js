@@ -19,7 +19,7 @@
     };
 
 
-    loadSound('../assets/audio/sample.mp3', function (audioBuffer) {
+    loadSound('../fixtures/audio/sample.mp3', function (audioBuffer) {
         var source = context.createBufferSource();
         source.buffer = audioBuffer;
 
