@@ -10,6 +10,9 @@ module FxAudioEngine {
     'use strict';
 
 
+    var DEFAULT_MAX_DELAY_TIME = 3.0;
+
+
     export class FxDelayNode extends FxAudioNode {
 
         private _delayNode: DelayNode;
@@ -20,14 +23,17 @@ module FxAudioEngine {
         }
 
         public set time(value: number) {
-            this._delayNode.delayTime.maxValue = value;
             this._delayNode.delayTime.value = value;
-            this._delayNode.delayTime.minValue = value;
+        }
+
+
+        constructor(maxTime?: number) {
+            super();
         }
 
 
         public _buildAudioGraph(): AudioNode[] {
-            var audioNode: DelayNode = FxAudioEngine.context.createDelay();
+            var audioNode: DelayNode = FxAudioEngine.context.createDelay(DEFAULT_MAX_DELAY_TIME);
             var audioGraph: AudioNode[] = [audioNode];
 
             this._delayNode = audioNode;
