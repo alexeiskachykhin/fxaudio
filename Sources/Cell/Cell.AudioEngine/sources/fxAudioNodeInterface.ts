@@ -16,13 +16,24 @@ module FxAudioEngine {
         private _bypass: FxAudioPort[];
 
 
+
+        constructor(
+            inputs: FxAudioPort,
+            outputs: FxAudioPort,
+            bypass?: FxAudioPort);
+
         constructor(
             inputs: FxAudioPort[],
             outputs: FxAudioPort[],
-            bypass?: FxAudioPort[]) {
-            this._inputs = inputs;
-            this._outputs = outputs;
-            this._bypass = bypass;
+            bypass?: FxAudioPort[]);
+
+        constructor(
+            inputs: any,
+            outputs: any,
+            bypass?: any) {
+                this._inputs = (inputs instanceof Array) ? inputs : [inputs];
+                this._outputs = (outputs instanceof Array) ? outputs : [outputs];
+                this._bypass = (bypass instanceof Array) ? bypass : [bypass];
         }
     }
 }

@@ -20,12 +20,9 @@ module FxAudioEngine {
 
 
         constructor() {
-            super();
+            var audioGraph = this._buildAudioGraph();
 
-            var audioGraph: AudioNode[] = this._buildAudioGraph();
-            var audioInterface: FxAudioNodeInterface = this._buildAudioInterface();
-
-            this._setAudioNodeInternals(audioGraph, audioInterface);
+            super(audioGraph);
         }
 
 
@@ -47,17 +44,6 @@ module FxAudioEngine {
             ];
 
             return audioGraph;
-        }
-
-        private _buildAudioInterface(): FxAudioNodeInterface {
-            var inputPort = new FxAudioPort(this._lowPassFilter, FxAudioPortDirection.INPUT);
-            var outputPort = new FxAudioPort(this._gain, FxAudioPortDirection.OUTPUT);
-
-            var audioInterface = new FxAudioNodeInterface(
-                [inputPort],
-                [outputPort]);
-
-            return audioInterface;
         }
 
         private _setDrive(value: number): void {

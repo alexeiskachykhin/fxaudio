@@ -30,36 +30,22 @@ module FxAudioEngine {
 
 
         constructor(maxDelayTime?: number) {
-            super();
+            var audioGraph = this._buildAudioGraph();
+
+            super(audioGraph);
+
 
             this._maxDelayTime = maxDelayTime || DEFAULT_MAX_DELAY_TIME;
-
-
-            var audioGraph: AudioNode[] = this._buildAudioGraph();
-            var audioInterface: FxAudioNodeInterface = this._buildAudioInterface();
-
-            this._setAudioNodeInternals(audioGraph, audioInterface);
         }
 
 
         private _buildAudioGraph(): AudioNode[] {
-            var audioNode: DelayNode = FxAudioEngine.context.createDelay(DEFAULT_MAX_DELAY_TIME);
+            var audioNode: DelayNode = FxAudioEngine.context.createDelay(this._maxDelayTime);
             var audioGraph: AudioNode[] = [audioNode];
 
             this._delayNode = audioNode;
 
             return audioGraph;
-        }
-
-        private _buildAudioInterface(): FxAudioNodeInterface {
-            var input = new FxAudioPort(this._delayNode, FxAudioPortDirection.INPUT);
-            var output = new FxAudioPort(this._delayNode, FxAudioPortDirection.OUTPUT);
-
-            var audioInterface = new FxAudioNodeInterface(
-                [input],
-                [output]); 
-
-            return audioInterface;
         }
     }
 }
