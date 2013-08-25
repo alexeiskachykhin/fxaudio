@@ -2,6 +2,7 @@
 
 /// <reference path="fxAudioPort.ts" />
 /// <reference path="fxAudioNodeInterface.ts" />
+/// <reference path="fxAudioEventSource.ts" />
 
 
 module FxAudioEngine {
@@ -13,6 +14,11 @@ module FxAudioEngine {
         private _audioInterface: FxAudioNodeInterface;
 
         private _audioGraph: AudioNode[];
+
+
+        public get ports(): FxAudioNodeInterface {
+            return this._audioInterface;
+        }
 
 
         constructor(

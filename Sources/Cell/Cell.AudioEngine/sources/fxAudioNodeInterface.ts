@@ -9,11 +9,11 @@ module FxAudioEngine {
 
     export class FxAudioNodeInterface {
 
-        private _inputs: FxAudioPort[];
+        public inputs: FxAudioPort[];
 
-        private _outputs: FxAudioPort[];
+        public outputs: FxAudioPort[];
 
-        private _bypass: FxAudioPort[];
+        public bypass: FxAudioPort[];
 
 
 
@@ -31,9 +31,15 @@ module FxAudioEngine {
             inputs: any,
             outputs: any,
             bypass?: any) {
-                this._inputs = (inputs instanceof Array) ? inputs : [inputs];
-                this._outputs = (outputs instanceof Array) ? outputs : [outputs];
-                this._bypass = (bypass instanceof Array) ? bypass : [bypass];
+                this.inputs = (inputs instanceof Array) ? inputs : [inputs];
+                this.outputs = (outputs instanceof Array) ? outputs : [outputs];
+                this.bypass = (bypass instanceof Array) ? bypass : [bypass];
+
+                Object.freeze(this.inputs);
+                Object.freeze(this.outputs);
+                Object.freeze(this.bypass);
+
+                Object.freeze(this);
         }
     }
 }
