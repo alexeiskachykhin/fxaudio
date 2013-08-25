@@ -10,25 +10,26 @@
         request.responseType = 'arraybuffer';
 
         request.addEventListener('load', function () {
-            context.decodeAudioData(this.response, function (buffer) {
-                callback(buffer);
-            });
+            callback(this.response);
         });
 
         request.send();
     };
 
 
-    loadSound('../fixtures/audio/sample.mp3', function (audioBuffer) {
-        var source = context.createBufferSource();
-        source.buffer = audioBuffer;
-
+    loadSound('../fixtures/audio/sample.mp3', function (audioData) {
+        var source = new FxAudioEngine.FxBufferSourceNode();
         var overdrive = new FxAudioEngine.FxOverdriveNode();
-        source.connect(overdrive._audioInterface.inputs[0]._audioNode);
 
+        
+        source.ports.outputs[0].connect(overdrive.ports.inputs[0]);
         overdrive.ports.outputs[0]._audioNode.connect(context.destination);
 
 
-        source.start(0);
+        var fillOperation = source.fill(audioData);
+
+        fillOperation.addEventListener('success', function () {
+            source.play(0);
+        });
     });
 }());

@@ -25,9 +25,9 @@
 
         var delay = new FxAudioEngine.FxDelayNode();
         delay.time = 3;
-        source.connect(delay._audioInterface._inputs[0]._audioNode);
+        source.connect(delay.ports.inputs[0]._audioNode);
 
-        delay._audioInterface._outputs[0]._audioNode.connect(context.destination);
+        delay.ports.outputs[0]._audioNode.connect(context.destination);
 
 
         source.start(0);
