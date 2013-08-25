@@ -30,12 +30,12 @@ module FxAudioEngine {
 
 
         constructor(maxDelayTime?: number) {
+            this._maxDelayTime = maxDelayTime || DEFAULT_MAX_DELAY_TIME;
+
+
             var audioGraph = this._buildAudioGraph();
 
             super(audioGraph);
-
-
-            this._maxDelayTime = maxDelayTime || DEFAULT_MAX_DELAY_TIME;
         }
 
 
