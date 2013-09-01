@@ -1,6 +1,6 @@
 /// <reference path="../libraries/waa.d.ts" />
 
-/// <reference path="fxaudionodeinterface.ts" />
+/// <reference path="fxAudioNodeInterface.ts" />
 
 
 module FxAudioEngine {
