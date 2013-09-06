@@ -21,12 +21,6 @@
         var source = new FxAudioEngine.FxBufferSourceNode();
         source.ports.outputs[0]._audioNode.connect(context.destination);
 
-        var overdrive = new FxAudioEngine.FxOverdriveNode();
-        source.ports.outputs[0].connect(overdrive.ports.inputs[0]);
-
-        overdrive.ports.outputs[0]._audioNode.connect(context.destination);
-
-
 
         var fillOperation = source.fill(audioData);
          
