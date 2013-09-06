@@ -18,8 +18,8 @@
 
 
     loadSound('../fixtures/audio/sample.mp3', function (audioData) {
-        var source = new FxAudioEngine.FxBufferSourceNode();
-        var overdrive = new FxAudioEngine.FxOverdriveNode();
+        var source = new FxAudioEngine.Nodes.FxBufferSourceNode();
+        var overdrive = new FxAudioEngine.Nodes.FxOverdriveNode();
 
         
         source.ports.outputs[0].connect(overdrive.ports.inputs[0]);

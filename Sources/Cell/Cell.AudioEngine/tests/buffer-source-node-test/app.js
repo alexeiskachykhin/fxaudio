@@ -18,7 +18,7 @@
 
 
     loadSound('../fixtures/audio/sample.mp3', function (audioData) {
-        var source = new FxAudioEngine.FxBufferSourceNode();
+        var source = new FxAudioEngine.Nodes.FxBufferSourceNode();
         source.ports.outputs[0]._audioNode.connect(context.destination);
 
 

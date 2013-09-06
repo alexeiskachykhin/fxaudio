@@ -23,7 +23,7 @@
         var source = context.createBufferSource();
         source.buffer = audioBuffer;
 
-        var delay = new FxAudioEngine.FxDelayNode();
+        var delay = new FxAudioEngine.Nodes.FxDelayNode();
         delay.time = 3;
         source.connect(delay.ports.inputs[0]._audioNode);
 

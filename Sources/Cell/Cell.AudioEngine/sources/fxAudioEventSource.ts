@@ -2,7 +2,21 @@
     'use strict';
 
 
-    export class FxAudioEventSource {
+    export interface IFxAudioEventSource {
+
+        addEventListener(eventName: string, eventListener: Function): IFxAudioEventSource;
+
+        removeEventListener(eventName: string, eventListener: Function): IFxAudioEventSource;
+    }
+
+
+    export interface IFxAudioEventCompletionSource extends IFxAudioEventSource {
+
+         dispatchEvent(eventName, ...eventArgs: any[]): void;
+    }
+
+
+    export class FxAudioEventSource implements IFxAudioEventCompletionSource {
 
         private _events: any = {};
 

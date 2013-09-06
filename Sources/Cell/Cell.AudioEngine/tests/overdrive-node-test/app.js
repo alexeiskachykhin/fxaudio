@@ -23,7 +23,7 @@
         var source = context.createBufferSource();
         source.buffer = audioBuffer;
 
-        var overdrive = new FxAudioEngine.FxOverdriveNode();
+        var overdrive = new FxAudioEngine.Nodes.FxOverdriveNode();
         source.connect(overdrive._audioInterface.inputs[0]._audioNode);
 
         overdrive.ports.outputs[0]._audioNode.connect(context.destination);

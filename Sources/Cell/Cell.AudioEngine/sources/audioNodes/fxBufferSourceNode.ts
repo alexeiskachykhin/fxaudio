@@ -4,7 +4,7 @@
 /// <reference path="../fxAudioEngine.ts" />
 
 
-module FxAudioEngine {
+module FxAudioEngine.Nodes {
     'use strict';
 
 
@@ -29,7 +29,7 @@ module FxAudioEngine {
         }
 
 
-        public fill(audioData: ArrayBuffer): FxAudioEventSource {
+        public fill(audioData: ArrayBuffer): IFxAudioEventSource {
             this._bufferState = FxAudioBufferState.DECODING;
 
 
