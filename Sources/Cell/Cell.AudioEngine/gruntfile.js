@@ -14,8 +14,8 @@
             },
 
             dev: [
-                '../sources/**/*.js',
-                '../sources/**/*.map'
+                'sources/**/*.js',
+                'sources/**/*.map'
             ]
         },
 
@@ -26,8 +26,9 @@
             },
 
             dev: {
-                src: ['../sources/**/*.ts'],
-                watch: '../sources'
+                src: ['sources/**/*.ts'],
+                watch: 'sources',
+                out: 'build/fxAudio.js'
             }
         }
     });
