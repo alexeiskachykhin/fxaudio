@@ -18,7 +18,7 @@
 
 
     loadSound('../fixtures/audio/sample.mp3', function (audioData) {
-        var source = new FxAudioEngine.Nodes.FxBufferSourceNode();
+        var source = new FxAudioEngine.Nodes.Source.FxBufferSourceNode();
         var overdrive = new FxAudioEngine.Nodes.FxOverdriveNode();
 
         
@@ -29,7 +29,7 @@
         var fillOperation = source.fill(audioData);
 
         fillOperation.addEventListener('success', function () {
-            source.play(0);
+            source.stream.start(0);
         });
     });
 }());

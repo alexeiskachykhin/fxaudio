@@ -1,10 +1,13 @@
-﻿/// <reference path="../../libraries/waa.d.ts" />
+﻿/// <reference path="../../../libraries/waa.d.ts" />
 
-/// <reference path="../fxAudioNode.ts" />
-/// <reference path="../fxAudioEngine.ts" />
+/// <reference path="../../fxAudioEngine.ts" />
+/// <reference path="../../fxAudioNode.ts" />
+/// <reference path="fxAudioStreamingController.ts" />
+/// <reference path="fxAudioStreamingNode.ts" />
+/// <reference path="fxBufferSourceNodeStreamingController.ts" />
 
 
-module FxAudioEngine.Nodes {
+module FxAudioEngine.Nodes.Source {
     'use strict';
 
 
@@ -15,17 +18,27 @@ module FxAudioEngine.Nodes {
     };
 
 
-    export class FxBufferSourceNode extends FxAudioNode {
+    export class FxBufferSourceNode extends FxAudioNode implements IFxAudioStreamingNode {
 
         private _bufferState: FxAudioBufferState;
 
         private _audioSourceNode: AudioBufferSourceNode;
+
+        private _streamingController: IFxAudioStreamingController;
+
+
+        public get stream(): IFxAudioStreamingController {
+            return this._streamingController;
+        }
 
 
         constructor() {
             var audioGraph = this._buildAudioGraph();
 
             super(audioGraph, null, false);
+
+
+            this._streamingController = new FxBufferSourceNodeStreamingController(this._audioSourceNode);
         }
 
 
@@ -53,14 +66,6 @@ module FxAudioEngine.Nodes {
                 });
 
             return asyncCompletionSource;
-        }
-
-        public play(time: number): void {
-            if (this._bufferState !== FxAudioBufferState.READY) {
-                throw new Error("Buffer is not ready to be played.");
-            }
-
-            this._audioSourceNode.start(time);
         }
 
 
