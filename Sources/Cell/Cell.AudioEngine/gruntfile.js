@@ -15,7 +15,9 @@
 
             dev: [
                 'sources/**/*.js',
-                'sources/**/*.map'
+                'sources/**/*.map',
+                'build/**/*.js',
+                'build/**/*.map'
             ]
         },
 
