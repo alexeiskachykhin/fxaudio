@@ -24,7 +24,8 @@
         ts: {
             options: {
                 target: 'es5',
-                module: 'amd'
+                module: 'amd',
+                declaration: true
             },
 
             dev: {
