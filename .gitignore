@@ -61,7 +61,7 @@ Thumbs.db
 # exclude JavaScript and Source Map files from Cell.AudioEngine project
 # these files will be generated automatically during next build.
 
-Sources/Cell/Cell.AudioEngine/build/
+Sources/Cell/Cell.AudioEngine/build/output
 
 Sources/Cell/Cell.AudioEngine/sources/*.js
 Sources/Cell/Cell.AudioEngine/sources/**/*.js
