@@ -2,6 +2,7 @@
 
 /// <reference path="../../fxAudioEngine.ts" />
 /// <reference path="../../fxAudioNode.ts" />
+/// <reference path="../../fxAudioEventSource.ts" />
 /// <reference path="fxAudioSourceController.ts" />
 /// <reference path="fxAudioSourceNode.ts" />
 /// <reference path="fxBufferAudioSourceController.ts" />
@@ -18,7 +19,7 @@ module FxAudioEngine.Nodes.Source {
     };
 
 
-    export class FxBufferSourceNode extends FxAudioSourceNode {
+    export class FxBufferSourceNode extends FxAudioSourceNode<ArrayBuffer> {
 
         private _bufferState: FxAudioBufferState;
 
@@ -42,7 +43,7 @@ module FxAudioEngine.Nodes.Source {
         }
 
 
-        public fill(audioData: ArrayBuffer): IFxAudioEventSource {
+        public init(audioData: ArrayBuffer): IFxAudioEventSource {
             this._bufferState = FxAudioBufferState.DECODING;
 
 

@@ -26,9 +26,9 @@
         overdrive.ports.outputs[0]._audioNode.connect(context.destination);
 
 
-        var fillOperation = source.fill(audioData);
+        var initOperation = source.init(audioData);
 
-        fillOperation.addEventListener('success', function () {
+        initOperation.addEventListener('success', function () {
             source.stream.start(0);
         });
     });
