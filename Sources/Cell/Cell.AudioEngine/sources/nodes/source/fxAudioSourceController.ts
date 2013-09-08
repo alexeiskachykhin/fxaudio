@@ -2,7 +2,7 @@
     'use strict';
 
 
-    export enum FxAudioStreamingState {
+    export enum FxAudioSourceState {
         PLAYING = 0,
         STOPPED = 1,
         PAUSED = 2,
@@ -10,9 +10,9 @@
     };
 
 
-    export interface IFxAudioStreamingController {
+    export interface IFxAudioSourceController {
 
-        state: FxAudioStreamingState;
+        state: FxAudioSourceState;
 
         canStart: boolean;
 

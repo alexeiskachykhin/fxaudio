@@ -1,20 +1,20 @@
 ﻿/// <reference path="../../../libraries/waa.d.ts" />
 
-/// <reference path="fxAudioStreamingController.ts" />
+/// <reference path="fxAudioSourceController.ts" />
 
 
 module FxAudioEngine.Nodes.Source {
     'use strict';
 
 
-    export class FxBufferSourceNodeStreamingController implements IFxAudioStreamingController {
+    export class FxBufferAudioSourceController implements IFxAudioSourceController {
 
-        private _state: FxAudioStreamingState = FxAudioStreamingState.AWAITING;
+        private _state: FxAudioSourceState = FxAudioSourceState.AWAITING;
 
         private _audioSourceNode: AudioBufferSourceNode;
 
 
-        public get state(): FxAudioStreamingState {
+        public get state(): FxAudioSourceState {
             return this._state;
         }
 
@@ -41,12 +41,12 @@ module FxAudioEngine.Nodes.Source {
 
         public start(when: number): void {
             this._audioSourceNode.start(when);
-            this._state = FxAudioStreamingState.PLAYING;
+            this._state = FxAudioSourceState.PLAYING;
         }
 
         public stop(when: number): void {
             this._audioSourceNode.stop(when);
-            this._state = FxAudioStreamingState.STOPPED;
+            this._state = FxAudioSourceState.STOPPED;
         }
     }
 }

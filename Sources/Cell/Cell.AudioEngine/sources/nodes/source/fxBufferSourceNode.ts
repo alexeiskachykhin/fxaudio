@@ -2,9 +2,9 @@
 
 /// <reference path="../../fxAudioEngine.ts" />
 /// <reference path="../../fxAudioNode.ts" />
-/// <reference path="fxAudioStreamingController.ts" />
-/// <reference path="fxAudioStreamingNode.ts" />
-/// <reference path="fxBufferSourceNodeStreamingController.ts" />
+/// <reference path="fxAudioSourceController.ts" />
+/// <reference path="fxAudioSourceNode.ts" />
+/// <reference path="fxBufferAudioSourceController.ts" />
 
 
 module FxAudioEngine.Nodes.Source {
@@ -18,17 +18,17 @@ module FxAudioEngine.Nodes.Source {
     };
 
 
-    export class FxBufferSourceNode extends FxAudioNode implements IFxAudioStreamingNode {
+    export class FxBufferSourceNode extends FxAudioSourceNode {
 
         private _bufferState: FxAudioBufferState;
 
         private _audioSourceNode: AudioBufferSourceNode;
 
-        private _streamingController: IFxAudioStreamingController;
+        private _audioSourceController: IFxAudioSourceController;
 
 
-        public get stream(): IFxAudioStreamingController {
-            return this._streamingController;
+        public get stream(): IFxAudioSourceController {
+            return this._audioSourceController;
         }
 
 
@@ -38,7 +38,7 @@ module FxAudioEngine.Nodes.Source {
             super(audioGraph, null, false);
 
 
-            this._streamingController = new FxBufferSourceNodeStreamingController(this._audioSourceNode);
+            this._audioSourceController = new FxBufferAudioSourceController(this._audioSourceNode);
         }
 
 
