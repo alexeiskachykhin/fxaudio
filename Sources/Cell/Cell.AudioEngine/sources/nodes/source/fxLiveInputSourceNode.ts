@@ -35,7 +35,7 @@ module FxAudioEngine.Nodes.Source {
             super(audioGraph, audioInterface, false);
 
 
-            this._audioSourceController = new FxLiveInputAudioSourceController(null);
+            this._audioSourceController = new FxLiveInputAudioSourceController();
         }
 
 
