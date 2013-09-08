@@ -21,6 +21,23 @@
         private _events: any = {};
 
 
+        private _defer(f: Function): void {
+            window.setTimeout(f, 0); // TODO: Replace with "true" setImmediate implementation.
+        }
+
+        private _dispatchEvent(eventName, ...eventArgs: any[]): void {
+            if (!this._events.hasOwnProperty(eventName)) {
+                return;
+            }
+
+
+            var eventListeners: Function[] = this._events[eventName];
+
+            eventListeners.forEach(
+                (eventListener) => eventListener.apply(null, eventArgs));
+        }
+
+
         public addEventListener(eventName: string, eventListener: Function): FxAudioEventSource {
 	        if (typeof eventListener !== 'function') {
 	            throw new TypeError('Event listener is not a function.');
@@ -54,15 +71,11 @@
         }
 
         public dispatchEvent(eventName, ...eventArgs: any[]): void {
-            if (!this._events.hasOwnProperty(eventName)) { 
-                return; 
-            }
+            var args = arguments;
 
-
-            var eventListeners: Function[] = this._events[eventName]; 
-
-            eventListeners.forEach(
-                (eventListener) => eventListener.apply(null, eventArgs));
+            this._defer(() => {
+                this._dispatchEvent.apply(this, args);
+            });
         }
     }
 }	
