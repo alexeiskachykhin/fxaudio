@@ -21,11 +21,11 @@
         var audioContext = new FxAudioEngine.FxRealTimeAudioContext();
 
         var bufferSourceNode = new FxAudioEngine.Nodes.Source.FxBufferSourceNode(audioContext);
-        var overdriveNode = new FxAudioEngine.Nodes.FxOverdriveNode(audioContext);
+        var delayNode = new FxAudioEngine.Nodes.FxDelayNode(audioContext);
         var destinationNode = new FxAudioEngine.Nodes.FxAudioDestinationNode(audioContext);
 
-        bufferSourceNode.ports.outputs[0].connect(overdriveNode.ports.inputs[0]);
-        overdriveNode.ports.outputs[0].connect(destinationNode.ports.inputs[0]);
+        bufferSourceNode.ports.outputs[0].connect(delayNode.ports.inputs[0]);
+        delayNode.ports.outputs[0].connect(destinationNode.ports.inputs[0]);
 
         var initOperation = bufferSourceNode.init(audioBuffer);
 

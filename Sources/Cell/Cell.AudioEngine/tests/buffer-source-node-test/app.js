@@ -17,15 +17,18 @@
     };
 
 
-    loadSound('../fixtures/audio/sample.mp3', function (audioData) {
-        var source = new FxAudioEngine.Nodes.Source.FxBufferSourceNode();
-        source.ports.outputs[0]._audioNode.connect(context.destination);
+    loadSound('../fixtures/audio/sample.mp3', function (audioBuffer) {
+        var audioContext = new FxAudioEngine.FxRealTimeAudioContext();
 
+        var bufferSourceNode = new FxAudioEngine.Nodes.Source.FxBufferSourceNode(audioContext);
+        var destinationNode = new FxAudioEngine.Nodes.FxAudioDestinationNode(audioContext);
 
-        var initOperation = source.init(audioData);
+        bufferSourceNode.ports.outputs[0].connect(destinationNode.ports.inputs[0]);
+
+        var initOperation = bufferSourceNode.init(audioBuffer);
          
         initOperation.addEventListener('success', function () {
-            source.stream.start(0);
+            bufferSourceNode.stream.start(0);
         });
     });
 }());

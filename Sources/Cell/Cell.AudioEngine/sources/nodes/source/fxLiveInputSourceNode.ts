@@ -1,7 +1,7 @@
 ﻿/// <reference path="../../../libraries/waa.d.ts" />
 /// <reference path="../../../libraries/MediaStream.d.ts" />
 
-/// <reference path="../../fxAudioEngine.ts" />
+/// <reference path="../../fxAudioContext.ts" />
 /// <reference path="../../fxAudioNode.ts" />
 /// <reference path="../../fxAudioEventSource.ts" />
 
@@ -28,11 +28,11 @@ module FxAudioEngine.Nodes.Source {
         }
 
 
-        constructor() {
-            var audioGraph = this._buildAudioGraph();
+        constructor(audioContext: FxAudioContext) {
+            var audioGraph = this._buildAudioGraph(audioContext);
             var audioInterface = this._buildAudioInterface(audioGraph);
 
-            super(audioGraph, audioInterface, false);
+            super(audioContext, audioGraph, audioInterface, false);
 
 
             this._audioSourceController = new FxLiveInputAudioSourceController();
@@ -54,8 +54,8 @@ module FxAudioEngine.Nodes.Source {
         }
 
 
-        private _buildAudioGraph(): AudioNode[] {
-            var audioNode: AudioNode = FxAudioEngine.context.createGain();
+        private _buildAudioGraph(audioContext: FxAudioContext): AudioNode[] {
+            var audioNode: AudioNode = audioContext._audioContext.createGain();
             var audioGraph: AudioNode[] = [audioNode];
 
             this._outputGainNode = audioNode;
@@ -75,7 +75,7 @@ module FxAudioEngine.Nodes.Source {
         }
 
         private _mountStream(stream: MediaStream): void {
-            this._mediStreamSourceNode = FxAudioEngine.context.createMediaStreamSource(<any>stream);
+            this._mediStreamSourceNode = this.audioContext._audioContext.createMediaStreamSource(<any>stream);
             this._mediStreamSourceNode.connect(this._outputGainNode);
         } 
     }
