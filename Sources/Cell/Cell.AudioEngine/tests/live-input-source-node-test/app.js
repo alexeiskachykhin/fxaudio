@@ -12,14 +12,17 @@
 
 
     getInputStream(function (stream) {
-        var source = new FxAudioEngine.Nodes.Source.FxLiveInputSourceNode();
-        source.ports.outputs[0]._audioNode.connect(context.destination);
+        var audioContext = new FxAudioEngine.FxRealTimeAudioContext();
 
+        var liveInputSourceNode = new FxAudioEngine.Nodes.Source.FxLiveInputSourceNode(audioContext);
+        var destinationNode = new FxAudioEngine.Nodes.FxAudioDestinationNode(audioContext);
+
+        liveInputSourceNode.ports.outputs[0].connect(overdriveNode.ports.inputs[0]);
 
         var initOperation = source.init(stream);
          
         initOperation.addEventListener('success', function () {
-            source.stream.start(0);
+            liveInputSourceNode.stream.start(0);
         });
 
         initOperation.addEventListener('error', function () {
