@@ -1,8 +1,6 @@
 ﻿(function () {
     'use strict';
 
-    var context = FxAudioEngine.context;
-
 
     function getInputStream(callback) {
         navigator.getUserMedia({
@@ -14,15 +12,16 @@
     getInputStream(function (stream) {
         var audioContext = new FxAudioEngine.FxRealTimeAudioContext();
 
-        var liveInputSourceNode = new FxAudioEngine.Nodes.Source.FxLiveInputSourceNode(audioContext);
+        var sourceNode = new FxAudioEngine.Nodes.Source.FxLiveInputSourceNode(audioContext);
         var destinationNode = new FxAudioEngine.Nodes.FxAudioDestinationNode(audioContext);
 
-        liveInputSourceNode.ports.outputs[0].connect(overdriveNode.ports.inputs[0]);
+        sourceNode.ports.outputs[0].connect(destinationNode.ports.inputs[0]);
 
-        var initOperation = source.init(stream);
+
+        var initOperation = sourceNode.init(stream);
          
         initOperation.addEventListener('success', function () {
-            liveInputSourceNode.stream.start(0);
+            sourceNode.stream.start(0);
         });
 
         initOperation.addEventListener('error', function () {
