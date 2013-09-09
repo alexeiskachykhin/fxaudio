@@ -1,8 +1,6 @@
 ﻿(function () {
     'use strict';
 
-    var context = FxAudioEngine.context;
-
 
     function loadSound(url, callback) {
         var request = new XMLHttpRequest();
@@ -20,17 +18,18 @@
     loadSound('../fixtures/audio/sample.mp3', function (audioBuffer) {
         var audioContext = new FxAudioEngine.FxRealTimeAudioContext();
 
-        var bufferSourceNode = new FxAudioEngine.Nodes.Source.FxBufferSourceNode(audioContext);
-        var overdriveNode = new FxAudioEngine.Nodes.FxOverdriveNode(audioContext);
+        var sourceNode = new FxAudioEngine.Nodes.Source.FxBufferSourceNode(audioContext);
         var destinationNode = new FxAudioEngine.Nodes.FxAudioDestinationNode(audioContext);
+        var overdriveNode = new FxAudioEngine.Nodes.FxOverdriveNode(audioContext);
 
-        bufferSourceNode.ports.outputs[0].connect(overdriveNode.ports.inputs[0]);
+        sourceNode.ports.outputs[0].connect(overdriveNode.ports.inputs[0]);
         overdriveNode.ports.outputs[0].connect(destinationNode.ports.inputs[0]);
 
-        var initOperation = bufferSourceNode.init(audioBuffer);
+
+        var initOperation = sourceNode.init(audioBuffer);
 
         initOperation.addEventListener('success', function () {
-            bufferSourceNode.stream.start(0);
+            sourceNode.stream.start(0);
         });
     });
 }());
