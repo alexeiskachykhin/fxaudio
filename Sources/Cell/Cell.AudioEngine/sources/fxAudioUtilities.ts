@@ -21,7 +21,7 @@ module FxAudioEngine {
     class FxAudioNodeInterfaceUtilities {
 
         public fromAudioGraph(audioGraph: AudioNode[]): FxAudioNodeInterface {
-            if (audioGraph == null) {
+            if (!audioGraph) {
                 throw new TypeError('Invalid audio graph.');
             }
 
