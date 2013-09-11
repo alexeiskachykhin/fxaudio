@@ -1,11 +1,4 @@
-﻿/// <reference path="../../../libraries/waa.d.ts" />
-
-/// <reference path="../../fxAudioContext.ts" />
-/// <reference path="../../fxAudioNode.ts" />
-/// <reference path="../../fxAudioEventSource.ts" />
-/// <reference path="fxAudioSourceController.ts" />
-/// <reference path="fxAudioSourceNode.ts" />
-/// <reference path="fxBufferAudioSourceController.ts" />
+﻿/// <reference path="../../_references.ts" />
 
 
 module FxAudioEngine.Nodes.Source {

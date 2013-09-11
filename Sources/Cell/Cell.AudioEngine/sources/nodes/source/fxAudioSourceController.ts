@@ -1,4 +1,7 @@
-﻿module FxAudioEngine.Nodes.Source {
+﻿/// <reference path="../../_references.ts" />
+
+
+module FxAudioEngine.Nodes.Source {
     'use strict';
 
 
