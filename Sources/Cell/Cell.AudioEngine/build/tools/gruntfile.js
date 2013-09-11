@@ -28,12 +28,11 @@
             },
 
             dev: {
-                src: ['../../sources/**/*.ts'],
+                src: ['../../sources/**/*.ts', '../../libraries/**/*.d.ts'],
                 watch: '../../sources',
-                out: '../output/fxAudio.js'
-            },
-
-
+                out: '../output/fxAudio.js',
+                reference: '../../sources/_references.ts'
+            }
         }
     });
 
