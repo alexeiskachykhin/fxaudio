@@ -1,11 +1,11 @@
 ﻿/// <reference path="../../../libraries/waa.d.ts" />
 /// <reference path="../../../libraries/MediaStream.d.ts" />
 
-/// <reference path="../../fxAudioContext.ts" />
-/// <reference path="../../fxAudioNode.ts" />
-/// <reference path="../../fxAudioEventSource.ts" />
+/// <reference path="../../fxUnitContext.ts" />
+/// <reference path="../../fxUnitNode.ts" />
+/// <reference path="../../fxEventSource.ts" />
 
-/// <reference path="fxAudioSourceNode.ts" />
+/// <reference path="fxAudioSourceUnit.ts" />
 /// <reference path="fxAudioSourceController.ts" />
 /// <reference path="fxLiveInputAudioSourceController.ts" />
 
@@ -14,7 +14,7 @@ module FxAudioEngine.Nodes.Source {
     'use strict';
 
 
-    export class FxLiveInputSourceNode extends FxAudioSourceNode<MediaStream> {
+    export class FxLiveInputSourceUnit extends FxAudioSourceUnit<MediaStream> {
 
         private _outputGainNode: AudioNode;
 
@@ -28,7 +28,7 @@ module FxAudioEngine.Nodes.Source {
         }
 
 
-        constructor(audioContext: FxAudioContext) {
+        constructor(unitContext: FxUnitContext) {
             var audioGraph = this._buildAudioGraph(audioContext);
             var audioInterface = this._buildAudioInterface(audioGraph);
 

@@ -10,20 +10,19 @@
 
 
     getInputStream(function (stream) {
-        var audioContext = new FxAudioEngine.FxRealTimeAudioContext();
+        var unitContext = new FxAudioEngine.FxRealTimeUnitContext();
 
-        var sourceNode = new FxAudioEngine.Nodes.Source.FxLiveInputSourceNode(audioContext);
-        var overdriveNode = new FxAudioEngine.Nodes.FxOverdriveNode(audioContext);
-        var destinationNode = new FxAudioEngine.Nodes.FxAudioDestinationNode(audioContext);
+        var sourceUnit = new FxAudioEngine.Units.Source.FxLiveInputSourceUnit(unitContext);
+        var overdriveUnit = new FxAudioEngine.Units.FxOverdriveUnit(unitContext);
+        var destinationUnit = new FxAudioEngine.Units.FxAudioDestinationUnit(unitContext);
 
-        sourceNode.ports.outputs[0].connect(overdriveNode.ports.inputs[0]);
-        overdriveNode.ports.outputs[0].connect(destinationNode.ports.inputs[0]);
+        sourceUnit.ports.outputs[0].connect(overdriveUnit.ports.inputs[0]);
+        overdriveUnit.ports.outputs[0].connect(destinationUnit.ports.inputs[0]);
 
-
-        var initOperation = sourceNode.init(stream);
+        var initOperation = sourceUnit.init(stream);
          
         initOperation.addEventListener('success', function () {
-            sourceNode.stream.start(0);
+            sourceUnit.stream.start(0);
         });
 
         initOperation.addEventListener('error', function () {

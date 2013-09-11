@@ -1,6 +1,6 @@
 /// <reference path="../libraries/waa.d.ts" />
 
-/// <reference path="fxAudioNodeInterface.ts" />
+/// <reference path="fxUnitInterface.ts" />
 
 
 module FxAudioEngine {
@@ -20,9 +20,9 @@ module FxAudioEngine {
     }
 
 
-    class FxAudioNodeInterfaceUtilities {
+    class FxUnitInterfaceUtilities {
 
-        public fromAudioGraph(audioGraph: AudioNode[]): FxAudioNodeInterface {
+        public fromAudioGraph(audioGraph: AudioNode[]): FxUnitInterface {
             if (audioGraph == null) {
                 throw new TypeError('Invalid audio graph.');
             }
@@ -30,11 +30,11 @@ module FxAudioEngine {
             var inputNode = audioGraph[0];
             var outputNode = audioGraph[audioGraph.length - 1];
 
-            var input = new FxAudioPort(inputNode, FxAudioPortDirection.INPUT);
-            var output = new FxAudioPort(outputNode, FxAudioPortDirection.OUTPUT);
+            var input = new FxUnitPort(inputNode, FxUnitPortDirection.INPUT);
+            var output = new FxUnitPort(outputNode, FxUnitPortDirection.OUTPUT);
 
 
-            var audioInterface = new FxAudioNodeInterface(input, output);
+            var audioInterface = new FxUnitInterface(input, output);
 
             return audioInterface;
         }
@@ -47,6 +47,6 @@ module FxAudioEngine {
 
         public static WebAudioAPI = new WebAudioAPIUtilities();
 
-        public static AudioInterface = new FxAudioNodeInterfaceUtilities();
+        public static AudioInterface = new FxUnitInterfaceUtilities();
     }
 }

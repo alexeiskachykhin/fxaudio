@@ -1,16 +1,16 @@
 /// <reference path="../../libraries/waa.d.ts" />
 
-/// <reference path="../fxAudioContext.ts" />
-/// <reference path="../fxAudioPort.ts" />
-/// <reference path="../fxAudioNode.ts" />
+/// <reference path="../fxUnitContext.ts" />
+/// <reference path="../fxUnitPort.ts" />
+/// <reference path="../fxUnit.ts" />
 /// <reference path="../fxAudioUtilities.ts" />
 
 
-module FxAudioEngine.Nodes {
+module FxAudioEngine.Units {
     'use strict';
 
 
-    export class FxOverdriveNode extends FxAudioNode {
+    export class FxOverdriveUnit extends FxUnit {
 
         private _waveShaperNode: WaveShaperNode;
 
@@ -19,23 +19,22 @@ module FxAudioEngine.Nodes {
         private _gainNode: GainNode;
 
 
-        constructor(audioContext: FxAudioContext) {
-            var audioGraph = this._buildAudioGraph(audioContext);
+        constructor(unitContext: FxUnitContext) {
+            var audioGraph = this._buildAudioGraph(unitContext);
 
-            super(audioContext, audioGraph);
+            super(unitContext, audioGraph);
         }
 
 
-        private _buildAudioGraph(audioContext: FxAudioContext): AudioNode[] {
-            this._lowPassFilterNode = audioContext.audioContext.createBiquadFilter();
+        private _buildAudioGraph(unitContext: FxUnitContext): AudioNode[] {
+            this._lowPassFilterNode = unitContext.audioContext.createBiquadFilter();
             this._lowPassFilterNode.type = 0;
             this._lowPassFilterNode.frequency.value = 3000;
 
-            this._waveShaperNode = audioContext.audioContext.createWaveShaper();
-            this._setDrive(audioContext.sampleRate, 120);
+            this._waveShaperNode = unitContext.audioContext.createWaveShaper();
+            this._setDrive(unitContext.sampleRate, 120);
 
-            this._gainNode = audioContext.audioContext.createGain();
-
+            this._gainNode = unitContext.audioContext.createGain();
 
             var audioGraph: AudioNode[] = [
                 this._lowPassFilterNode,

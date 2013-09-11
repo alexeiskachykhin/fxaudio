@@ -16,18 +16,17 @@
 
 
     loadSound('../fixtures/audio/sample.mp3', function (audioBuffer) {
-        var audioContext = new FxAudioEngine.FxRealTimeAudioContext();
+        var unitContext = new FxAudioEngine.FxRealTimeUnitContext();
 
-        var sourceNode = new FxAudioEngine.Nodes.Source.FxBufferSourceNode(audioContext);
-        var destinationNode = new FxAudioEngine.Nodes.FxAudioDestinationNode(audioContext);
+        var sourceUnit = new FxAudioEngine.Units.Source.FxBufferSourceUnit(unitContext);
+        var destinationUnit = new FxAudioEngine.Units.FxAudioDestinationUnit(unitContext);
 
-        sourceNode.ports.outputs[0].connect(destinationNode.ports.inputs[0]);
+        sourceUnit.ports.outputs[0].connect(destinationUnit.ports.inputs[0]);
 
-
-        var initOperation = sourceNode.init(audioBuffer);
+        var initOperation = sourceUnit.init(audioBuffer);
          
         initOperation.addEventListener('success', function () {
-            sourceNode.stream.start(0);
+            sourceUnit.stream.start(0);
         });
     });
 }());
