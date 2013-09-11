@@ -1,4 +1,4 @@
-/// <reference path="../libraries/waa.d.ts" />
+/// <reference path="_references.ts" />
 
 
 module FxAudioEngine {

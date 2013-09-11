@@ -12,6 +12,7 @@
 *.map
 bin/
 obj/
+_references.ts
 
 # Visual Studio user preferences #
 ##################################
