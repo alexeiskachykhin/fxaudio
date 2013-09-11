@@ -1,5 +1,6 @@
 /// <reference path="../libraries/waa.d.ts" />
 
+/// <reference path="fxAudioContext.ts" />
 /// <reference path="fxAudioPort.ts" />
 /// <reference path="fxAudioNodeInterface.ts" />
 /// <reference path="fxAudioEventSource.ts" />
@@ -11,10 +12,16 @@ module FxAudioEngine {
 
     export class FxAudioNode {
 
+        private _audioContext: FxAudioContext;
+
         private _audioInterface: FxAudioNodeInterface;
 
         private _audioGraph: AudioNode[];
 
+
+        public get audioContext(): FxAudioContext {
+            return this._audioContext;
+        }
 
         public get ports(): FxAudioNodeInterface {
             return this._audioInterface;
@@ -22,9 +29,11 @@ module FxAudioEngine {
 
 
         constructor(
+            audioContext: FxAudioContext,
             audioGraph: AudioNode[],
             audioInterface?: FxAudioNodeInterface,
             autoRoute: boolean = true) {
+                this._audioContext = audioContext;
                 this._setAudioNodeInternals(audioGraph, audioInterface, autoRoute);
         }
 
