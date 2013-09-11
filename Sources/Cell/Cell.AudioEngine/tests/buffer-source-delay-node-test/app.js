@@ -20,12 +20,14 @@
 
         var sourceNode = new FxAudioEngine.Nodes.Source.FxBufferSourceNode(audioContext);
         var destinationNode = new FxAudioEngine.Nodes.FxAudioDestinationNode(audioContext);
+        var delayNode = new FxAudioEngine.Nodes.FxDelayNode(audioContext);
 
-        sourceNode.ports.outputs[0].connect(destinationNode.ports.inputs[0]);
+        sourceNode.ports.outputs[0].connect(delayNode.ports.inputs[0]);
+        delayNode.ports.outputs[0].connect(destinationNode.ports.inputs[0]);
 
 
         var initOperation = sourceNode.init(audioBuffer);
-         
+
         initOperation.addEventListener('success', function () {
             sourceNode.stream.start(0);
         });

@@ -1,8 +1,8 @@
 /// <reference path="../../libraries/waa.d.ts" />
 
+/// <reference path="../fxAudioContext.ts" />
 /// <reference path="../fxAudioNode.ts" />
 /// <reference path="../fxAudioPort.ts" />
-/// <reference path="../fxAudioEngine.ts" />
 /// <reference path="../fxAudioUtilities.ts" />
 
 
@@ -29,18 +29,17 @@ module FxAudioEngine.Nodes {
         }
 
 
-        constructor(maxDelayTime?: number) {
+        constructor(audioContext: FxAudioContext, maxDelayTime?: number) {
             this._maxDelayTime = maxDelayTime || DEFAULT_MAX_DELAY_TIME;
 
+            var audioGraph = this._buildAudioGraph(audioContext);
 
-            var audioGraph = this._buildAudioGraph();
-
-            super(audioGraph);
+            super(audioContext, audioGraph);
         }
 
 
-        private _buildAudioGraph(): AudioNode[] {
-            var audioNode: DelayNode = FxAudioEngine.context.createDelay(this._maxDelayTime);
+        private _buildAudioGraph(audioContext: FxAudioContext): AudioNode[] {
+            var audioNode: DelayNode = audioContext.audioContext.createDelay(this._maxDelayTime);
             var audioGraph: AudioNode[] = [audioNode];
 
             this._delayNode = audioNode;

@@ -1,6 +1,6 @@
 ﻿/// <reference path="../../../libraries/waa.d.ts" />
 
-/// <reference path="../../fxAudioEngine.ts" />
+/// <reference path="../../fxAudioContext.ts" />
 /// <reference path="../../fxAudioNode.ts" />
 /// <reference path="../../fxAudioEventSource.ts" />
 /// <reference path="fxAudioSourceController.ts" />
@@ -33,11 +33,10 @@ module FxAudioEngine.Nodes.Source {
         }
 
 
-        constructor() {
-            var audioGraph = this._buildAudioGraph();
+        constructor(audioContext: FxAudioContext) {
+            var audioGraph = this._buildAudioGraph(audioContext);
 
-            super(audioGraph, null, false);
-
+            super(audioContext, audioGraph, null, false);
 
             this._audioSourceController = new FxBufferAudioSourceController(this._audioSourceNode);
         }
@@ -46,10 +45,9 @@ module FxAudioEngine.Nodes.Source {
         public init(audioData: ArrayBuffer): IFxAudioEventSource {
             this._bufferState = FxAudioBufferState.DECODING;
 
-
             var asyncCompletionSource = new FxAudioEventSource();
 
-            FxAudioEngine.context.decodeAudioData(
+            this.audioContext.audioContext.decodeAudioData(
                 audioData,
 
                 (audioBuffer: AudioBuffer) => {
@@ -70,8 +68,8 @@ module FxAudioEngine.Nodes.Source {
         }
 
 
-        private _buildAudioGraph(): AudioNode[] {
-            var audioNode: AudioBufferSourceNode = FxAudioEngine.context.createBufferSource();
+        private _buildAudioGraph(audioContext: FxAudioContext): AudioNode[] {
+            var audioNode: AudioBufferSourceNode = audioContext.audioContext.createBufferSource();
             var audioGraph: AudioNode[] = [audioNode];
 
             this._audioSourceNode = audioNode;

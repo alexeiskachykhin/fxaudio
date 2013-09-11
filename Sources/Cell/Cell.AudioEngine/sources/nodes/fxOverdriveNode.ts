@@ -1,8 +1,8 @@
 /// <reference path="../../libraries/waa.d.ts" />
 
+/// <reference path="../fxAudioContext.ts" />
 /// <reference path="../fxAudioPort.ts" />
 /// <reference path="../fxAudioNode.ts" />
-/// <reference path="../fxAudioEngine.ts" />
 /// <reference path="../fxAudioUtilities.ts" />
 
 
@@ -12,53 +12,52 @@ module FxAudioEngine.Nodes {
 
     export class FxOverdriveNode extends FxAudioNode {
 
-        private _waveShaper: WaveShaperNode;
+        private _waveShaperNode: WaveShaperNode;
 
-        private _lowPassFilter: BiquadFilterNode;
+        private _lowPassFilterNode: BiquadFilterNode;
 
-        private _gain: GainNode;
+        private _gainNode: GainNode;
 
 
-        constructor() {
-            var audioGraph = this._buildAudioGraph();
+        constructor(audioContext: FxAudioContext) {
+            var audioGraph = this._buildAudioGraph(audioContext);
 
-            super(audioGraph);
+            super(audioContext, audioGraph);
         }
 
 
-        private _buildAudioGraph(): AudioNode[] {
-            this._lowPassFilter = FxAudioEngine.context.createBiquadFilter();
-            this._lowPassFilter.type = 0;
-            this._lowPassFilter.frequency.value = 3000;
+        private _buildAudioGraph(audioContext: FxAudioContext): AudioNode[] {
+            this._lowPassFilterNode = audioContext.audioContext.createBiquadFilter();
+            this._lowPassFilterNode.type = 0;
+            this._lowPassFilterNode.frequency.value = 3000;
 
-            this._waveShaper = FxAudioEngine.context.createWaveShaper();
-            this._setDrive(120);
+            this._waveShaperNode = audioContext.audioContext.createWaveShaper();
+            this._setDrive(audioContext.sampleRate, 120);
 
-            this._gain = FxAudioEngine.context.createGain();
+            this._gainNode = audioContext.audioContext.createGain();
 
 
             var audioGraph: AudioNode[] = [
-                this._lowPassFilter,
-                this._waveShaper,
-                this._gain
+                this._lowPassFilterNode,
+                this._waveShaperNode,
+                this._gainNode
             ];
 
             return audioGraph;
         }
 
-        private _setDrive(value: number): void {
+        private _setDrive(sampleRate:number, value: number): void {
             var k = value;
-            var n_samples = FxAudioEngine.context.sampleRate;
             var deg = Math.PI / 180;
 
-            var wsCurve = new Float32Array(n_samples);
+            var wsCurve = new Float32Array(sampleRate);
 
-            for (var i = 0; i < n_samples; i += 1) {
-                var x = i * 2 / n_samples - 1;
+            for (var i = 0; i < sampleRate; i += 1) {
+                var x = i * 2 / sampleRate - 1;
                 wsCurve[i] = (3 + k) * x * 20 * deg / (Math.PI + k * Math.abs(x));
             }
 
-            this._waveShaper.curve = wsCurve;
+            this._waveShaperNode.curve = wsCurve;
         }
     }
 }
