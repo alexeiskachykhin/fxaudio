@@ -4,6 +4,7 @@
 
     grunt.loadNpmTasks('grunt-ts');
     grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-tslint');
 
 
     grunt.initConfig({
@@ -33,9 +34,19 @@
                 out: '../output/fxAudio.js',
                 reference: '../../sources/_references.ts'
             }
+        },
+
+        tslint: {
+            options: {
+                configuration: grunt.file.readJSON('tslint.json')
+            },
+
+            dev: {
+                src: ['../../sources/**/*.ts']
+            }
         }
     });
 
 
-    grunt.registerTask('default', ['clean:dev', 'ts:dev']);
+    grunt.registerTask('default', ['clean:dev', 'tslint:dev', 'ts:dev']);
 }
