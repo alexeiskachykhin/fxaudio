@@ -26,7 +26,7 @@ module FxAudioEngine.Nodes {
 
 
         private _buildAudioGraph(audioContext: FxAudioContext): AudioNode[] {
-            var audioDestinationNode: AudioDestinationNode = audioContext._audioContext.destination;
+            var audioDestinationNode: AudioDestinationNode = audioContext.audioContext.destination;
             var audioGraph: AudioNode[] = [audioDestinationNode];
 
             return audioGraph;

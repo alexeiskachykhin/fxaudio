@@ -10,6 +10,10 @@ module FxAudioEngine {
         public _audioContext: AudioContext;
 
 
+        public get audioContext(): AudioContext {
+            return this._audioContext;
+        }
+
         public get sampleRate(): number {
             return this._audioContext.sampleRate;
         }

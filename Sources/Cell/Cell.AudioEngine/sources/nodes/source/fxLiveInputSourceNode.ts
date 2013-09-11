@@ -55,7 +55,7 @@ module FxAudioEngine.Nodes.Source {
 
 
         private _buildAudioGraph(audioContext: FxAudioContext): AudioNode[] {
-            var audioNode: AudioNode = audioContext._audioContext.createGain();
+            var audioNode: AudioNode = audioContext.audioContext.createGain();
             var audioGraph: AudioNode[] = [audioNode];
 
             this._outputGainNode = audioNode;
@@ -75,7 +75,7 @@ module FxAudioEngine.Nodes.Source {
         }
 
         private _mountStream(stream: MediaStream): void {
-            this._mediStreamSourceNode = this.audioContext._audioContext.createMediaStreamSource(<any>stream);
+            this._mediStreamSourceNode = this.audioContext.audioContext.createMediaStreamSource(<any>stream);
             this._mediStreamSourceNode.connect(this._outputGainNode);
         } 
     }

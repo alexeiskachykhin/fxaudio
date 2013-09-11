@@ -47,7 +47,7 @@ module FxAudioEngine.Nodes.Source {
 
             var asyncCompletionSource = new FxAudioEventSource();
 
-            this.audioContext._audioContext.decodeAudioData(
+            this.audioContext.audioContext.decodeAudioData(
                 audioData,
 
                 (audioBuffer: AudioBuffer) => {
@@ -69,7 +69,7 @@ module FxAudioEngine.Nodes.Source {
 
 
         private _buildAudioGraph(audioContext: FxAudioContext): AudioNode[] {
-            var audioNode: AudioBufferSourceNode = audioContext._audioContext.createBufferSource();
+            var audioNode: AudioBufferSourceNode = audioContext.audioContext.createBufferSource();
             var audioGraph: AudioNode[] = [audioNode];
 
             this._audioSourceNode = audioNode;
