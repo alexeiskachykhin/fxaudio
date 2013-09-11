@@ -1,14 +1,14 @@
 ﻿/// <reference path="../../../libraries/waa.d.ts" />
 
-/// <reference path="../../fxAudioContext.ts" />
-/// <reference path="../../fxAudioNode.ts" />
-/// <reference path="../../fxAudioEventSource.ts" />
+/// <reference path="../../fxUnitContext.ts" />
+/// <reference path="../../fxUnit.ts" />
+/// <reference path="../../fxEventSource.ts" />
 /// <reference path="fxAudioSourceController.ts" />
-/// <reference path="fxAudioSourceNode.ts" />
+/// <reference path="fxAudioSourceUnit.ts" />
 /// <reference path="fxBufferAudioSourceController.ts" />
 
 
-module FxAudioEngine.Nodes.Source {
+module FxAudioEngine.Units.Source {
     'use strict';
 
 
@@ -19,7 +19,7 @@ module FxAudioEngine.Nodes.Source {
     };
 
 
-    export class FxBufferSourceNode extends FxAudioSourceNode<ArrayBuffer> {
+    export class FxBufferSourceUnit extends FxAudioSourceUnit<ArrayBuffer> {
 
         private _bufferState: FxAudioBufferState;
 
@@ -33,21 +33,21 @@ module FxAudioEngine.Nodes.Source {
         }
 
 
-        constructor(audioContext: FxAudioContext) {
-            var audioGraph = this._buildAudioGraph(audioContext);
+        constructor(unitContext: FxUnitContext) {
+            var audioGraph = this._buildAudioGraph(unitContext);
 
-            super(audioContext, audioGraph, null, false);
+            super(unitContext, audioGraph, null, false);
 
             this._audioSourceController = new FxBufferAudioSourceController(this._audioSourceNode);
         }
 
 
-        public init(audioData: ArrayBuffer): IFxAudioEventSource {
+        public init(audioData: ArrayBuffer): IFxEventSource {
             this._bufferState = FxAudioBufferState.DECODING;
 
-            var asyncCompletionSource = new FxAudioEventSource();
-
-            this.audioContext.audioContext.decodeAudioData(
+            var asyncCompletionSource = new FxEventSource();
+           
+            this.unitContext.audioContext.decodeAudioData(
                 audioData,
 
                 (audioBuffer: AudioBuffer) => {
@@ -68,8 +68,8 @@ module FxAudioEngine.Nodes.Source {
         }
 
 
-        private _buildAudioGraph(audioContext: FxAudioContext): AudioNode[] {
-            var audioNode: AudioBufferSourceNode = audioContext.audioContext.createBufferSource();
+        private _buildAudioGraph(unitContext: FxUnitContext): AudioNode[] {
+            var audioNode: AudioBufferSourceNode = unitContext.audioContext.createBufferSource();
             var audioGraph: AudioNode[] = [audioNode];
 
             this._audioSourceNode = audioNode;

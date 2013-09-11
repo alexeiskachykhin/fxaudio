@@ -1,4 +1,4 @@
-﻿module FxAudioEngine.Nodes.Source {
+﻿module FxAudioEngine.Units.Source {
     'use strict';
 
 
