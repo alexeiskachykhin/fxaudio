@@ -37,10 +37,10 @@ module FxAudioEngine.Nodes.Source {
                 this._mountStream(stream);
                 asyncCompletionSource.dispatchEvent('success');
             }
-            catch(e) {
+            catch (e) {
                 asyncCompletionSource.dispatchEvent('error', e);
             }
-            
+
             return asyncCompletionSource;
         }
 
@@ -68,6 +68,6 @@ module FxAudioEngine.Nodes.Source {
         private _mountStream(stream: MediaStream): void {
             this._mediStreamSourceNode = this.audioContext.audioContext.createMediaStreamSource(<any>stream);
             this._mediStreamSourceNode.connect(this._outputGainNode);
-        } 
+        }
     }
 }

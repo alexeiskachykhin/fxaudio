@@ -26,8 +26,8 @@ module FxAudioEngine {
 
 
         public connect(port: FxAudioPort): void {
-            if (port._direction != FxAudioPortDirection.INPUT) {
-                throw new Error("Can`t connect to output node.");
+            if (port._direction !== FxAudioPortDirection.INPUT) {
+                throw new Error('Can`t connect to output node.');
             }
 
             var sourceAudioNode = this._audioNode;
