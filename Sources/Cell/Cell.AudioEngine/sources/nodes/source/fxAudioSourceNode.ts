@@ -1,6 +1,4 @@
-﻿/// <reference path="../../fxAudioNode.ts" />
-/// <reference path="../../fxAudioEventSource.ts" />
-/// <reference path="fxAudioSourceController.ts" />
+﻿/// <reference path="../../_references.ts" />
 
 
 module FxAudioEngine.Nodes.Source {
