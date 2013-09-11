@@ -39,7 +39,7 @@ module FxAudioEngine.Nodes {
 
 
         private _buildAudioGraph(audioContext: FxAudioContext): AudioNode[] {
-            var audioNode: DelayNode = audioContext._audioContext.createDelay(this._maxDelayTime);
+            var audioNode: DelayNode = audioContext.audioContext.createDelay(this._maxDelayTime);
             var audioGraph: AudioNode[] = [audioNode];
 
             this._delayNode = audioNode;

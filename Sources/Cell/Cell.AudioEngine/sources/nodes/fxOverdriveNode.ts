@@ -27,14 +27,14 @@ module FxAudioEngine.Nodes {
 
 
         private _buildAudioGraph(audioContext: FxAudioContext): AudioNode[] {
-            this._lowPassFilterNode = audioContext._audioContext.createBiquadFilter();
+            this._lowPassFilterNode = audioContext.audioContext.createBiquadFilter();
             this._lowPassFilterNode.type = 0;
             this._lowPassFilterNode.frequency.value = 3000;
 
-            this._waveShaperNode = audioContext._audioContext.createWaveShaper();
+            this._waveShaperNode = audioContext.audioContext.createWaveShaper();
             this._setDrive(audioContext.sampleRate, 120);
 
-            this._gainNode = audioContext._audioContext.createGain();
+            this._gainNode = audioContext.audioContext.createGain();
 
 
             var audioGraph: AudioNode[] = [
