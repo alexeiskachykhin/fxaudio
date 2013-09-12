@@ -2,12 +2,19 @@
     'use strict';
 
 
-    grunt.loadNpmTasks('grunt-ts');
-    grunt.loadNpmTasks('grunt-contrib-clean');
-    grunt.loadNpmTasks('grunt-tslint');
-
-
     grunt.initConfig({
+
+        sourcePath: '../../sources',
+
+        outputPath: '../output',
+
+
+        sources: {
+            ts: grunt.file.readJSON('../fragments/source-reference.json'),
+            libraries: ['../../libraries/**/*.d.ts']
+        },
+
+
 
         clean: {
             options: {
@@ -15,9 +22,9 @@
             },
 
             dev: [
-                '../../sources/**/*.js',
-                '../../sources/**/*.map',
-                '../output/*'
+                '<%= sourcePath %>/**/*.js',
+                '<%= sourcePath %>/**/*.map',
+                '<%= outputPath %>/*'
             ]
         },
 
@@ -29,10 +36,10 @@
             },
 
             dev: {
-                src: ['../../sources/**/*.ts', '../../libraries/**/*.d.ts'],
-                watch: '../../sources',
-                out: '../output/fxAudio.js',
-                reference: '../../sources/_references.ts'
+                src: ['<%= sources.ts %>', '<%= sources.libraries %>'],
+                watch: '<%= sourcePath %>',
+                out: '<%= outputPath %>/fxAudio.js',
+                reference: '<%= sourcePath %>/_references.ts'
             }
         },
 
@@ -42,10 +49,15 @@
             },
 
             dev: {
-                src: ['../../sources/**/*.ts']
+                files: ['<%= sources.ts %>']
             }
         }
     });
+
+
+    grunt.loadNpmTasks('grunt-ts');
+    grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-tslint');
 
 
     grunt.registerTask('default', ['clean:dev', 'tslint:dev', 'ts:dev']);
