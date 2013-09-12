@@ -1,0 +1,19 @@
+[
+    "../../sources/fxEventSource.ts",
+    "../../sources/fxUnitContext.ts",
+    "../../sources/fxOfflineUnitContext.ts",
+    "../../sources/fxRealTimeUnitContext.ts",
+    "../../sources/fxUnit.ts",
+    "../../sources/fxUnitPort.ts",
+    "../../sources/fxUnitInterface.ts",
+    "../../sources/fxAudioUtilities.ts",
+    "../../sources/units/fxAudioDestinationUnit.ts",
+    "../../sources/units/fxDelayUnit.ts",
+    "../../sources/units/fxOverdriveUnit.ts",
+    "../../sources/units/source/fxAudioSourceController.ts",
+    "../../sources/units/source/fxAudioSourceUnit.ts",
+    "../../sources/units/source/fxBufferAudioSourceController.ts",
+    "../../sources/units/source/fxBufferSourceUnit.ts",
+    "../../sources/units/source/fxLiveInputAudioSourceController.ts",
+    "../../sources/units/source/fxLiveInputSourceUnit.ts"
+]
