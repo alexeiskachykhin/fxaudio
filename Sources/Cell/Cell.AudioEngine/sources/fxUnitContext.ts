@@ -5,9 +5,9 @@ module FxAudioEngine {
     'use strict';
 
 
-    export class FxAudioContext {
+    export class FxUnitContext {
 
-        public _audioContext: AudioContext;
+        private _audioContext: AudioContext;
 
 
         public get audioContext(): AudioContext {
@@ -28,3 +28,4 @@ module FxAudioEngine {
         }
     }
 }
+

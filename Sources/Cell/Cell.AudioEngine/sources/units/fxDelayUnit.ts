@@ -1,14 +1,14 @@
 /// <reference path="../_references.ts" />
 
 
-module FxAudioEngine.Nodes {
+module FxAudioEngine.Units {
     'use strict';
 
 
     var DEFAULT_MAX_DELAY_TIME = 3.0;
 
 
-    export class FxDelayNode extends FxAudioNode {
+    export class FxDelayUnit extends FxUnit {
 
         private _delayNode: DelayNode;
 
@@ -24,17 +24,17 @@ module FxAudioEngine.Nodes {
         }
 
 
-        constructor(audioContext: FxAudioContext, maxDelayTime?: number) {
+        constructor(unitContext: FxUnitContext, maxDelayTime?: number) {
             this._maxDelayTime = maxDelayTime || DEFAULT_MAX_DELAY_TIME;
 
-            var audioGraph = this._buildAudioGraph(audioContext);
+            var audioGraph = this._buildAudioGraph(unitContext);
 
-            super(audioContext, audioGraph);
+            super(unitContext, audioGraph);
         }
 
 
-        private _buildAudioGraph(audioContext: FxAudioContext): AudioNode[] {
-            var audioNode: DelayNode = audioContext.audioContext.createDelay(this._maxDelayTime);
+        private _buildAudioGraph(unitContext: FxUnitContext): AudioNode[] {
+            var audioNode: DelayNode = unitContext.audioContext.createDelay(this._maxDelayTime);
             var audioGraph: AudioNode[] = [audioNode];
 
             this._delayNode = audioNode;

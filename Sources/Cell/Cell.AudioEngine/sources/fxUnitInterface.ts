@@ -5,25 +5,25 @@ module FxAudioEngine {
     'use strict';
 
 
-    export class FxAudioNodeInterface {
+    export class FxUnitInterface {
 
-        public inputs: FxAudioPort[];
+        public inputs: FxUnitPort[];
 
-        public outputs: FxAudioPort[];
+        public outputs: FxUnitPort[];
 
-        public bypass: FxAudioPort[];
+        public bypass: FxUnitPort[];
 
 
-
-        constructor(
-            inputs: FxAudioPort,
-            outputs: FxAudioPort,
-            bypass?: FxAudioPort);
 
         constructor(
-            inputs: FxAudioPort[],
-            outputs: FxAudioPort[],
-            bypass?: FxAudioPort[]);
+            inputs: FxUnitPort,
+            outputs: FxUnitPort,
+            bypass?: FxUnitPort);
+
+        constructor(
+            inputs: FxUnitPort[],
+            outputs: FxUnitPort[],
+            bypass?: FxUnitPort[]);
 
         constructor(
             inputs: any,

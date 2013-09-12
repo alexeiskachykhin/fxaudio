@@ -1,13 +1,15 @@
 ﻿/// <reference path="../../_references.ts" />
 
 
-module FxAudioEngine.Nodes.Source {
+module FxAudioEngine.Units.Source {
     'use strict';
 
 
-    export class FxLiveInputAudioSourceController implements IFxAudioSourceController {
+    export class FxBufferAudioSourceController implements IFxAudioSourceController {
 
         private _state: FxAudioSourceState = FxAudioSourceState.AWAITING;
+
+        private _audioSourceNode: AudioBufferSourceNode;
 
 
         public get state(): FxAudioSourceState {
@@ -15,11 +17,11 @@ module FxAudioEngine.Nodes.Source {
         }
 
         public get canStart(): boolean {
-            return false;
+            return true;
         }
 
         public get canStop(): boolean {
-            return false;
+            return true;
         }
 
         public get canRewind(): boolean {
@@ -29,12 +31,19 @@ module FxAudioEngine.Nodes.Source {
         public time: number;
 
 
+        constructor(audioSourceNode: AudioBufferSourceNode) {
+            this._audioSourceNode = audioSourceNode;
+        }
+
+
         public start(when: number): void {
+            this._audioSourceNode.start(when);
             this._state = FxAudioSourceState.PLAYING;
         }
 
         public stop(when: number): void {
-            throw new Error('Not supported.');
+            this._audioSourceNode.stop(when);
+            this._state = FxAudioSourceState.STOPPED;
         }
     }
 }
