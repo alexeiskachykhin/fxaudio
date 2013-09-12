@@ -4,7 +4,9 @@
 module FxAudioEngine {
     'use strict';
 
+
     declare var window: any;
+
 
     var OfflineAudioContext =
         window.OfflineAudioContext ||
@@ -12,10 +14,11 @@ module FxAudioEngine {
         window.mozOfflineAudioContext;
 
 
-    export class FxOfflineAudioContext extends FxAudioContext {
+    export class FxOfflineUnitContext extends FxUnitContext {
 
         constructor(numberOfChannels: number, length: number, sampleRate: number) {
             super(new OfflineAudioContext(numberOfChannels, length, sampleRate));
         }
     }
 }
+

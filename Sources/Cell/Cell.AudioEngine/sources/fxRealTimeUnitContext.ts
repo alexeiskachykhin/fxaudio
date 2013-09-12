@@ -4,7 +4,9 @@
 module FxAudioEngine {
     'use strict';
 
+
     declare var window: any;
+
 
     var AudioContext =
         window.AudioContext ||
@@ -12,7 +14,7 @@ module FxAudioEngine {
         window.mozAudioContext;
 
 
-    export class FxRealTimeAudioContext extends FxAudioContext {
+    export class FxRealTimeUnitContext extends FxUnitContext {
 
         constructor() {
             super(new AudioContext());

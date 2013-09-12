@@ -5,21 +5,21 @@ module FxAudioEngine {
     'use strict';
 
 
-    export interface IFxAudioEventSource {
+    export interface IFxEventSource {
 
-        addEventListener(eventName: string, eventListener: Function): IFxAudioEventSource;
+        addEventListener(eventName: string, eventListener: Function): IFxEventSource;
 
-        removeEventListener(eventName: string, eventListener: Function): IFxAudioEventSource;
+        removeEventListener(eventName: string, eventListener: Function): IFxEventSource;
     }
 
 
-    export interface IFxAudioEventCompletionSource extends IFxAudioEventSource {
+    export interface IFxEventCompletionSource extends IFxEventSource {
 
          dispatchEvent(eventName, ...eventArgs: any[]): void;
     }
 
 
-    export class FxAudioEventSource implements IFxAudioEventCompletionSource {
+    export class FxEventSource implements IFxEventCompletionSource {
 
         private _events: any = {};
 
@@ -41,7 +41,7 @@ module FxAudioEngine {
         }
 
 
-        public addEventListener(eventName: string, eventListener: Function): FxAudioEventSource {
+        public addEventListener(eventName: string, eventListener: Function): FxEventSource {
 	        if (typeof eventListener !== 'function') {
 	            throw new TypeError('Event listener is not a function.');
             }
@@ -55,7 +55,7 @@ module FxAudioEngine {
             return this;
         }
 
-        public removeEventListener(eventName: string, eventListener: Function): FxAudioEventSource {
+        public removeEventListener(eventName: string, eventListener: Function): FxEventSource {
             if (!this._events.hasOwnProperty(eventName)) {
                 return;
             }
