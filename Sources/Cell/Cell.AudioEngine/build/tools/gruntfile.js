@@ -5,8 +5,9 @@
     grunt.initConfig({
 
         manifest: {
-            sourcePath: '../../sources',
-            outputPath: '../output',
+            rootPath: '../..',
+            sourcePath: '<%= manifest.rootPath %>/sources',
+            outputPath: '<%= manifest.rootPath %>/build/output',
 
             sources: {
                 ts: grunt.file.readJSON('../fragments/source-reference.json'),
@@ -27,6 +28,16 @@
             ]
         },
 
+        tslint: {
+            options: {
+                configuration: grunt.file.readJSON('tslint.json')
+            },
+
+            dev: {
+                files: ['<%= manifest.sources.ts %>']
+            }
+        },
+
         ts: {
             options: {
                 target: 'es5',
@@ -42,22 +53,22 @@
             }
         },
 
-        tslint: {
-            options: {
-                configuration: grunt.file.readJSON('tslint.json')
-            },
-
+        connect: {
             dev: {
-                files: ['<%= manifest.sources.ts %>']
+                options: {
+                    base: ['<%= manifest.rootPath %>'],
+                    open: true
+                }
             }
         }
     });
 
 
     grunt.loadNpmTasks('grunt-ts');
-    grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-tslint');
+    grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-contrib-connect');
 
 
-    grunt.registerTask('default', ['clean:dev', 'tslint:dev', 'ts:dev']);
+    grunt.registerTask('default', ['clean:dev', 'tslint:dev', 'connect:dev', 'ts:dev']);
 }
