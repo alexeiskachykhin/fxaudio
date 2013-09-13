@@ -4,16 +4,15 @@
 
     grunt.initConfig({
 
-        sourcePath: '../../sources',
+        manifest: {
+            sourcePath: '../../sources',
+            outputPath: '../output',
 
-        outputPath: '../output',
-
-
-        sources: {
-            ts: grunt.file.readJSON('../fragments/source-reference.json'),
-            libraries: ['../../libraries/**/*.d.ts']
+            sources: {
+                ts: grunt.file.readJSON('../fragments/source-reference.json'),
+                libraries: ['../../libraries/**/*.d.ts']
+            }
         },
-
 
 
         clean: {
@@ -22,9 +21,9 @@
             },
 
             dev: [
-                '<%= sourcePath %>/**/*.js',
-                '<%= sourcePath %>/**/*.map',
-                '<%= outputPath %>/*'
+                '<%= manifest.sourcePath %>/**/*.js',
+                '<%= manifest.sourcePath %>/**/*.map',
+                '<%= manifest.outputPath %>/*'
             ]
         },
 
@@ -36,10 +35,10 @@
             },
 
             dev: {
-                src: ['<%= sources.ts %>', '<%= sources.libraries %>'],
-                watch: '<%= sourcePath %>',
-                out: '<%= outputPath %>/fxAudio.js',
-                reference: '<%= sourcePath %>/_references.ts'
+                src: ['<%= manifest.sources.ts %>', '<%= manifest.sources.libraries %>'],
+                watch: '<%= manifest.sourcePath %>',
+                out: '<%= manifest.outputPath %>/fxAudio.js',
+                reference: '<%= manifest.sourcePath %>/_references.ts'
             }
         },
 
@@ -49,7 +48,7 @@
             },
 
             dev: {
-                files: ['<%= sources.ts %>']
+                files: ['<%= manifest.sources.ts %>']
             }
         }
     });
