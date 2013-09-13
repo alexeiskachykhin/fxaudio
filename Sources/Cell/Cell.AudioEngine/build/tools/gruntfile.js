@@ -28,6 +28,12 @@
             ]
         },
 
+        jsonlint: {
+            dev: {
+                src: ['*.json', '../fragments/*.json']
+            }
+        },
+
         tslint: {
             options: {
                 configuration: grunt.file.readJSON('tslint.json')
@@ -65,10 +71,11 @@
 
 
     grunt.loadNpmTasks('grunt-ts');
+    grunt.loadNpmTasks('grunt-jsonlint');
     grunt.loadNpmTasks('grunt-tslint');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-connect');
 
 
-    grunt.registerTask('default', ['clean:dev', 'tslint:dev', 'connect:dev', 'ts:dev']);
+    grunt.registerTask('default', ['clean:dev', 'jsonlint:dev', 'tslint:dev', 'connect:dev', 'ts:dev']);
 }
