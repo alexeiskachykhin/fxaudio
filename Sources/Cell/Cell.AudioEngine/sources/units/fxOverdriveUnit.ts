@@ -13,6 +13,13 @@ module FxAudioEngine.Units {
 
         private _gainNode: GainNode;
 
+        private _ports: FxUnitInterface;
+
+
+        public get ports(): FxUnitInterface {
+            return this._ports;
+        }
+
 
         constructor(context: FxUnitContext) {
             super(context);

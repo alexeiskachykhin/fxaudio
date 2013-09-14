@@ -13,9 +13,16 @@ module FxAudioEngine.Units.Source {
 
         private _audioSourceController: IFxAudioSourceController;
 
+        private _ports: FxUnitInterface;
+
 
         public get stream(): IFxAudioSourceController {
             return this._audioSourceController;
+        }
+
+
+        public get ports(): FxUnitInterface {
+            return this._ports;
         }
 
 

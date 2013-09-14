@@ -7,6 +7,14 @@ module FxAudioEngine.Units {
 
     export class FxChannelSplitterUnit extends FxUnit {
 
+        private _ports: FxUnitInterface;
+
+
+        public get ports(): FxUnitInterface {
+            return this._ports;
+        }
+
+
         constructor(unitContext: FxUnitContext, numberOfOutputs: number = 6) {
             super(unitContext);
 
