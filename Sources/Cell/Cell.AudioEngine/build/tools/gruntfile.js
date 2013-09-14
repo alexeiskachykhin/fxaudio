@@ -36,12 +36,18 @@
         },
 
         jshint: {
-            dev: ['gruntfile.js', '<%= manifest.testPath %>']
+            options: {
+                jshintrc : '.jshintrc'
+            },
+
+            dev: {
+                src: ['gruntfile.js', '<%= manifest.testPath %>']
+            }
         },
 
         tslint: {
             options: {
-                configuration: grunt.file.readJSON('tslint.json')
+                configuration: grunt.file.readJSON('.tslintrc')
             },
 
             dev: {
