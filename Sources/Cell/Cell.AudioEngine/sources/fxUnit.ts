@@ -22,9 +22,8 @@ module FxAudioEngine {
         }
 
 
-        constructor(
-            unitContext: FxUnitContext) {
-                this._context = unitContext;
+        constructor(unitContext: FxUnitContext) {
+            this._context = unitContext;
         }
     }
 }
