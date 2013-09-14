@@ -31,7 +31,7 @@
 
         jsonlint: {
             dev: {
-                src: ['*.json', '../fragments/*.json']
+                src: ['.jshintrc', '.tslintrc', '*.json', '../fragments/*.json']
             }
         },
 
