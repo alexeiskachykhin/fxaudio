@@ -9,6 +9,13 @@ module FxAudioEngine.Units {
 
         private _audioDestinationNode: AudioDestinationNode;
 
+        private _ports: FxUnitInterface;
+
+
+        public get ports(): FxUnitInterface {
+            return this._ports;
+        }
+
 
         public get maxChannelCount(): number {
             return this._audioDestinationNode.maxNumberOfChannels;
