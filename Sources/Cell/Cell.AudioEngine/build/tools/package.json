@@ -18,6 +18,7 @@
     "grunt-tslint": "~0.2.2",
     "grunt-jsonlint": "~1.0.0",
     "grunt-contrib-clean": "~0.5.0",
-    "grunt-contrib-connect": "~0.5.0"
+    "grunt-contrib-connect": "~0.5.0",
+    "grunt-contrib-jshint": "~0.6.4"
   }
 }
