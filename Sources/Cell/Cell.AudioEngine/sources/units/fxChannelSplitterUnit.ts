@@ -6,7 +6,7 @@ module FxAudioEngine.Units {
 
 
     export class FxChannelSplitterUnit extends FxUnit {
-	
+
         constructor(unitContext: FxUnitContext, numberOfOutputs: number = 6) {
             super(unitContext);
 

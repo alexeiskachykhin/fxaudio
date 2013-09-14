@@ -14,11 +14,10 @@ module FxAudioEngine {
         public bypass: FxUnitPort[];
 
 
-
         constructor(
-            inputs: FxUnitPort,
-            outputs: FxUnitPort,
-            bypass?: FxUnitPort);
+            input: FxUnitPort,
+            output: FxUnitPort,
+            bypas?: FxUnitPort);
 
         constructor(
             inputs: FxUnitPort[],
