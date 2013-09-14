@@ -55,7 +55,7 @@ module FxAudioEngine.Units.Source {
 
         private _buildAudioInterface(audioGraph: AudioNode[]) {
             var outputNode = audioGraph[audioGraph.length - 1];
-            var output: FxUnitPort = new FxUnitPort(outputNode, FxUnitPortDirection.OUTPUT);
+            var output: FxUnitPort = new FxUnitPort(outputNode, 0, FxUnitPortDirection.OUTPUT);
 
             var unitInterface = new FxUnitInterface(
                 [],
