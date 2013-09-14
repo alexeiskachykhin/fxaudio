@@ -7,23 +7,24 @@ module FxAudioEngine {
 
     export class FxUnit {
 
-        private _unitContext: FxUnitContext;
-
-        public _unitInterface: FxUnitInterface;
+        private _context: FxUnitContext;
 
 
-        public get unitContext(): FxUnitContext {
-            return this._unitContext;
+        public _ports: FxUnitInterface;
+
+
+        public get context(): FxUnitContext {
+            return this._context;
         }
 
         public get ports(): FxUnitInterface {
-            return this._unitInterface;
+            return this._ports;
         }
 
 
         constructor(
             unitContext: FxUnitContext) {
-                this._unitContext = unitContext;
+                this._context = unitContext;
         }
     }
 }

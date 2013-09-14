@@ -26,12 +26,12 @@ module FxAudioEngine.Units.Source {
         }
 
 
-        constructor(unitContext: FxUnitContext) {
-            super(unitContext);
+        constructor(context: FxUnitContext) {
+            super(context);
 
-            this._audioSourceNode = unitContext.audioContext.createBufferSource();
+            this._audioSourceNode = context.audioContext.createBufferSource();
 
-            this._unitInterface = this._buildUnitInterface();
+            this._ports = this._buildInterface();
 
             this._audioSourceController = new FxBufferAudioSourceController(this._audioSourceNode);
         }
@@ -42,7 +42,7 @@ module FxAudioEngine.Units.Source {
 
             var asyncCompletionSource = new FxEventSource();
            
-            this.unitContext.audioContext.decodeAudioData(
+            this.context.audioContext.decodeAudioData(
                 audioData,
 
                 (audioBuffer: AudioBuffer) => {
@@ -63,10 +63,10 @@ module FxAudioEngine.Units.Source {
         }
 
 
-        private _buildUnitInterface(): FxUnitInterface {
-            var unitInterface: FxUnitInterface = FxAudioUtilities.AudioInterface.fromAudioGraph([this._audioSourceNode]);
+        private _buildInterface(): FxUnitInterface {
+            var ports: FxUnitInterface = FxAudioUtilities.AudioInterface.fromAudioGraph([this._audioSourceNode]);
 
-            return unitInterface;
+            return ports;
         }
     }
 }
