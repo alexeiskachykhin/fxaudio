@@ -1,6 +1,8 @@
 ﻿(function (global) {
+    'use strict';
 
-    if (!global.hasOwnProperty("URL")) {
+
+    if (!global.hasOwnProperty('URL')) {
         global.URL = global.webkitURL;
     }
 
