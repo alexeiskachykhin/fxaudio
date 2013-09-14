@@ -17,27 +17,36 @@ module FxAudioEngine.Units {
         constructor(context: FxUnitContext) {
             super(context);
 
-            this._lowPassFilterNode = context.audioContext.createBiquadFilter();
-            this._lowPassFilterNode.type = 0;
-            this._lowPassFilterNode.frequency.value = 3000;
+            var audioGraph: AudioNode[] = this._buildAudioGraph();
+            var audioInterface: FxUnitInterface = this._buildInterface(audioGraph);
 
-            this._waveShaperNode = context.audioContext.createWaveShaper();
-            this._setDrive(context.sampleRate, 120);
-
-            this._gainNode = context.audioContext.createGain();
-
-            this._ports = this._buildInterface();
+            this._ports = audioInterface;
         }
 
 
-        private _buildInterface(): FxUnitInterface {
+        private _buildAudioGraph(): AudioNode[]{
+            this._lowPassFilterNode = this.context.audioContext.createBiquadFilter();
+            this._lowPassFilterNode.type = 0;
+            this._lowPassFilterNode.frequency.value = 3000;
+
+            this._waveShaperNode = this.context.audioContext.createWaveShaper();
+            this._setDrive(this.context.sampleRate, 120);
+
+            this._gainNode = this.context.audioContext.createGain();
+
+
             var audioGraph: AudioNode[] = [
                 this._lowPassFilterNode,
                 this._waveShaperNode,
                 this._gainNode
             ];
 
+            return audioGraph;
+        }
+
+        private _buildInterface(audioGraph): FxUnitInterface {
             FxAudioUtilities.WebAudioAPI.routeAudioGraph(audioGraph);
+
             var ports: FxUnitInterface = FxAudioUtilities.AudioInterface.fromAudioGraph(audioGraph);
 
             return ports;
