@@ -45,11 +45,11 @@ module FxAudioEngine.Units.Source {
         }
 
 
-        private _buildInterface(): FxUnitInterface {
-            var outputPort: FxUnitPort = new FxUnitPort(this._outputGainNode, FxUnitPortDirection.OUTPUT);
-            var ports: FxUnitInterface = new FxUnitInterface([], [outputPort]);
+        private _buildInterface() {
+            var output: FxUnitPort = new FxUnitPort(this._outputGainNode, 0, FxUnitPortDirection.OUTPUT);
+            var unitInterface = new FxUnitInterface([], [output]);
 
-            return ports;
+            return unitInterface;
         }
 
         private _mountStream(stream: MediaStream): void {
