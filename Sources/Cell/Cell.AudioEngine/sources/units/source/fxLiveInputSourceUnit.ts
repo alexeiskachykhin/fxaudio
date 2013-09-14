@@ -20,10 +20,9 @@ module FxAudioEngine.Units.Source {
 
 
         constructor(unitContext: FxUnitContext) {
-            var audioGraph = this._buildAudioGraph(unitContext);
-            var audioInterface = this._buildAudioInterface(audioGraph);
+            var audioInterface: FxUnitInterface = this._buildUnitInterface(unitContext);
 
-            super(unitContext, audioGraph, audioInterface, false);
+            super(unitContext, audioInterface);
 
             this._audioSourceController = new FxLiveInputAudioSourceController();
         }
@@ -43,25 +42,11 @@ module FxAudioEngine.Units.Source {
             return asyncCompletionSource;
         }
 
+        private _buildUnitInterface(unitContext: FxUnitContext): FxUnitInterface {
+            this._outputGainNode = unitContext.audioContext.createGain();
+            var outputPort: FxUnitPort = new FxUnitPort(this._outputGainNode, FxUnitPortDirection.OUTPUT);
 
-        private _buildAudioGraph(unitContext: FxUnitContext): AudioNode[] {
-            var audioNode: AudioNode = unitContext.audioContext.createGain();
-            var audioGraph: AudioNode[] = [audioNode];
-
-            this._outputGainNode = audioNode;
-
-            return audioGraph;
-        }
-
-        private _buildAudioInterface(audioGraph: AudioNode[]) {
-            var outputNode = audioGraph[audioGraph.length - 1];
-            var output: FxUnitPort = new FxUnitPort(outputNode, FxUnitPortDirection.OUTPUT);
-
-            var unitInterface = new FxUnitInterface(
-                [],
-                [output]);
-
-            return unitInterface;
+            return new FxUnitInterface([], [outputPort]);
         }
 
         private _mountStream(stream: MediaStream): void {

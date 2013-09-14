@@ -27,19 +27,16 @@ module FxAudioEngine.Units {
         constructor(unitContext: FxUnitContext, maxDelayTime?: number) {
             this._maxDelayTime = maxDelayTime || DEFAULT_MAX_DELAY_TIME;
 
-            var audioGraph = this._buildAudioGraph(unitContext);
+            var unitInterface: FxUnitInterface = this._buildUnitInterface(unitContext);
 
-            super(unitContext, audioGraph);
+            super(unitContext, unitInterface);
         }
 
 
-        private _buildAudioGraph(unitContext: FxUnitContext): AudioNode[] {
-            var audioNode: DelayNode = unitContext.audioContext.createDelay(this._maxDelayTime);
-            var audioGraph: AudioNode[] = [audioNode];
+        private _buildUnitInterface(unitContext: FxUnitContext): FxUnitInterface {
+            this._delayNode = unitContext.audioContext.createDelay(this._maxDelayTime);
 
-            this._delayNode = audioNode;
-
-            return audioGraph;
+            return FxAudioUtilities.AudioInterface.fromAudioGraph([this._delayNode]);
         }
     }
 }

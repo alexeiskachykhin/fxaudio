@@ -11,8 +11,6 @@ module FxAudioEngine {
 
         private _unitInterface: FxUnitInterface;
 
-        private _audioGraph: AudioNode[];
-
 
         public get unitContext(): FxUnitContext {
             return this._unitContext;
@@ -25,25 +23,9 @@ module FxAudioEngine {
 
         constructor(
             unitContext: FxUnitContext,
-            audioGraph: AudioNode[],
-            unitInterface?: FxUnitInterface,
-            autoRoute: boolean = true) {
+            unitInterface: FxUnitInterface) {
                 this._unitContext = unitContext;
-                this._setAudioNodeInternals(audioGraph, unitInterface, autoRoute);
-        }
-
-
-        private _setAudioNodeInternals(audioGraph: AudioNode[], unitInterface?: FxUnitInterface, autoRoute: boolean = true) {
-            if (autoRoute) {
-                FxAudioUtilities.WebAudioAPI.routeAudioGraph(audioGraph);
-            }
-
-            if (!unitInterface) {
-                unitInterface = FxAudioUtilities.AudioInterface.fromAudioGraph(audioGraph);
-            }
-
-            this._audioGraph = audioGraph;
-            this._unitInterface = unitInterface;
+                this._unitInterface = unitInterface;
         }
     }
 }
