@@ -22,10 +22,12 @@ module FxAudioEngine.Units.Source {
         constructor(context: FxUnitContext) {
             super(context);
 
-            this._outputGainNode = context.audioContext.createGain();
+            var audioGraph: AudioNode = this._buildAudioGraph();
+            var audioInterface: FxUnitInterface = this._buildInterface(audioGraph);
 
-            this._ports = this._buildInterface();
-
+            this._outputGainNode = audioGraph;
+            this._ports = audioInterface;
+            
             this._audioSourceController = new FxLiveInputAudioSourceController();
         }
 
@@ -45,8 +47,14 @@ module FxAudioEngine.Units.Source {
         }
 
 
-        private _buildInterface() {
-            var output: FxUnitPort = new FxUnitPort(this._outputGainNode, 0, FxUnitPortDirection.OUTPUT);
+        private _buildAudioGraph(): AudioNode {
+            var audioNode: AudioNode = this.context.audioContext.createGain();
+
+            return audioNode;
+        }
+
+        private _buildInterface(audioGraph: AudioNode): FxUnitInterface {
+            var output: FxUnitPort = new FxUnitPort(audioGraph, 0, FxUnitPortDirection.OUTPUT);
             var unitInterface = new FxUnitInterface([], [output]);
 
             return unitInterface;
