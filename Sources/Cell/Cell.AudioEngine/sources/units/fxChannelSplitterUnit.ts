@@ -25,7 +25,7 @@ module FxAudioEngine.Units {
         }
 
         private _buildAudioInterface(audioGraph: AudioNode[]): FxUnitInterface {
-            var audioInterface = FxAudioUtilities.AudioInterface.fromAudioGraph(audioGraph);
+            var audioInterface: FxUnitInterface = FxAudioUtilities.AudioInterface.fromAudioGraph(audioGraph);
 
             return audioInterface;
         }
