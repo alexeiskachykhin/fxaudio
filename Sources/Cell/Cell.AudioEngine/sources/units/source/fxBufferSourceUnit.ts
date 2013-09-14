@@ -27,9 +27,11 @@ module FxAudioEngine.Units.Source {
 
 
         constructor(unitContext: FxUnitContext) {
-            var unitInterface: FxUnitInterface = this._buildUnitInterface(unitContext);
+            super(unitContext);
 
-            super(unitContext, unitInterface);
+            this._audioSourceNode = unitContext.audioContext.createBufferSource();
+
+            this._unitInterface = this._buildUnitInterface();
 
             this._audioSourceController = new FxBufferAudioSourceController(this._audioSourceNode);
         }
@@ -61,10 +63,10 @@ module FxAudioEngine.Units.Source {
         }
 
 
-        private _buildUnitInterface(unitContext: FxUnitContext): FxUnitInterface {
-            this._audioSourceNode = unitContext.audioContext.createBufferSource();
+        private _buildUnitInterface(): FxUnitInterface {
+            var unitInterface: FxUnitInterface = FxAudioUtilities.AudioInterface.fromAudioGraph([this._audioSourceNode]);
 
-            return FxAudioUtilities.AudioInterface.fromAudioGraph([this._audioSourceNode]);
+            return unitInterface;
         }
     }
 }

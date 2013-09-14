@@ -20,9 +20,11 @@ module FxAudioEngine.Units.Source {
 
 
         constructor(unitContext: FxUnitContext) {
-            var audioInterface: FxUnitInterface = this._buildUnitInterface(unitContext);
+            super(unitContext);
 
-            super(unitContext, audioInterface);
+            this._outputGainNode = unitContext.audioContext.createGain();
+
+            this._unitInterface = this._buildUnitInterface();
 
             this._audioSourceController = new FxLiveInputAudioSourceController();
         }
@@ -42,11 +44,11 @@ module FxAudioEngine.Units.Source {
             return asyncCompletionSource;
         }
 
-        private _buildUnitInterface(unitContext: FxUnitContext): FxUnitInterface {
-            this._outputGainNode = unitContext.audioContext.createGain();
+        private _buildUnitInterface(): FxUnitInterface {
             var outputPort: FxUnitPort = new FxUnitPort(this._outputGainNode, FxUnitPortDirection.OUTPUT);
+            var unitInterface: FxUnitInterface = new FxUnitInterface([], [outputPort]);
 
-            return new FxUnitInterface([], [outputPort]);
+            return unitInterface;
         }
 
         private _mountStream(stream: MediaStream): void {

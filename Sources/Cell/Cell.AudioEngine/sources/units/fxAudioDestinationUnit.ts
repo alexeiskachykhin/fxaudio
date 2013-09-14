@@ -16,16 +16,18 @@ module FxAudioEngine.Units {
 
 
         constructor(unitContext: FxRealTimeUnitContext) {
-            var unitInterface: FxUnitInterface = this._buildUnitInterface(unitContext);
+            super(unitContext);
 
-            super(unitContext, unitInterface);
+            this._audioDestinationNode = unitContext.audioContext.destination;
+
+            this._unitInterface = this._buildUnitInterface();
         }
 
 
-        private _buildUnitInterface(unitContext: FxUnitContext): FxUnitInterface {
-            this._audioDestinationNode = unitContext.audioContext.destination;
+        private _buildUnitInterface(): FxUnitInterface {
+            var unitInterface: FxUnitInterface = FxAudioUtilities.AudioInterface.fromAudioGraph([this._audioDestinationNode]);
 
-            return FxAudioUtilities.AudioInterface.fromAudioGraph([this._audioDestinationNode]);
+            return unitInterface;
         }
     }
 }

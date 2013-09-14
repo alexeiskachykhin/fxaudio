@@ -9,7 +9,7 @@ module FxAudioEngine {
 
         private _unitContext: FxUnitContext;
 
-        private _unitInterface: FxUnitInterface;
+        public _unitInterface: FxUnitInterface;
 
 
         public get unitContext(): FxUnitContext {
@@ -22,10 +22,8 @@ module FxAudioEngine {
 
 
         constructor(
-            unitContext: FxUnitContext,
-            unitInterface: FxUnitInterface) {
+            unitContext: FxUnitContext) {
                 this._unitContext = unitContext;
-                this._unitInterface = unitInterface;
         }
     }
 }
