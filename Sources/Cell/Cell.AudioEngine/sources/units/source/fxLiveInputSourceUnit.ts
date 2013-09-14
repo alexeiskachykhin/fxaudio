@@ -20,7 +20,6 @@ module FxAudioEngine.Units.Source {
             return this._audioSourceController;
         }
 
-
         public get ports(): FxUnitInterface {
             return this._ports;
         }

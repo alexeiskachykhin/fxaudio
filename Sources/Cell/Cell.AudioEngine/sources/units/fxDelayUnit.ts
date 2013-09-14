@@ -15,17 +15,16 @@ module FxAudioEngine.Units {
         private _ports: FxUnitInterface;
 
 
-        public get ports(): FxUnitInterface {
-            return this._ports;
-        }
-
-
         public get time(): number {
             return this._delayNode.delayTime.value;
         }
 
         public set time(value: number) {
             this._delayNode.delayTime.value = value;
+        }
+
+        public get ports(): FxUnitInterface {
+            return this._ports;
         }
 
 
