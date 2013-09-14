@@ -6,7 +6,7 @@
         navigator.getUserMedia({
             audio: true
         }, callback, function () { });
-    };
+    }
 
 
     getInputStream(function (stream) {

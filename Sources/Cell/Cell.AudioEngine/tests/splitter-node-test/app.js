@@ -12,19 +12,21 @@
         });
 
         request.send();
-    };
+    }
 
     function initUI(leftGain, rightGain) {
         var channels = [leftGain, rightGain];
         var channelSwitches = document.getElementsByTagName('input');
 
+
+        var channelSwitchChangeHandler = function () {
+            var channel = channels[this.dataset.channel];
+            channel.gain.value = Number(this.checked);
+        };
+
         for (var i = 0; i <= channelSwitches.length - 1; i++) {
             var channelSwitch = channelSwitches[i];
-
-            channelSwitch.addEventListener('change', function () {
-                var channel = channels[this.dataset.channel];
-                channel.gain.value = Number(this.checked);
-            });
+            channelSwitch.addEventListener('change', channelSwitchChangeHandler);
         }
     }
 

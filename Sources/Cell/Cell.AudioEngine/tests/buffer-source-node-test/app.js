@@ -12,7 +12,7 @@
         });
 
         request.send();
-    };
+    }
 
 
     loadSound('../fixtures/audio/sample.mp3', function (audioBuffer) {

@@ -7,6 +7,7 @@
         manifest: {
             rootPath: '../..',
             sourcePath: '<%= manifest.rootPath %>/sources',
+            testPath: '<%= manifest.rootPath %>/tests',
             outputPath: '<%= manifest.rootPath %>/build/output',
 
             sources: {
@@ -32,6 +33,10 @@
             dev: {
                 src: ['*.json', '../fragments/*.json']
             }
+        },
+
+        jshint: {
+            dev: ['gruntfile.js', '<%= manifest.testPath %>']
         },
 
         tslint: {
@@ -73,9 +78,10 @@
     grunt.loadNpmTasks('grunt-ts');
     grunt.loadNpmTasks('grunt-jsonlint');
     grunt.loadNpmTasks('grunt-tslint');
+    grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-connect');
 
 
-    grunt.registerTask('default', ['clean:dev', 'jsonlint:dev', 'tslint:dev', 'connect:dev', 'ts:dev']);
-}
+    grunt.registerTask('default', ['clean:dev', 'jsonlint:dev', 'jshint:dev', 'tslint:dev', 'connect:dev', 'ts:dev']);
+};
