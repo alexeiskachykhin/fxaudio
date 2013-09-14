@@ -15,13 +15,13 @@ module FxAudioEngine.Units {
 
 
         constructor(unitContext: FxUnitContext) {
-            var audioGraph = this._buildAudioGraph(unitContext);
+            var unitInterface: FxUnitInterface = this._buildUnitInterface(unitContext);
 
-            super(unitContext, audioGraph);
+            super(unitContext, unitInterface);
         }
 
 
-        private _buildAudioGraph(unitContext: FxUnitContext): AudioNode[] {
+        private _buildUnitInterface(unitContext: FxUnitContext): FxUnitInterface {
             this._lowPassFilterNode = unitContext.audioContext.createBiquadFilter();
             this._lowPassFilterNode.type = 0;
             this._lowPassFilterNode.frequency.value = 3000;
@@ -37,7 +37,9 @@ module FxAudioEngine.Units {
                 this._gainNode
             ];
 
-            return audioGraph;
+            FxAudioUtilities.WebAudioAPI.routeAudioGraph(audioGraph);
+
+            return FxAudioUtilities.AudioInterface.fromAudioGraph(audioGraph);
         }
 
         private _setDrive(sampleRate:number, value: number): void {
