@@ -16,12 +16,15 @@ module FxAudioEngine {
 
         private _audioNode: AudioNode;
 
+        private _channel: number;
+
         private _direction: FxUnitPortDirection;
 
 
-        constructor(audioNode: AudioNode, direction: FxUnitPortDirection) {
+        constructor(audioNode: AudioNode, channel: number, direction: FxUnitPortDirection) {
             this._audioNode = audioNode;
             this._direction = direction;
+            this._channel = channel;
         }
 
 
@@ -33,7 +36,7 @@ module FxAudioEngine {
             var sourceAudioNode = this._audioNode;
             var destionationAudioNode = port._audioNode;
 
-            sourceAudioNode.connect(destionationAudioNode);
+            sourceAudioNode.connect(destionationAudioNode, this._channel, port._channel);
         }
 
         public disconnect(): void {

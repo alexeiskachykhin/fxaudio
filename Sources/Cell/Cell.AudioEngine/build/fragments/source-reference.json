@@ -10,6 +10,7 @@
     "../../sources/units/fxAudioDestinationUnit.ts",
     "../../sources/units/fxDelayUnit.ts",
     "../../sources/units/fxOverdriveUnit.ts",
+    "../../sources/units/fxChannelSplitterUnit.ts",
     "../../sources/units/source/fxAudioSourceController.ts",
     "../../sources/units/source/fxAudioSourceUnit.ts",
     "../../sources/units/source/fxBufferAudioSourceController.ts",
