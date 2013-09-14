@@ -24,20 +24,20 @@ module FxAudioEngine.Units {
         }
 
 
-        constructor(unitContext: FxUnitContext, maxDelayTime?: number) {
-            super(unitContext);
+        constructor(context: FxUnitContext, maxDelayTime?: number) {
+            super(context);
 
-            this._delayNode = unitContext.audioContext.createDelay(this._maxDelayTime);
+            this._delayNode = context.audioContext.createDelay(this._maxDelayTime);
             this._maxDelayTime = maxDelayTime || DEFAULT_MAX_DELAY_TIME;
 
-            this._unitInterface = this._buildUnitInterface();
+            this._ports = this._buildInterface();
         }
 
 
-        private _buildUnitInterface(): FxUnitInterface {
-            var unitInterface: FxUnitInterface = FxAudioUtilities.AudioInterface.fromAudioGraph([this._delayNode]);
+        private _buildInterface(): FxUnitInterface {
+            var ports: FxUnitInterface = FxAudioUtilities.AudioInterface.fromAudioGraph([this._delayNode]);
 
-            return unitInterface;
+            return ports;
         }
     }
 }

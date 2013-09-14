@@ -36,9 +36,7 @@ module FxAudioEngine {
 
             return audioInterface;
         }
-       
     }
-
 
 
     export class FxAudioUtilities {
