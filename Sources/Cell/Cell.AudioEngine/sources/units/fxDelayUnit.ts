@@ -12,6 +12,13 @@ module FxAudioEngine.Units {
 
         private _delayNode: DelayNode;
 
+        private _ports: FxUnitInterface;
+
+
+        public get ports(): FxUnitInterface {
+            return this._ports;
+        }
+
 
         public get time(): number {
             return this._delayNode.delayTime.value;
