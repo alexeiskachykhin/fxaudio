@@ -59,14 +59,14 @@ module FxAudioEngine.Units {
             return ports;
         }
 
-        private _setDrive(sampleRate:number, value: number): void {
-            var k = value;
-            var deg = Math.PI / 180;
+        private _setDrive(sampleRate: number, value: number): void {
+            var k: number = value;
+            var deg: number = Math.PI / 180;
 
             var wsCurve = new Float32Array(sampleRate);
 
-            for (var i = 0; i < sampleRate; i += 1) {
-                var x = i * 2 / sampleRate - 1;
+            for (var i: number = 0; i < sampleRate; i += 1) {
+                var x: number = i * 2 / sampleRate - 1;
                 wsCurve[i] = (3 + k) * x * 20 * deg / (Math.PI + k * Math.abs(x));
             }
 
