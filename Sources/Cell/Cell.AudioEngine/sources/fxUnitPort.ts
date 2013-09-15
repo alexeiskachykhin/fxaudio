@@ -33,8 +33,8 @@ module FxAudioEngine {
                 throw new Error('Can`t connect to output node.');
             }
 
-            var sourceAudioNode = this._audioNode;
-            var destionationAudioNode = port._audioNode;
+            var sourceAudioNode: AudioNode = this._audioNode;
+            var destionationAudioNode: AudioNode = port._audioNode;
 
             sourceAudioNode.connect(destionationAudioNode, this._channel, port._channel);
         }
