@@ -5,9 +5,13 @@ module FxAudioEngine {
     'use strict';
 
 
-    export class FxUnit {
+    export class FxUnit<TBuilder extends IFxUnitBuilder> {
 
         private _context: FxUnitContext;
+
+        private _ports: FxUnitInterface;
+
+        private _builder: TBuilder;
 
 
         public get context(): FxUnitContext {
@@ -15,12 +19,21 @@ module FxAudioEngine {
         }
 
         public get ports(): FxUnitInterface {
-            throw new Error('Not Implemented.');
+            return this._ports;
+        }
+
+        public get builder(): TBuilder {
+            return this._builder;
         }
 
 
-        constructor(unitContext: FxUnitContext) {
+        constructor(unitContext: FxUnitContext, builder: TBuilder) {
+            var audioGraph: AudioNode[] = builder.buildAudioGraph(unitContext);
+            var audioInterface: FxUnitInterface = builder.buildAudioInterface(audioGraph);
+
             this._context = unitContext;
+            this._ports = audioInterface;
+            this._builder = builder;
         }
     }
 }

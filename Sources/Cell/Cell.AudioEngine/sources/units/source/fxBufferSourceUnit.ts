@@ -12,36 +12,27 @@ module FxAudioEngine.Units.Source {
     };
 
 
-    export class FxBufferSourceUnit extends FxAudioSourceUnit<ArrayBuffer> {
+    export class FxBufferSourceUnit extends FxAudioSourceUnit<ArrayBuffer, FxBufferSourceUnitBuilder> {
 
         private _bufferState: FxAudioBufferState;
 
-        private _audioSourceNode: AudioBufferSourceNode;
-
         private _audioSourceController: IFxAudioSourceController;
 
-        private _ports: FxUnitInterface;
+        
+        private get _audioSourceNode(): AudioBufferSourceNode {
+            return this.builder.audioSourceNode;
+        }
 
 
         public get stream(): IFxAudioSourceController {
             return this._audioSourceController;
         }
 
-        public get ports(): FxUnitInterface {
-            return this._ports;
-        }
-
 
         constructor(context: FxUnitContext) {
-            super(context);
+            super(context, new FxBufferSourceUnitBuilder());
 
-            var audioGraph: AudioBufferSourceNode = this._buildAudioGraph();
-            var audioInterface: FxUnitInterface = this._buildInterface(audioGraph);
-
-            this._audioSourceNode = audioGraph;
-            this._audioSourceController = new FxBufferAudioSourceController(audioGraph);
-
-            this._ports = audioInterface;
+            this._audioSourceController = new FxBufferAudioSourceController(this._audioSourceNode);
         }
 
 
@@ -69,18 +60,32 @@ module FxAudioEngine.Units.Source {
 
             return asyncCompletionSource;
         }
+    }
 
 
-        private _buildAudioGraph(): AudioBufferSourceNode {
-            var audioSourceNode: AudioBufferSourceNode = this.context.audioContext.createBufferSource();
+    export class FxBufferSourceUnitBuilder implements IFxUnitBuilder {
 
-            return audioSourceNode;
+        private _audioSourceNode: AudioBufferSourceNode;
+
+
+        public get audioSourceNode(): AudioBufferSourceNode {
+            return this._audioSourceNode;
         }
 
-        private _buildInterface(audioGraph: AudioNode): FxUnitInterface {
-            var ports: FxUnitInterface = FxAudioUtilities.AudioInterface.fromAudioGraph([audioGraph]);
 
-            return ports;
+        public buildAudioGraph(unitContext: FxUnitContext): AudioNode[] {
+            var audioNode: AudioBufferSourceNode = unitContext.audioContext.createBufferSource();
+            var audioGraph: AudioNode[] = [audioNode];
+
+            this._audioSourceNode = audioNode;
+
+            return audioGraph;
+        }
+
+        public buildAudioInterface(audioGraph: AudioNode[]): FxUnitInterface {
+            var audioInterface: FxUnitInterface = FxAudioUtilities.AudioInterface.fromAudioGraph(audioGraph);
+
+            return audioInterface;
         }
     }
 }

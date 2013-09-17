@@ -5,7 +5,15 @@ module FxAudioEngine.Units {
     'use strict';
 
 
-    export class FxOverdriveUnit extends FxUnit {
+    export class FxOverdriveUnit extends FxUnit<FxOverdriveUnitBuilder> {
+
+        constructor(context: FxUnitContext) {
+            super(context, new FxOverdriveUnitBuilder());
+        }
+    }
+
+
+    export class FxOverdriveUnitBuilder implements IFxUnitBuilder {
 
         private _waveShaperNode: WaveShaperNode;
 
@@ -13,33 +21,16 @@ module FxAudioEngine.Units {
 
         private _gainNode: GainNode;
 
-        private _ports: FxUnitInterface;
 
-
-        public get ports(): FxUnitInterface {
-            return this._ports;
-        }
-
-
-        constructor(context: FxUnitContext) {
-            super(context);
-
-            var audioGraph: AudioNode[] = this._buildAudioGraph();
-            var audioInterface: FxUnitInterface = this._buildInterface(audioGraph);
-
-            this._ports = audioInterface;
-        }
-
-
-        private _buildAudioGraph(): AudioNode[]{
-            this._lowPassFilterNode = this.context.audioContext.createBiquadFilter();
+        public buildAudioGraph(unitContext: FxUnitContext): AudioNode[] {
+            this._lowPassFilterNode = unitContext.audioContext.createBiquadFilter();
             this._lowPassFilterNode.type = 0;
             this._lowPassFilterNode.frequency.value = 3000;
 
-            this._waveShaperNode = this.context.audioContext.createWaveShaper();
-            this._setDrive(this.context.sampleRate, 120);
+            this._waveShaperNode = unitContext.audioContext.createWaveShaper();
+            this._setDrive(unitContext.sampleRate, 120);
 
-            this._gainNode = this.context.audioContext.createGain();
+            this._gainNode = unitContext.audioContext.createGain();
 
 
             var audioGraph: AudioNode[] = [
@@ -48,16 +39,17 @@ module FxAudioEngine.Units {
                 this._gainNode
             ];
 
+            FxAudioUtilities.WebAudioAPI.routeAudioGraph(audioGraph);
+
             return audioGraph;
         }
 
-        private _buildInterface(audioGraph): FxUnitInterface {
-            FxAudioUtilities.WebAudioAPI.routeAudioGraph(audioGraph);
+        public buildAudioInterface(audioGraph: AudioNode[]): FxUnitInterface {
+            var audioInterface: FxUnitInterface = FxAudioUtilities.AudioInterface.fromAudioGraph(audioGraph);
 
-            var ports: FxUnitInterface = FxAudioUtilities.AudioInterface.fromAudioGraph(audioGraph);
-
-            return ports;
+            return audioInterface;
         }
+
 
         private _setDrive(sampleRate: number, value: number): void {
             var k: number = value;
