@@ -5,52 +5,53 @@ module FxAudioEngine.Units {
     'use strict';
 
 
-    var DEFAULT_MAX_DELAY_TIME = 3.0;
-
-
-    export class FxDelayUnit extends FxUnit {
-
-        private _delayNode: DelayNode;
-
-        private _ports: FxUnitInterface;
-
+    export class FxDelayUnit extends FxUnit<FxDelayUnitBuilder> {
 
         public get time(): number {
-            return this._delayNode.delayTime.value;
+            return this.builder.delayNode.delayTime.value;
         }
 
         public set time(value: number) {
-            this._delayNode.delayTime.value = value;
-        }
-
-        public get ports(): FxUnitInterface {
-            return this._ports;
+            this.builder.delayNode.delayTime.value = value;
         }
 
 
-        constructor(context: FxUnitContext, maxDelayTime?: number) {
-            super(context);
- 
-            maxDelayTime = maxDelayTime || DEFAULT_MAX_DELAY_TIME;
+        constructor(context: FxUnitContext, maxDelayTime: number = 3.0) {
+            super(context, new FxDelayUnitBuilder(maxDelayTime));
+        }
+    }
 
-            var audioGraph: DelayNode = this._buildAudioGraph(maxDelayTime);
-            var audioInterface: FxUnitInterface = this._buildInterface(audioGraph);
 
-            this._delayNode = audioGraph;
-            this._ports = audioInterface;
+    export class FxDelayUnitBuilder implements IFxUnitBuilder {
+
+        private _maxDelayTime: number;
+
+        private _delayNode: DelayNode;
+
+        
+        public get delayNode(): DelayNode {
+            return this._delayNode;
         }
 
 
-        private _buildAudioGraph(maxDelayTime: number): DelayNode {
-            var audioNode: DelayNode = this.context.audioContext.createDelay(maxDelayTime);
-
-            return audioNode;
+        constructor(maxDelayTime: number) {
+            this._maxDelayTime = maxDelayTime;
         }
 
-        private _buildInterface(audioGraph: AudioNode): FxUnitInterface {
-            var ports: FxUnitInterface = FxAudioUtilities.AudioInterface.fromAudioGraph([audioGraph]);
 
-            return ports;
+        public buildAudioGraph(unitContext: FxUnitContext): AudioNode[] {
+            var audioNode: DelayNode = unitContext.audioContext.createDelay(this._maxDelayTime);
+            var audioGraph: AudioNode[] = [audioNode];
+
+            this._delayNode = audioNode;
+
+            return audioGraph;
+        }
+
+        public buildAudioInterface(audioGraph: AudioNode[]): FxUnitInterface {
+            var audioInterface: FxUnitInterface = FxAudioUtilities.AudioInterface.fromAudioGraph(audioGraph);
+
+            return audioInterface;
         }
     }
 }
