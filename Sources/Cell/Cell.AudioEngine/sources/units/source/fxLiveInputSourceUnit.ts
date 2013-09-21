@@ -5,7 +5,7 @@ module FxAudioEngine.Units.Source {
     'use strict';
 
 
-    export class FxLiveInputSourceUnit extends FxAudioSourceUnit<MediaStream> {
+    export class FxLiveInputSourceUnit extends FxAudioSourceUnit<FxLiveInputSourceUnitBuilder, MediaStream> {
 
         private _audioSourceController: IFxAudioSourceController;
 
@@ -26,7 +26,7 @@ module FxAudioEngine.Units.Source {
             var asyncCompletionSource = new FxEventSource();
 
             try {
-                (<any>this.builder).mountStream(stream);
+                this.builder.mountStream(this.context, stream);
                 asyncCompletionSource.dispatchEvent('success');
             }
             catch (e) {
@@ -38,7 +38,7 @@ module FxAudioEngine.Units.Source {
     }
 
 
-    class FxLiveInputSourceUnitBuilder implements IFxUnitBuilder {
+    export class FxLiveInputSourceUnitBuilder implements IFxUnitBuilder {
 
         private _outputGainNode: GainNode;
 

@@ -12,7 +12,7 @@ module FxAudioEngine.Units.Source {
     };
 
 
-    export class FxBufferSourceUnit extends FxAudioSourceUnit<ArrayBuffer, FxBufferSourceUnitBuilder> {
+    export class FxBufferSourceUnit extends FxAudioSourceUnit<FxBufferSourceUnitBuilder, ArrayBuffer> {
 
         private _bufferState: FxAudioBufferState;
 
