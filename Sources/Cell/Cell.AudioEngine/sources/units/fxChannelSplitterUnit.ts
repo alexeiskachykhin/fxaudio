@@ -1,4 +1,4 @@
-﻿/// <reference path="../_references.ts" />
+﻿ /// <reference path="../_references.ts" />
 
 
 module FxAudioEngine.Units {
@@ -13,27 +13,10 @@ module FxAudioEngine.Units {
     }
 
 
-    export class FxChannelSplitterUnitBuilder implements IFxUnitBuilder {
-
-        private _numberOfOutputs: number;
-
+    export class FxChannelSplitterUnitBuilder extends FxAdapterUnitBuilder<ChannelSplitterNode> {
 
         constructor(numberOfOutputs: number) {
-            this._numberOfOutputs = numberOfOutputs;
-        }
-
-
-        public buildAudioGraph(unitContext: FxUnitContext): AudioNode[] {
-            var audioNode: AudioNode = unitContext.audioContext.createChannelSplitter(this._numberOfOutputs);
-            var audioGraph: AudioNode[] = [audioNode];
-
-            return audioGraph;
-        }
-
-        public buildAudioInterface(audioGraph: AudioNode[]): FxUnitInterface {
-            var audioInterface: FxUnitInterface = FxAudioUtilities.AudioInterface.fromAudioGraph(audioGraph);
-
-            return audioInterface;
+            super(NodeType.CHANNEL_SPLITTER, numberOfOutputs);
         }
     }
 }

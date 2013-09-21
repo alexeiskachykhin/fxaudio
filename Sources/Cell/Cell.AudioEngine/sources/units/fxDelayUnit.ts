@@ -8,11 +8,11 @@ module FxAudioEngine.Units {
     export class FxDelayUnit extends FxUnit<FxDelayUnitBuilder> {
 
         public get time(): number {
-            return this.builder.delayNode.delayTime.value;
+            return this.builder.audioNode.delayTime.value;
         }
 
         public set time(value: number) {
-            this.builder.delayNode.delayTime.value = value;
+            this.builder.audioNode.delayTime.value = value;
         }
 
 
@@ -22,36 +22,10 @@ module FxAudioEngine.Units {
     }
 
 
-    export class FxDelayUnitBuilder implements IFxUnitBuilder {
-
-        private _maxDelayTime: number;
-
-        private _delayNode: DelayNode;
-
-        
-        public get delayNode(): DelayNode {
-            return this._delayNode;
-        }
-
+    export class FxDelayUnitBuilder extends FxAdapterUnitBuilder<DelayNode> {
 
         constructor(maxDelayTime: number) {
-            this._maxDelayTime = maxDelayTime;
-        }
-
-
-        public buildAudioGraph(unitContext: FxUnitContext): AudioNode[] {
-            var audioNode: DelayNode = unitContext.audioContext.createDelay(this._maxDelayTime);
-            var audioGraph: AudioNode[] = [audioNode];
-
-            this._delayNode = audioNode;
-
-            return audioGraph;
-        }
-
-        public buildAudioInterface(audioGraph: AudioNode[]): FxUnitInterface {
-            var audioInterface: FxUnitInterface = FxAudioUtilities.AudioInterface.fromAudioGraph(audioGraph);
-
-            return audioInterface;
+            super(NodeType.DELAY, maxDelayTime);
         }
     }
 }
