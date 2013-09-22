@@ -2,7 +2,7 @@
 
 
 module FxAudioEngine.Units.Source {
-	'use strict';
+    'use strict';
 
 
     export class FxAudioSourceUnit<TSource> extends FxUnit {
