@@ -1,41 +1,22 @@
-﻿/// <reference path="../_references.ts" />
+﻿ /// <reference path="../_references.ts" />
 
 
 module FxAudioEngine.Units {
     'use strict';
 
 
-    export class FxChannelSplitterUnit extends FxUnit {
-
-        private _ports: FxUnitInterface;
-
-
-        public get ports(): FxUnitInterface {
-            return this._ports;
-        }
-
+    export class FxChannelSplitterUnit extends FxUnit<FxChannelSplitterUnitBuilder> {
 
         constructor(unitContext: FxUnitContext, numberOfOutputs: number = 6) {
-            super(unitContext);
-
-            var audioGraph: AudioNode[] = this._buildAudioGraph(unitContext, numberOfOutputs);
-            var audioInterface: FxUnitInterface = this._buildAudioInterface(audioGraph);
-
-            this._ports = audioInterface;
+            super(unitContext, new FxChannelSplitterUnitBuilder(numberOfOutputs));
         }
+    }
 
 
-        private _buildAudioGraph(unitContext: FxUnitContext, numberOfChannels: number): AudioNode[] {
-            var audioNode: AudioNode = unitContext.audioContext.createChannelSplitter(numberOfChannels);
-            var audioGraph: AudioNode[] = [audioNode];
+    export class FxChannelSplitterUnitBuilder extends FxAdapterUnitBuilder<ChannelSplitterNode> {
 
-            return audioGraph;
-        }
-
-        private _buildAudioInterface(audioGraph: AudioNode[]): FxUnitInterface {
-            var audioInterface: FxUnitInterface = FxAudioUtilities.AudioInterface.fromAudioGraph(audioGraph);
-
-            return audioInterface;
+        constructor(numberOfOutputs: number) {
+            super(NodeType.CHANNEL_SPLITTER, numberOfOutputs);
         }
     }
 }

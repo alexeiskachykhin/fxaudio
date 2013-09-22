@@ -5,35 +5,42 @@ module FxAudioEngine.Units {
     'use strict';
 
 
-    export class FxAudioDestinationUnit extends FxUnit {
-
-        private _audioDestinationNode: AudioDestinationNode;
-
-        private _ports: FxUnitInterface;
-
+    export class FxAudioDestinationUnit extends FxUnit<FxAudioDestinationUnitBuilder> {
 
         public get maxChannelCount(): number {
-            return this._audioDestinationNode.maxNumberOfChannels;
-        }
-
-        public get ports(): FxUnitInterface {
-            return this._ports;
+            return this.builder.audioDestinationNode.maxNumberOfChannels;
         }
 
 
         constructor(context: FxRealTimeUnitContext) {
-            super(context);
+            super(context, new FxAudioDestinationUnitBuilder());
+        }
+    }
 
-            this._audioDestinationNode = context.audioContext.destination;
 
-            this._ports = this._buildInterface();
+    export class FxAudioDestinationUnitBuilder implements IFxUnitBuilder {
+
+        private _audioDestinationNode: AudioDestinationNode;
+
+
+        public get audioDestinationNode(): AudioDestinationNode {
+            return this._audioDestinationNode;
         }
 
 
-        private _buildInterface(): FxUnitInterface {
-            var ports: FxUnitInterface = FxAudioUtilities.AudioInterface.fromAudioGraph([this._audioDestinationNode]);
+        public buildAudioGraph(unitContext: FxUnitContext): AudioNode[] {
+            var audioNode: AudioDestinationNode = unitContext.audioContext.destination;
+            var audioGraph: AudioNode[] = [audioNode];
 
-            return ports;
+            this._audioDestinationNode = audioNode;
+
+            return audioGraph;
+        }
+
+        public buildAudioInterface(audioGraph: AudioNode[]): FxUnitInterface {
+            var audioInterface: FxUnitInterface = FxAudioUtilities.AudioInterface.fromAudioGraph(audioGraph);
+
+            return audioInterface;
         }
     }
 }

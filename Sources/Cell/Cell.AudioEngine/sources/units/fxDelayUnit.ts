@@ -5,52 +5,27 @@ module FxAudioEngine.Units {
     'use strict';
 
 
-    var DEFAULT_MAX_DELAY_TIME = 3.0;
-
-
-    export class FxDelayUnit extends FxUnit {
-
-        private _delayNode: DelayNode;
-
-        private _ports: FxUnitInterface;
-
+    export class FxDelayUnit extends FxUnit<FxDelayUnitBuilder> {
 
         public get time(): number {
-            return this._delayNode.delayTime.value;
+            return this.builder.audioNode.delayTime.value;
         }
 
         public set time(value: number) {
-            this._delayNode.delayTime.value = value;
-        }
-
-        public get ports(): FxUnitInterface {
-            return this._ports;
+            this.builder.audioNode.delayTime.value = value;
         }
 
 
-        constructor(context: FxUnitContext, maxDelayTime?: number) {
-            super(context);
- 
-            maxDelayTime = maxDelayTime || DEFAULT_MAX_DELAY_TIME;
-
-            var audioGraph: DelayNode = this._buildAudioGraph(maxDelayTime);
-            var audioInterface: FxUnitInterface = this._buildInterface(audioGraph);
-
-            this._delayNode = audioGraph;
-            this._ports = audioInterface;
+        constructor(context: FxUnitContext, maxDelayTime: number = 3.0) {
+            super(context, new FxDelayUnitBuilder(maxDelayTime));
         }
+    }
 
 
-        private _buildAudioGraph(maxDelayTime: number): DelayNode {
-            var audioNode: DelayNode = this.context.audioContext.createDelay(maxDelayTime);
+    export class FxDelayUnitBuilder extends FxAdapterUnitBuilder<DelayNode> {
 
-            return audioNode;
-        }
-
-        private _buildInterface(audioGraph: AudioNode): FxUnitInterface {
-            var ports: FxUnitInterface = FxAudioUtilities.AudioInterface.fromAudioGraph([audioGraph]);
-
-            return ports;
+        constructor(maxDelayTime: number) {
+            super(NodeType.DELAY, maxDelayTime);
         }
     }
 }
