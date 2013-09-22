@@ -1,8 +1,11 @@
 [
+    "../../sources/fxNodeType.ts",
     "../../sources/fxEventSource.ts",
     "../../sources/fxUnitContext.ts",
     "../../sources/fxOfflineUnitContext.ts",
     "../../sources/fxRealTimeUnitContext.ts",
+    "../../sources/fxUnitBuilder.ts",
+    "../../sources/fxAdapterUnitBuilder.ts",
     "../../sources/fxUnit.ts",
     "../../sources/fxUnitPort.ts",
     "../../sources/fxUnitInterface.ts",
