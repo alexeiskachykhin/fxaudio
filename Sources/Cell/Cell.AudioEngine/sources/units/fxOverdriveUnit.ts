@@ -13,7 +13,7 @@ module FxAudioEngine.Units {
     }
 
 
-    export class FxOverdriveUnitBuilder implements IFxUnitBuilder {
+    export class FxOverdriveUnitBuilder extends FxLinearInterfaceUnitBuilder {
 
         private _waveShaperNode: WaveShaperNode;
 
@@ -42,12 +42,6 @@ module FxAudioEngine.Units {
             FxAudioUtilities.WebAudioAPI.routeAudioGraph(audioGraph);
 
             return audioGraph;
-        }
-
-        public buildAudioInterface(audioGraph: AudioNode[]): FxUnitInterface {
-            var audioInterface: FxUnitInterface = FxAudioUtilities.AudioInterface.fromAudioGraph(audioGraph);
-
-            return audioInterface;
         }
 
 
