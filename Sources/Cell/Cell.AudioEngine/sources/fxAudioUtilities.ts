@@ -48,7 +48,7 @@ module FxAudioEngine {
 
     class FxUnitInterfaceUtilities {
 
-        private _createPortsFromAudioNode(audioNode: AudioNode, direction: FxUnitPortDirection): FxUnitPort[] {
+        private _createPortsFromAudioNode(audioNode: AudioNode, direction: FxUnitPortDirection, ports: FxUnitPort[]): FxUnitPort[] {
             var numberOfPorts: number;
 
             switch (direction) {
@@ -66,8 +66,6 @@ module FxAudioEngine {
             }
 
 
-            var ports: FxUnitPort[] = [];
-
             for (var portIndex = 0; portIndex < numberOfPorts; portIndex++) {
                 var port = new FxUnitPort(audioNode, portIndex, direction);
                 ports.push(port);
@@ -82,11 +80,20 @@ module FxAudioEngine {
                 throw new TypeError('Invalid audio graph.');
             }
 
+            var inputs: FxUnitPort[] = [];
             var inputNode: AudioNode = audioGraph[0];
+
+            if (inputNode) {
+                this._createPortsFromAudioNode(inputNode, FxUnitPortDirection.INPUT, inputs);
+            }
+
+
+            var outputs: FxUnitPort[] = [];
             var outputNode: AudioNode = audioGraph[audioGraph.length - 1];
 
-            var inputs: FxUnitPort[] = this._createPortsFromAudioNode(inputNode, FxUnitPortDirection.INPUT);
-            var outputs: FxUnitPort[] = this._createPortsFromAudioNode(outputNode, FxUnitPortDirection.OUTPUT);
+            if (outputNode) {
+                this._createPortsFromAudioNode(outputNode, FxUnitPortDirection.OUTPUT, outputs);
+            }
 
 
             var audioInterface = new FxUnitInterface(inputs, outputs);

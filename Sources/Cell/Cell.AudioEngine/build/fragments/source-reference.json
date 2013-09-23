@@ -5,6 +5,7 @@
     "../../sources/fxOfflineUnitContext.ts",
     "../../sources/fxRealTimeUnitContext.ts",
     "../../sources/fxUnitBuilder.ts",
+    "../../sources/fxLinearInterfaceUnitBuilder.ts",
     "../../sources/fxAdapterUnitBuilder.ts",
     "../../sources/fxUnit.ts",
     "../../sources/fxUnitPort.ts",

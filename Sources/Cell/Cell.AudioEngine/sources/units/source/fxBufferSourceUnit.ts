@@ -20,7 +20,7 @@ module FxAudioEngine.Units.Source {
 
         
         private get _audioSourceNode(): AudioBufferSourceNode {
-            return this.builder.audioSourceNode;
+            return this.builder.audioNode;
         }
 
 
@@ -63,29 +63,10 @@ module FxAudioEngine.Units.Source {
     }
 
 
-    export class FxBufferSourceUnitBuilder implements IFxUnitBuilder {
-
-        private _audioSourceNode: AudioBufferSourceNode;
-
-
-        public get audioSourceNode(): AudioBufferSourceNode {
-            return this._audioSourceNode;
-        }
-
-
-        public buildAudioGraph(unitContext: FxUnitContext): AudioNode[] {
-            var audioNode: AudioBufferSourceNode = unitContext.audioContext.createBufferSource();
-            var audioGraph: AudioNode[] = [audioNode];
-
-            this._audioSourceNode = audioNode;
-
-            return audioGraph;
-        }
-
-        public buildAudioInterface(audioGraph: AudioNode[]): FxUnitInterface {
-            var audioInterface: FxUnitInterface = FxAudioUtilities.AudioInterface.fromAudioGraph(audioGraph);
-
-            return audioInterface;
+    export class FxBufferSourceUnitBuilder extends FxAdapterUnitBuilder<AudioBufferSourceNode> {
+        
+        constructor() {
+            super(NodeType.BUFFER_SOURCE);
         }
     }
 }
