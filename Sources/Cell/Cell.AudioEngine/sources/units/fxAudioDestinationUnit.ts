@@ -18,7 +18,7 @@ module FxAudioEngine.Units {
     }
 
 
-    export class FxAudioDestinationUnitBuilder implements IFxUnitBuilder {
+    export class FxAudioDestinationUnitBuilder extends FxLinearInterfaceUnitBuilder {
 
         private _audioDestinationNode: AudioDestinationNode;
 
@@ -35,12 +35,6 @@ module FxAudioEngine.Units {
             this._audioDestinationNode = audioNode;
 
             return audioGraph;
-        }
-
-        public buildAudioInterface(audioGraph: AudioNode[]): FxUnitInterface {
-            var audioInterface: FxUnitInterface = FxAudioUtilities.AudioInterface.fromAudioGraph(audioGraph);
-
-            return audioInterface;
         }
     }
 }
