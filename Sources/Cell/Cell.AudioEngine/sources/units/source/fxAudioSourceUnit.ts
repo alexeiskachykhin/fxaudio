@@ -15,6 +15,8 @@ module FxAudioEngine.Units.Source {
         }
 
 
-        public init(source: TSource): IFxEventSource { return null; }
+        public init(source: TSource): IFxEventSource {
+            throw new Error('This method is abstract.');
+        }
     }
 }
