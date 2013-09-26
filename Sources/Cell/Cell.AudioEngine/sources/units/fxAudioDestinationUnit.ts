@@ -8,7 +8,7 @@ module FxAudioEngine.Units {
     export class FxAudioDestinationUnit extends FxUnit<FxAudioDestinationUnitBuilder> {
 
         public get maxChannelCount(): number {
-            return this.builder.audioDestinationNode.maxNumberOfChannels;
+            return this.builder.audioNode.maxNumberOfChannels;
         }
 
 
@@ -18,23 +18,10 @@ module FxAudioEngine.Units {
     }
 
 
-    export class FxAudioDestinationUnitBuilder extends FxLinearInterfaceUnitBuilder {
+    export class FxAudioDestinationUnitBuilder extends FxAdapterUnitBuilder<AudioDestinationNode> {
 
-        private _audioDestinationNode: AudioDestinationNode;
-
-
-        public get audioDestinationNode(): AudioDestinationNode {
-            return this._audioDestinationNode;
-        }
-
-
-        public buildAudioGraph(unitContext: FxUnitContext): AudioNode[] {
-            var audioNode: AudioDestinationNode = unitContext.audioContext.destination;
-            var audioGraph: AudioNode[] = [audioNode];
-
-            this._audioDestinationNode = audioNode;
-
-            return audioGraph;
+        constructor() {
+            super(NodeType.DESTINATION);
         }
     }
 }

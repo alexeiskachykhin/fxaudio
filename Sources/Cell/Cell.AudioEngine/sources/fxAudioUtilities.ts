@@ -27,6 +27,7 @@ module FxAudioEngine {
                 case NodeType.CHANNEL_SPLITTER: factoryMethod = audioContext.createChannelSplitter; break;
                 case NodeType.CONVOLVER: factoryMethod = audioContext.createConvolver; break;
                 case NodeType.DELAY: factoryMethod = audioContext.createDelay; break;
+                case NodeType.DESTINATION: factoryMethod = function () { return audioContext.destination; }; break;
                 case NodeType.DYNAMICS_COMPRESSOR: factoryMethod = audioContext.createDynamicsCompressor; break;
                 case NodeType.GAIN: factoryMethod = audioContext.createGain; break;
                 case NodeType.MEDIA_ELEMENT_SOURCE: factoryMethod = audioContext.createMediaElementSource; break;
@@ -48,7 +49,7 @@ module FxAudioEngine {
 
     class FxUnitInterfaceUtilities {
 
-        private _createPortsFromAudioNode(audioNode: AudioNode, direction: FxUnitPortDirection, ports: FxUnitPort[]): FxUnitPort[] {
+        public createPortsFromAudioNode(audioNode: AudioNode, direction: FxUnitPortDirection, ports: FxUnitPort[]): void {
             var numberOfPorts: number;
 
             switch (direction) {
@@ -70,35 +71,6 @@ module FxAudioEngine {
                 var port = new FxUnitPort(audioNode, portIndex, direction);
                 ports.push(port);
             }
-
-            return ports;
-        }
-
-
-        public fromAudioGraph(audioGraph: AudioNode[]): FxUnitInterface {
-            if (!audioGraph) {
-                throw new TypeError('Invalid audio graph.');
-            }
-
-            var inputs: FxUnitPort[] = [];
-            var inputNode: AudioNode = audioGraph[0];
-
-            if (inputNode) {
-                this._createPortsFromAudioNode(inputNode, FxUnitPortDirection.INPUT, inputs);
-            }
-
-
-            var outputs: FxUnitPort[] = [];
-            var outputNode: AudioNode = audioGraph[audioGraph.length - 1];
-
-            if (outputNode) {
-                this._createPortsFromAudioNode(outputNode, FxUnitPortDirection.OUTPUT, outputs);
-            }
-
-
-            var audioInterface = new FxUnitInterface(inputs, outputs);
-
-            return audioInterface;
         }
     }
 

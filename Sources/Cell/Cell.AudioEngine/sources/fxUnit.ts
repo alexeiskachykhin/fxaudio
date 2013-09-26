@@ -28,8 +28,8 @@ module FxAudioEngine {
 
 
         constructor(unitContext: FxUnitContext, builder: TBuilder) {
-            var audioGraph: AudioNode[] = builder.buildAudioGraph(unitContext);
-            var audioInterface: FxUnitInterface = builder.buildAudioInterface(audioGraph);
+            var audioCircuit: FxAudioCircuit = builder.buildAudioCircuit(unitContext);
+            var audioInterface: FxUnitInterface = new FxUnitInterface(audioCircuit);
 
             this._context = unitContext;
             this._ports = audioInterface;

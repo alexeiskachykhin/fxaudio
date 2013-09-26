@@ -5,7 +5,7 @@ module FxAudioEngine {
     'use strict';
 
 
-    export class FxAdapterUnitBuilder<TNode extends AudioNode> extends FxLinearInterfaceUnitBuilder {
+    export class FxAdapterUnitBuilder<TNode extends AudioNode> implements IFxUnitBuilder {
 
         private _audioNode: TNode;
 
@@ -20,20 +20,18 @@ module FxAudioEngine {
 
 
         constructor(audioNodeType: NodeType, ...args: any[]) {
-            super();
-
             this._audioNodeType = audioNodeType;
             this._audioNodeFactoryMethodArguments = args;
         }
 
 
-        public buildAudioGraph(unitContext: FxUnitContext): AudioNode[] {
+        public buildAudioCircuit(unitContext: FxUnitContext): FxAudioCircuit {
             var audioNode: TNode = this._createNode(unitContext);
-            var audioGraph: TNode[] = [audioNode];
+            var audioCircuit: FxAudioCircuit = new FxAudioCircuit(audioNode, audioNode);
 
             this._audioNode = audioNode;
 
-            return audioGraph;
+            return audioCircuit;
         }
 
 

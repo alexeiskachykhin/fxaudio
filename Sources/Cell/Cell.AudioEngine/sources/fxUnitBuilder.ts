@@ -7,8 +7,6 @@ module FxAudioEngine {
     
     export interface IFxUnitBuilder {
 
-        buildAudioGraph(unitContext: FxUnitContext): AudioNode[];
-
-        buildAudioInterface(audioGraph: AudioNode[]): FxUnitInterface;
+        buildAudioCircuit(unitContext: FxUnitContext): FxAudioCircuit;
     }
 }

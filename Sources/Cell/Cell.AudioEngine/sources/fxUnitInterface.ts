@@ -14,29 +14,24 @@ module FxAudioEngine {
         public bypass: FxUnitPort[];
 
 
-        constructor(
-            input: FxUnitPort,
-            output: FxUnitPort,
-            bypas?: FxUnitPort);
+        constructor(audioCircuit: FxAudioCircuit) {
+            this.inputs = this._createPorts(audioCircuit.inputs, FxUnitPortDirection.INPUT);
+            this.outputs = this._createPorts(audioCircuit.outputs, FxUnitPortDirection.OUTPUT);
+        }
 
-        constructor(
-            inputs: FxUnitPort[],
-            outputs: FxUnitPort[],
-            bypass?: FxUnitPort[]);
 
-        constructor(
-            inputs: any,
-            outputs: any,
-            bypass?: any) {
-                this.inputs = (inputs instanceof Array) ? inputs : [inputs];
-                this.outputs = (outputs instanceof Array) ? outputs : [outputs];
-                this.bypass = (bypass instanceof Array) ? bypass : [bypass];
+        private _createPorts(audioNodes: AudioNode[], portDirection: FxUnitPortDirection): FxUnitPort[] {
+            var ports: FxUnitPort[] = [];
 
-                Object.freeze(this.inputs);
-                Object.freeze(this.outputs);
-                Object.freeze(this.bypass);
+            for (var i = 0; i < audioNodes.length; i++) {
+                var audioNode: AudioNode = audioNodes[i];
 
-                Object.freeze(this);
+                if (audioNode) {
+                    FxAudioUtilities.AudioInterface.createPortsFromAudioNode(audioNode, portDirection, ports);
+                }
+            }
+
+            return ports;
         }
     }
 }

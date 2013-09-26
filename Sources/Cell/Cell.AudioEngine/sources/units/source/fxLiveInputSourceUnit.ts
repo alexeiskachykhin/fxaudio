@@ -38,20 +38,20 @@ module FxAudioEngine.Units.Source {
     }
 
 
-    export class FxLiveInputSourceUnitBuilder extends FxLinearInterfaceUnitBuilder {
+    export class FxLiveInputSourceUnitBuilder implements IFxUnitBuilder {
 
         private _outputGainNode: GainNode;
 
         private _mediStreamSourceNode: MediaStreamAudioSourceNode;
 
 
-        public buildAudioGraph(unitContext: FxUnitContext): AudioNode[] {
+        public buildAudioCircuit(unitContext: FxUnitContext): FxAudioCircuit {
             var audioNode: GainNode = unitContext.audioContext.createGain();
-            var audioGraph: AudioNode[] = [null, audioNode];
+            var audioCircuit: FxAudioCircuit = new FxAudioCircuit(null, audioNode);
 
             this._outputGainNode = audioNode;
 
-            return audioGraph;
+            return audioCircuit;
         }
 
         public mountStream(unitContext: FxUnitContext, stream: MediaStream): void {
