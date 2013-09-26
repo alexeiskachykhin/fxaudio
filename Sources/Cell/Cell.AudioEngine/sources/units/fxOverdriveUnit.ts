@@ -13,7 +13,7 @@ module FxAudioEngine.Units {
     }
 
 
-    export class FxOverdriveUnitBuilder extends FxLinearInterfaceUnitBuilder {
+    export class FxOverdriveUnitBuilder implements IFxUnitBuilder {
 
         private _waveShaperNode: WaveShaperNode;
 
@@ -22,7 +22,7 @@ module FxAudioEngine.Units {
         private _gainNode: GainNode;
 
 
-        public buildAudioGraph(unitContext: FxUnitContext): AudioNode[] {
+        public buildAudioCircuit(unitContext: FxUnitContext): FxAudioCircuit {
             this._lowPassFilterNode = unitContext.audioContext.createBiquadFilter();
             this._lowPassFilterNode.type = 0;
             this._lowPassFilterNode.frequency.value = 3000;
@@ -41,7 +41,10 @@ module FxAudioEngine.Units {
 
             FxAudioUtilities.WebAudioAPI.routeAudioGraph(audioGraph);
 
-            return audioGraph;
+
+            var audioCircuit = new FxAudioCircuit(this._lowPassFilterNode, this._gainNode);
+
+            return audioCircuit;
         }
 
 
