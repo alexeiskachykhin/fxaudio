@@ -11,7 +11,7 @@ module FxAudioEngine {
 
         private _audioNodeType: NodeType;
 
-        private _audioNodeFactoryMethodAruments: any[];
+        private _audioNodeFactoryMethodArguments: any[];
 
 
         public get audioNode(): TNode {
@@ -23,7 +23,7 @@ module FxAudioEngine {
             super();
 
             this._audioNodeType = audioNodeType;
-            this._audioNodeFactoryMethodAruments = args;
+            this._audioNodeFactoryMethodArguments = args;
         }
 
 
@@ -40,7 +40,7 @@ module FxAudioEngine {
         private _createNode(unitContext: FxUnitContext): TNode {
             var audioContext: AudioContext = unitContext.audioContext;
             var audioNodeType: NodeType = this._audioNodeType;
-            var audioNodeArguments: any[] = this._audioNodeFactoryMethodAruments;
+            var audioNodeArguments: any[] = this._audioNodeFactoryMethodArguments;
 
 
             var audioNode: TNode = <TNode>FxAudioUtilities.WebAudioAPI.createNode(
