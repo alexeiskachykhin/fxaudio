@@ -7,8 +7,7 @@ module FxAudioEngine {
    
     export enum FxUnitPortDirection {
         INPUT,
-        OUTPUT,
-        BYPASS
+        OUTPUT
     }
     
 
