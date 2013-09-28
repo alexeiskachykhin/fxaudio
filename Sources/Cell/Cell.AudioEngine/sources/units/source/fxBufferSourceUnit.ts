@@ -12,7 +12,7 @@ module FxAudioEngine.Units.Source {
     };
 
 
-    export class FxBufferSourceUnit extends FxAudioSourceUnit<FxBufferSourceUnitBuilder, ArrayBuffer> {
+    export class FxBufferSourceUnit extends FxAudioSourceUnit<FxBufferSourceUnitCircuit, ArrayBuffer> {
 
         private _bufferState: FxAudioBufferState;
 
@@ -20,7 +20,7 @@ module FxAudioEngine.Units.Source {
 
         
         private get _audioSourceNode(): AudioBufferSourceNode {
-            return this.builder.audioNode;
+            return this.circuit.audioNode;
         }
 
 
@@ -30,7 +30,7 @@ module FxAudioEngine.Units.Source {
 
 
         constructor(context: FxUnitContext) {
-            super(context, new FxBufferSourceUnitBuilder());
+            super(new FxBufferSourceUnitCircuit(context));
 
             this._audioSourceController = new FxBufferAudioSourceController(this._audioSourceNode);
         }
@@ -63,10 +63,10 @@ module FxAudioEngine.Units.Source {
     }
 
 
-    export class FxBufferSourceUnitBuilder extends FxAdapterUnitBuilder<AudioBufferSourceNode> {
+    export class FxBufferSourceUnitCircuit extends FxAdapterUnitCircuit<AudioBufferSourceNode> {
         
-        constructor() {
-            super(NodeType.BUFFER_SOURCE);
+        constructor(context: FxUnitContext) {
+            super(context, NodeType.BUFFER_SOURCE);
         }
     }
 }

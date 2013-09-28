@@ -5,13 +5,13 @@ module FxAudioEngine.Units.Source {
     'use strict';
 
 
-    export class FxAudioSourceUnit<TBuilder extends IFxUnitBuilder, TSource> extends FxUnit<TBuilder> {
+    export class FxAudioSourceUnit<TCircuit extends FxUnitCircuit, TSource> extends FxUnit<TCircuit> {
 
         public stream: IFxAudioSourceController;
 
 
-        constructor(unitContext: FxUnitContext, builder: TBuilder) {
-            super(unitContext, builder);
+        constructor(circuit: TCircuit) {
+            super(circuit);
         }
 
 

@@ -5,18 +5,18 @@ module FxAudioEngine.Units {
     'use strict';
 
 
-    export class FxChannelMergerUnit extends FxUnit<FxChannelMergerUnitBuilder> {
+    export class FxChannelMergerUnit extends FxUnit<FxChannelMergerUnitCircuit> {
 
-        constructor(unitContext: FxUnitContext, numberOfInputs: number = 6) {
-            super(unitContext, new FxChannelMergerUnitBuilder(numberOfInputs));
+        constructor(context: FxUnitContext, numberOfInputs: number = 6) {
+            super(new FxChannelMergerUnitCircuit(context, numberOfInputs));
         }
     }
 
 
-    export class FxChannelMergerUnitBuilder extends FxAdapterUnitBuilder<ChannelMergerNode> {
+    export class FxChannelMergerUnitCircuit extends FxAdapterUnitCircuit<ChannelMergerNode> {
 
-        constructor(numberOfInputs: number) {
-            super(NodeType.CHANNEL_MERGER, numberOfInputs);
+        constructor(context: FxUnitContext, numberOfInputs: number) {
+            super(context, NodeType.CHANNEL_MERGER, numberOfInputs);
         }
     }
 }
