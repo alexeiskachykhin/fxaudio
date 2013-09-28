@@ -5,23 +5,23 @@ module FxAudioEngine.Units {
     'use strict';
 
 
-    export class FxAudioDestinationUnit extends FxUnit<FxAudioDestinationUnitBuilder> {
+    export class FxAudioDestinationUnit extends FxUnit<FxAudioDestinationUnitCircuit> {
 
         public get maxChannelCount(): number {
-            return this.builder.audioNode.maxNumberOfChannels;
+            return this.circuit.audioNode.maxNumberOfChannels;
         }
 
 
         constructor(context: FxRealTimeUnitContext) {
-            super(context, new FxAudioDestinationUnitBuilder());
+            super(new FxAudioDestinationUnitCircuit(context));
         }
     }
 
 
-    export class FxAudioDestinationUnitBuilder extends FxAdapterUnitBuilder<AudioDestinationNode> {
+    export class FxAudioDestinationUnitCircuit extends FxAdapterUnitCircuit<AudioDestinationNode> {
 
-        constructor() {
-            super(NodeType.DESTINATION);
+        constructor(context: FxUnitContext) {
+            super(context, NodeType.DESTINATION);
         }
     }
 }

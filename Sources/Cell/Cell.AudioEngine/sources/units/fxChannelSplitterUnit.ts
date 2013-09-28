@@ -5,18 +5,18 @@ module FxAudioEngine.Units {
     'use strict';
 
 
-    export class FxChannelSplitterUnit extends FxUnit<FxChannelSplitterUnitBuilder> {
+    export class FxChannelSplitterUnit extends FxUnit<FxChannelSplitterUnitCircuit> {
 
-        constructor(unitContext: FxUnitContext, numberOfOutputs: number = 6) {
-            super(unitContext, new FxChannelSplitterUnitBuilder(numberOfOutputs));
+        constructor(context: FxUnitContext, numberOfOutputs: number = 6) {
+            super(new FxChannelSplitterUnitCircuit(context, numberOfOutputs));
         }
     }
 
 
-    export class FxChannelSplitterUnitBuilder extends FxAdapterUnitBuilder<ChannelSplitterNode> {
+    export class FxChannelSplitterUnitCircuit extends FxAdapterUnitCircuit<ChannelSplitterNode> {
 
-        constructor(numberOfOutputs: number) {
-            super(NodeType.CHANNEL_SPLITTER, numberOfOutputs);
+        constructor(context: FxUnitContext, numberOfOutputs: number) {
+            super(context, NodeType.CHANNEL_SPLITTER, numberOfOutputs);
         }
     }
 }

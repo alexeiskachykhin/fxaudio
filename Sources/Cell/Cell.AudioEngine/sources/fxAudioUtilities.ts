@@ -49,7 +49,7 @@ module FxAudioEngine {
 
     class FxUnitInterfaceUtilities {
 
-        public createPortsFromAudioNode(audioNode: AudioNode, direction: FxUnitPortDirection, ports: FxUnitPort[]): void {
+        private _createPortsFromAudioNode(audioNode: AudioNode, direction: FxUnitPortDirection, ports: FxUnitPort[]): void {
             var numberOfPorts: number;
 
             switch (direction) {
@@ -71,6 +71,30 @@ module FxAudioEngine {
                 var port = new FxUnitPort(audioNode, portIndex, direction);
                 ports.push(port);
             }
+        }
+
+        private _createPortsFromAudioNodes(audioNodes: AudioNode[], direction: FxUnitPortDirection, ports: FxUnitPort[]): void {
+            for (var i = 0; i < audioNodes.length; i++) {
+                var audioNode: AudioNode = audioNodes[i];
+
+                if (audioNode) {
+                    this._createPortsFromAudioNode(audioNode, direction, ports);
+                }
+            }
+        }
+
+
+        public fromUnitCircuit(circuit: FxUnitCircuit): FxUnitInterface {
+            var inputPorts = [];
+            var outputPorts = [];
+
+            this._createPortsFromAudioNodes(circuit.inputs, FxUnitPortDirection.INPUT, inputPorts);
+            this._createPortsFromAudioNodes(circuit.outputs, FxUnitPortDirection.OUTPUT, outputPorts);
+
+
+            var audioInterface = new FxUnitInterface(inputPorts, outputPorts);
+
+            return audioInterface;
         }
     }
 

@@ -7,31 +7,23 @@ module FxAudioEngine {
 
     export class FxUnitInterface {
 
-        public inputs: FxUnitPort[];
+        private _inputs: FxUnitPort[];
 
-        public outputs: FxUnitPort[];
-
-        public bypass: FxUnitPort[];
+        private _outputs: FxUnitPort[];
 
 
-        constructor(audioCircuit: FxAudioCircuit) {
-            this.inputs = this._createPorts(audioCircuit.inputs, FxUnitPortDirection.INPUT);
-            this.outputs = this._createPorts(audioCircuit.outputs, FxUnitPortDirection.OUTPUT);
+        public get inputs() {
+            return this._inputs;
+        }
+
+        public get outputs() {
+            return this._outputs;
         }
 
 
-        private _createPorts(audioNodes: AudioNode[], portDirection: FxUnitPortDirection): FxUnitPort[] {
-            var ports: FxUnitPort[] = [];
-
-            for (var i = 0; i < audioNodes.length; i++) {
-                var audioNode: AudioNode = audioNodes[i];
-
-                if (audioNode) {
-                    FxAudioUtilities.AudioInterface.createPortsFromAudioNode(audioNode, portDirection, ports);
-                }
-            }
-
-            return ports;
+        constructor(inputs: FxUnitPort[], outputs: FxUnitPort[]) {
+            this._inputs = inputs;
+            this._outputs = outputs;
         }
     }
 }

@@ -5,7 +5,7 @@ module FxAudioEngine.Units.Source {
     'use strict';
 
 
-    export class FxLiveInputSourceUnit extends FxAudioSourceUnit<FxLiveInputSourceUnitBuilder, MediaStream> {
+    export class FxLiveInputSourceUnit extends FxAudioSourceUnit<FxLiveInputSourceUnitCircuit, MediaStream> {
 
         private _audioSourceController: IFxAudioSourceController;
 
@@ -16,7 +16,7 @@ module FxAudioEngine.Units.Source {
 
 
         constructor(context: FxUnitContext) {
-            super(context, new FxLiveInputSourceUnitBuilder());
+            super(new FxLiveInputSourceUnitCircuit(context));
             
             this._audioSourceController = new FxLiveInputAudioSourceController();
         }
@@ -26,7 +26,7 @@ module FxAudioEngine.Units.Source {
             var asyncCompletionSource = new FxEventSource();
 
             try {
-                this.builder.mountStream(this.context, stream);
+                this.circuit.mountStream(stream);
                 asyncCompletionSource.dispatchEvent('success');
             }
             catch (e) {
@@ -38,25 +38,29 @@ module FxAudioEngine.Units.Source {
     }
 
 
-    export class FxLiveInputSourceUnitBuilder implements IFxUnitBuilder {
+    export class FxLiveInputSourceUnitCircuit extends FxUnitCircuit {
 
         private _outputGainNode: GainNode;
 
         private _mediStreamSourceNode: MediaStreamAudioSourceNode;
 
 
-        public buildAudioCircuit(unitContext: FxUnitContext): FxAudioCircuit {
-            var audioNode: GainNode = unitContext.audioContext.createGain();
-            var audioCircuit: FxAudioCircuit = new FxAudioCircuit(null, audioNode);
+        constructor(context: FxUnitContext) {
+            super(context);
 
-            this._outputGainNode = audioNode;
-
-            return audioCircuit;
+            this._buildAudioCircuit();
         }
 
-        public mountStream(unitContext: FxUnitContext, stream: MediaStream): void {
-            this._mediStreamSourceNode = unitContext.audioContext.createMediaStreamSource(<any>stream);
+
+        public mountStream(stream: MediaStream): void {
+            this._mediStreamSourceNode = this.context.audioContext.createMediaStreamSource(<any>stream);
             this._mediStreamSourceNode.connect(this._outputGainNode);
+        }
+
+
+        private _buildAudioCircuit(): void {
+            this._outputGainNode = this.context.audioContext.createGain();
+            this._addOutputNode(this._outputGainNode);
         }
     }
 }

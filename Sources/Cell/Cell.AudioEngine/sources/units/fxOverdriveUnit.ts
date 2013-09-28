@@ -5,15 +5,15 @@ module FxAudioEngine.Units {
     'use strict';
 
 
-    export class FxOverdriveUnit extends FxUnit<FxOverdriveUnitBuilder> {
+    export class FxOverdriveUnit extends FxUnit<FxOverdriveUnitCircuit> {
 
         constructor(context: FxUnitContext) {
-            super(context, new FxOverdriveUnitBuilder());
+            super(new FxOverdriveUnitCircuit(context));
         }
     }
 
 
-    export class FxOverdriveUnitBuilder implements IFxUnitBuilder {
+    export class FxOverdriveUnitCircuit extends FxUnitCircuit {
 
         private _waveShaperNode: WaveShaperNode;
 
@@ -22,15 +22,24 @@ module FxAudioEngine.Units {
         private _gainNode: GainNode;
 
 
-        public buildAudioCircuit(unitContext: FxUnitContext): FxAudioCircuit {
-            this._lowPassFilterNode = unitContext.audioContext.createBiquadFilter();
+        constructor(context: FxUnitContext) {
+            super(context);
+
+            this._buildAudioCircuit();
+        }
+
+
+        private _buildAudioCircuit(): void {
+            var audioContext: AudioContext = this.context.audioContext;
+
+            this._lowPassFilterNode = audioContext.createBiquadFilter();
             this._lowPassFilterNode.type = 0;
             this._lowPassFilterNode.frequency.value = 3000;
 
-            this._waveShaperNode = unitContext.audioContext.createWaveShaper();
-            this._setDrive(unitContext.sampleRate, 120);
+            this._waveShaperNode = audioContext.createWaveShaper();
+            this._setDrive(audioContext.sampleRate, 120);
 
-            this._gainNode = unitContext.audioContext.createGain();
+            this._gainNode = audioContext.createGain();
 
 
             var audioGraph: AudioNode[] = [
@@ -41,12 +50,9 @@ module FxAudioEngine.Units {
 
             FxAudioUtilities.WebAudioAPI.routeAudioGraph(audioGraph);
 
-
-            var audioCircuit = new FxAudioCircuit(this._lowPassFilterNode, this._gainNode);
-
-            return audioCircuit;
+            this._addInputNode(this._lowPassFilterNode);
+            this._addOutputNode(this._gainNode);
         }
-
 
         private _setDrive(sampleRate: number, value: number): void {
             var k: number = value;
