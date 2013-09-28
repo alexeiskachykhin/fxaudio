@@ -34,9 +34,9 @@ module FxAudioEngine {
             }
 
             var sourceAudioNode: AudioNode = this._audioNode;
-            var destionationAudioNode: AudioNode = port._audioNode;
+            var destinationAudioNode: AudioNode = port._audioNode;
 
-            sourceAudioNode.connect(destionationAudioNode, this._channel, port._channel);
+            sourceAudioNode.connect(destinationAudioNode, this._channel, port._channel);
         }
 
         public disconnect(): void {
