@@ -5,27 +5,27 @@ module FxAudioEngine.Units {
     'use strict';
 
 
-    export class FxDelayUnit extends FxUnit<FxDelayUnitBuilder> {
+    export class FxDelayUnit extends FxUnit<FxDelayUnitCircuit> {
 
         public get time(): number {
-            return this.builder.audioNode.delayTime.value;
+            return this.circuit.audioNode.delayTime.value;
         }
 
         public set time(value: number) {
-            this.builder.audioNode.delayTime.value = value;
+            this.circuit.audioNode.delayTime.value = value;
         }
 
 
         constructor(context: FxUnitContext, maxDelayTime: number = 3.0) {
-            super(context, new FxDelayUnitBuilder(maxDelayTime));
+            super(new FxDelayUnitCircuit(context, maxDelayTime));
         }
     }
 
 
-    export class FxDelayUnitBuilder extends FxAdapterUnitBuilder<DelayNode> {
+    export class FxDelayUnitCircuit extends FxAdapterUnitCircuit<DelayNode> {
 
-        constructor(maxDelayTime: number) {
-            super(NodeType.DELAY, maxDelayTime);
+        constructor(context: FxUnitContext, maxDelayTime: number) {
+            super(context, NodeType.DELAY, maxDelayTime);
         }
     }
 }
