@@ -5,35 +5,31 @@ module FxAudioEngine {
     'use strict';
 
 
-    export class FxUnit<TBuilder extends IFxUnitBuilder> {
-
-        private _context: FxUnitContext;
+    export class FxUnit<TCircuit extends FxUnitCircuit> {
 
         private _ports: FxUnitInterface;
 
-        private _builder: TBuilder;
+        private _circuit: TCircuit;
 
-
-        public get context(): FxUnitContext {
-            return this._context;
-        }
 
         public get ports(): FxUnitInterface {
             return this._ports;
         }
 
-        public get builder(): TBuilder {
-            return this._builder;
+        public get circuit(): TCircuit {
+            return this._circuit;
+        }
+
+        public get context(): FxUnitContext {
+            return this._circuit.context;
         }
 
 
-        constructor(unitContext: FxUnitContext, builder: TBuilder) {
-            var audioGraph: AudioNode[] = builder.buildAudioGraph(unitContext);
-            var audioInterface: FxUnitInterface = builder.buildAudioInterface(audioGraph);
+        constructor(circuit: TCircuit) {
+            var audioInterface: FxUnitInterface = FxAudioUtilities.AudioInterface.fromUnitCircuit(circuit);
 
-            this._context = unitContext;
             this._ports = audioInterface;
-            this._builder = builder;
+            this._circuit = circuit;
         }
     }
 }

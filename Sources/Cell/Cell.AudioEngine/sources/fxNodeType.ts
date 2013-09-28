@@ -13,6 +13,7 @@ module FxAudioEngine {
         CHANNEL_SPLITTER,
         CONVOLVER,
         DELAY,
+        DESTINATION,
         DYNAMICS_COMPRESSOR,
         GAIN,
         SCRIPT_PROCESSOR,
@@ -21,6 +22,6 @@ module FxAudioEngine {
         MEDIA_STREAM_SOURCE,
         OSCILLATOR,
         PANNER,
-        WAVE_SHAPER
+        WAVE_SHAPER,
     }
 }
