@@ -6,6 +6,7 @@
     "../../sources/fxRealTimeUnitContext.ts",
     "../../sources/fxUnitCircuit.ts",
     "../../sources/circuits/fxAdapterUnitCircuit.ts",
+    "../../sources/circuits/fxHubUnitCircuit.ts",
     "../../sources/fxUnit.ts",
     "../../sources/fxUnitPort.ts",
     "../../sources/fxUnitInterface.ts",
