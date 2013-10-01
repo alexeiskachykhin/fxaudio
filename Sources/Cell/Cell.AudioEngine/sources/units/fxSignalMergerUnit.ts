@@ -13,19 +13,10 @@ module FxAudioEngine.Units {
     }
 
 
-    export class FxSignalMergerUnitCircuit extends FxAdapterUnitCircuit<GainNode> {
+    export class FxSignalMergerUnitCircuit extends FxHubUnitCircuit {
 
         constructor(context: FxUnitContext, numberOfInputs: number) {
-            super(context, NodeType.GAIN);
-
-            this._connectInputs(numberOfInputs);
-        }
-
-
-        private _connectInputs(numberOfInputs: number): void {
-            for (var i = this.inputs.length - 1; i < numberOfInputs; i++) {
-                this._addInputNode(this.audioNode);
-            }
+            super(context, numberOfInputs, 1);
         }
     }
 }
