@@ -39,7 +39,7 @@ module FxAudioEngine {
         }
 
         public disconnect(): void {
-            this._audioNode.disconnect();
+            this._audioNode.disconnect(this._channel);
         }
     }
 }
