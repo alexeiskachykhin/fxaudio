@@ -15,6 +15,7 @@
     "../../sources/units/fxOverdriveUnit.ts",
     "../../sources/units/fxChannelSplitterUnit.ts",
     "../../sources/units/fxChannelMergerUnit.ts",
+    "../../sources/units/fxSignalSplitterUnit.ts",
     "../../sources/units/fxSignalMergerUnit.ts",
     "../../sources/units/source/fxAudioSourceController.ts",
     "../../sources/units/source/fxAudioSourceUnit.ts",
