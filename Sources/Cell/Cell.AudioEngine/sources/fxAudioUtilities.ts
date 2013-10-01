@@ -16,6 +16,14 @@ module FxAudioEngine {
             }
         }
 
+        public routeCross(a: AudioNode[], b: AudioNode[]): void {
+            for (var i = 0; i < a.length; i++) {
+                for (var j = 0; j < b.length; j++) {
+                    a[i].connect(b[j]);
+                }
+            }
+        }
+
         public createNode(audioContext: AudioContext, nodeType: NodeType, ...args: any[]): AudioNode {
             var factoryMethod: (...args: any[]) => AudioNode;
 
