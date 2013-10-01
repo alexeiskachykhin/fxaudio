@@ -13,28 +13,10 @@ module FxAudioEngine.Units {
     }
 
 
-    export class FxSignalSplitterUnitCircuit extends FxUnitCircuit {
+    export class FxSignalSplitterUnitCircuit extends FxHubUnitCircuit {
 
         constructor(context: FxUnitContext, numberOfOutputs: number) {
-            super(context);
-
-            this._buildAudioGraph(numberOfOutputs);
-            this._routeAudioGraph();
-        }
-
-
-        private _buildAudioGraph(numberOfOutputs: number): void {
-            for (var i = this.inputs.length - 1; i < numberOfOutputs; i++) {
-                var outputNode = FxAudioUtilities.WebAudioAPI.createNode(this.context.audioContext, NodeType.GAIN);
-                this._addOutputNode(outputNode);
-            }
-
-            var inputNode = FxAudioUtilities.WebAudioAPI.createNode(this.context.audioContext, NodeType.GAIN);
-            this._addInputNode(inputNode);
-        }
-
-        private _routeAudioGraph(): void {
-            FxAudioUtilities.WebAudioAPI.routeCross(this.inputs, this.outputs);
+            super(context, 1, numberOfOutputs);
         }
     }
 }
