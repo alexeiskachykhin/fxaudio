@@ -50,8 +50,8 @@ module FxAudioEngine.Units {
 
             FxAudioUtilities.WebAudioAPI.routeAudioGraph(audioGraph);
 
-            this._addInputNode(this._lowPassFilterNode);
-            this._addOutputNode(this._gainNode);
+            this._publishInputComponent(this._lowPassFilterNode);
+            this._publishOutputComponent(this._gainNode);
         }
 
         private _setDrive(sampleRate: number, value: number): void {
