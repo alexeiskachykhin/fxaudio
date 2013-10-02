@@ -57,7 +57,7 @@ module FxAudioEngine {
 
     class FxUnitInterfaceUtilities {
 
-        private _createPortsFromAudioNode(audioNode: AudioNode, direction: FxUnitPortDirection, ports: FxUnitPort[]): void {
+        public createPortsFromAudioNode(audioNode: AudioNode, direction: FxUnitPortDirection, ports: FxUnitPort[]): void {
             var numberOfPorts: number;
 
             switch (direction) {
@@ -81,26 +81,16 @@ module FxAudioEngine {
             }
         }
 
-        private _createPortsFromAudioNodes(audioNodes: AudioNode[], direction: FxUnitPortDirection, ports: FxUnitPort[]): void {
+        public createPortsFromAudioNodes(audioNodes: AudioNode[], direction: FxUnitPortDirection, ports: FxUnitPort[]): void {
             for (var i = 0; i < audioNodes.length; i++) {
                 var audioNode: AudioNode = audioNodes[i];
-
-                if (audioNode) {
-                    this._createPortsFromAudioNode(audioNode, direction, ports);
-                }
+                this.createPortsFromAudioNode(audioNode, direction, ports);
             }
         }
 
 
         public fromUnitCircuit(circuit: FxUnitCircuit): FxUnitInterface {
-            var inputPorts = [];
-            var outputPorts = [];
-
-            this._createPortsFromAudioNodes(circuit.inputs, FxUnitPortDirection.INPUT, inputPorts);
-            this._createPortsFromAudioNodes(circuit.outputs, FxUnitPortDirection.OUTPUT, outputPorts);
-
-
-            var audioInterface = new FxUnitInterface(inputPorts, outputPorts);
+            var audioInterface = new FxUnitInterface(circuit.inputs, circuit.outputs);
 
             return audioInterface;
         }
