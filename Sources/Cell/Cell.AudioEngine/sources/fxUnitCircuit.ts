@@ -9,20 +9,20 @@ module FxAudioEngine {
 
         private _context: FxUnitContext;
 
-        private _inputs: AudioNode[];
+        private _inputs: FxUnitPort[];
 
-        private _outputs: AudioNode[];
+        private _outputs: FxUnitPort[];
 
 
         public get context(): FxUnitContext {
             return this._context;
         }
 
-        public get inputs(): AudioNode[] {
+        public get inputs(): FxUnitPort[] {
             return this._inputs;
         }
 
-        public get outputs(): AudioNode[] {
+        public get outputs(): FxUnitPort[] {
             return this._outputs;
         }
 
@@ -35,12 +35,21 @@ module FxAudioEngine {
         }
 
 
-        public _addInputNode(audioNode: AudioNode): void {
-            this._inputs.push(audioNode);
+        public _publishInputComponent(audioNode: AudioNode): void {
+            FxAudioUtilities.AudioInterface.createPortsFromAudioNode(audioNode, FxUnitPortDirection.INPUT, this._inputs);
         }
 
-        public _addOutputNode(audioNode: AudioNode): void {
-            this._outputs.push(audioNode);
+        public _publishInputComponents(audioNodes: AudioNode[]): void {
+            FxAudioUtilities.AudioInterface.createPortsFromAudioNodes(audioNodes, FxUnitPortDirection.INPUT, this._inputs);
+        }
+
+
+        public _publishOutputComponent(audioNode: AudioNode): void {
+            FxAudioUtilities.AudioInterface.createPortsFromAudioNode(audioNode, FxUnitPortDirection.OUTPUT, this._outputs);
+        }
+
+        public _publishOutputComponents(audioNodes: AudioNode[]): void {
+            FxAudioUtilities.AudioInterface.createPortsFromAudioNodes(audioNodes, FxUnitPortDirection.OUTPUT, this._outputs);
         }
     }
 }

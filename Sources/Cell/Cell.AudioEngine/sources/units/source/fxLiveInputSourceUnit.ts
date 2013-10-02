@@ -60,7 +60,7 @@ module FxAudioEngine.Units.Source {
 
         private _buildAudioCircuit(): void {
             this._outputGainNode = this.context.audioContext.createGain();
-            this._addOutputNode(this._outputGainNode);
+            this._publishOutputComponent(this._outputGainNode);
         }
     }
 }
