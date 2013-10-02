@@ -10,32 +10,29 @@ module FxAudioEngine {
         constructor(context: FxUnitContext, numberOfInputs: number, numberOfOutputs: number) {
             super(context);
 
-            this._buildAudioGraph(numberOfInputs, numberOfOutputs);
-            this._routeAudioGraph();
+            this._buildAudioCircuit(numberOfInputs, numberOfOutputs);
         }
 
 
-        private _buildAudioGraph(numberOfInputs: number, numberOfOutputs: number): void {
-            this._buildInputs(numberOfInputs);
-            this._buildOutputs(numberOfOutputs);
+        private _buildAudioCircuit(numberOfInputs: number, numberOfOutputs: number): void {
+            var inputs = this._createNodeGroup(numberOfInputs);
+            var outputs = this._createNodeGroup(numberOfOutputs);
+
+            FxAudioUtilities.WebAudioAPI.routeCross(inputs, outputs);
+
+            this._publishInputComponents(inputs);
+            this._publishOutputComponents(outputs);
         }
 
-        private _buildInputs(numberOfInputs: number): void {
-            for (var i = 0; i < numberOfInputs; i++) {
-                var inputNode = FxAudioUtilities.WebAudioAPI.createNode(this.context.audioContext, NodeType.GAIN);
-                this._addInputNode(inputNode);
+        private _createNodeGroup(numberOfNodes: number): AudioNode[] {
+            var nodes: AudioNode[] = [];
+
+            for (var i = 0; i < numberOfNodes; i++) {
+                var node = FxAudioUtilities.WebAudioAPI.createNode(this.context.audioContext, NodeType.GAIN);
+                nodes.push(node);
             }
-        }
 
-        private _buildOutputs(numberOfOutputs: number): void {
-            for (var i = 0; i < numberOfOutputs; i++) {
-                var outputNode = FxAudioUtilities.WebAudioAPI.createNode(this.context.audioContext, NodeType.GAIN);
-                this._addOutputNode(outputNode);
-            }
-        }
-
-        private _routeAudioGraph(): void {
-            FxAudioUtilities.WebAudioAPI.routeCross(this.inputs, this.outputs);
+            return nodes;
         }
     }
 }

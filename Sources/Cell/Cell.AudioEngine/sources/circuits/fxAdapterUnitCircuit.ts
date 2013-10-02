@@ -32,8 +32,8 @@ module FxAudioEngine {
         private _buildAudioCircuit(): void {
             this._audioNode = this._createNode();
 
-            this._addInputNode(this._audioNode);
-            this._addOutputNode(this._audioNode);
+            this._publishInputComponent(this._audioNode);
+            this._publishOutputComponent(this._audioNode);
         }
 
         private _createNode(): TNode {
