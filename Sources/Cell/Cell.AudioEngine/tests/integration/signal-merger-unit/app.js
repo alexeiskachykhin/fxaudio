@@ -15,7 +15,7 @@
     }
 
 
-    loadSound('../fixtures/audio/sample.mp3', function (audioBuffer) {
+    loadSound('../../fixtures/audio/sample.mp3', function (audioBuffer) {
         var unitContext = new FxAudioEngine.FxRealTimeUnitContext();
 
         var sourceUnit = new FxAudioEngine.Units.Source.FxBufferSourceUnit(unitContext);
