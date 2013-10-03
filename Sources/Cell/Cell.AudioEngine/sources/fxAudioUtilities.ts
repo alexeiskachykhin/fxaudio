@@ -7,7 +7,7 @@ module FxAudioEngine {
 
     class WebAudioAPIUtilities {
 
-        public routeAudioGraph(audioGraph: AudioNode[]): void {
+        public routeLinear(audioGraph: AudioNode[]): void {
             for (var i = 0; i <= audioGraph.length - 2; i++) {
                 var audioNode = audioGraph[i];
                 var nextAudioNode = audioGraph[i + 1];

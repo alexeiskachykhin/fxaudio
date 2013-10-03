@@ -48,7 +48,7 @@ module FxAudioEngine.Units {
                 this._gainNode
             ];
 
-            FxAudioUtilities.WebAudioAPI.routeAudioGraph(audioGraph);
+            FxAudioUtilities.WebAudioAPI.routeLinear(audioGraph);
 
             this._publishInputComponent(this._lowPassFilterNode);
             this._publishOutputComponent(this._gainNode);
