@@ -87,13 +87,6 @@ module FxAudioEngine {
                 this.createPortsFromAudioNode(audioNode, direction, ports);
             }
         }
-
-
-        public fromUnitCircuit(circuit: FxUnitCircuit): FxUnitInterface {
-            var audioInterface = new FxUnitInterface(circuit.inputs, circuit.outputs);
-
-            return audioInterface;
-        }
     }
 
 
