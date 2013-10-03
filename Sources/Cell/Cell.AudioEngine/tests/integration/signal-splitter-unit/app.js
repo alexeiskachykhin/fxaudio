@@ -15,18 +15,23 @@
     }
 
 
-    loadSound('../fixtures/audio/sample.mp3', function (audioBuffer) {
+    loadSound('../../fixtures/audio/sample.mp3', function (audioBuffer) {
         var unitContext = new FxAudioEngine.FxRealTimeUnitContext();
 
         var sourceUnit = new FxAudioEngine.Units.Source.FxBufferSourceUnit(unitContext);
         var destinationUnit = new FxAudioEngine.Units.FxAudioDestinationUnit(unitContext);
-        var delayUnit = new FxAudioEngine.Units.FxDelayUnit(unitContext);
-
-        sourceUnit.ports.outputs[0].connect(delayUnit.ports.inputs[0]);
-        delayUnit.ports.outputs[0].connect(destinationUnit.ports.inputs[0]);
+        var signalSplitterUnit = new FxAudioEngine.Units.FxSignalSplitterUnit(unitContext, 2);
+        var signalMergerUnit = new FxAudioEngine.Units.FxSignalMergerUnit(unitContext, 2);
 
 
-        delayUnit.time = 3;
+        sourceUnit.ports.outputs[0].connect(signalSplitterUnit.ports.inputs[0]);
+        signalSplitterUnit.ports.outputs[0].connect(signalMergerUnit.ports.inputs[0]);
+        signalSplitterUnit.ports.outputs[1].connect(signalMergerUnit.ports.inputs[1]);
+
+        signalMergerUnit.ports.outputs[0].connect(destinationUnit.ports.inputs[0]);
+
+
+        signalSplitterUnit.ports.outputs[0].disconnect();
 
 
         var initOperation = sourceUnit.init(audioBuffer);
