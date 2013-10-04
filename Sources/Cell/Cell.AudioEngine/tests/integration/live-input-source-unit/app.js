@@ -10,10 +10,10 @@
 
 
     getInputStream(function (stream) {
-        var unitContext = new FxAudioEngine.FxRealTimeUnitContext();
+        var context = new FxAudioEngine.FxRealTimeContext();
 
-        var sourceUnit = new FxAudioEngine.FxLiveInputSourceUnit(unitContext);
-        var destinationUnit = new FxAudioEngine.FxAudioDestinationUnit(unitContext);
+        var sourceUnit = new FxAudioEngine.FxLiveInputSourceUnit(context);
+        var destinationUnit = new FxAudioEngine.FxAudioDestinationUnit(context);
 
         sourceUnit.ports.outputs[0].connect(destinationUnit.ports.inputs[0]);
 
