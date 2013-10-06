@@ -24,6 +24,11 @@ module FxAudioEngine {
             }
         }
 
+        public routeWithFeedback(a: AudioNode, b: AudioNode): void {
+            a.connect(b);
+            b.connect(a);
+        }
+
         public createNode(audioContext: AudioContext, nodeType: NodeType, ...args: any[]): AudioNode {
             var factoryMethod: (...args: any[]) => AudioNode;
 
