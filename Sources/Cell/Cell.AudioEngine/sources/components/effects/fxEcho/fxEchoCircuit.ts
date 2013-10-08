@@ -7,6 +7,8 @@ module FxAudioEngine {
 
     export class FxEchoCircuit extends FxCircuit {
 
+        private _inputGainNode: GainNode;
+
         private _delayNode: DelayNode;
 
         private _feedbackGainNode: GainNode;
@@ -15,6 +17,10 @@ module FxAudioEngine {
 
         private _outputGainNode: GainNode;
 
+
+        public get inputGainNode(): GainNode {
+            return this._inputGainNode;
+        }
 
         public get delayNode(): DelayNode {
             return this._delayNode;
@@ -43,12 +49,14 @@ module FxAudioEngine {
         private _buildAudioCircuit(maxDelayTime): void {
             var audioContext: AudioContext = this.context.audioContext;
 
+            this._inputGainNode = audioContext.createGain()
             this._delayNode = audioContext.createDelay(maxDelayTime);
             this._feedbackGainNode = audioContext.createGain();
             this._echoGainNode = audioContext.createGain();
             this._outputGainNode = audioContext.createGain();
 
             var linearRoute: AudioNode[] = [
+                this._inputGainNode,
                 this._delayNode,
                 this._echoGainNode,
                 this._outputGainNode
@@ -56,8 +64,9 @@ module FxAudioEngine {
 
             FxAudioUtilities.WebAudioAPI.routeLinear(linearRoute);
             FxAudioUtilities.WebAudioAPI.routeWithFeedback(this._delayNode, this._feedbackGainNode);
+            this._inputGainNode.connect(this._outputGainNode);
 
-            this._publishInputComponent(this._delayNode);
+            this._publishInputComponent(this._inputGainNode);
             this._publishOutputComponent(this._outputGainNode);
         }
     }
