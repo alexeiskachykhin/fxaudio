@@ -34,8 +34,8 @@
     "../../sources/components/routing/fxSignalSplitter/fxSignalSplitterUnit.ts",
     "../../sources/components/effects/fxDelay/fxDelayCircuit.ts",
     "../../sources/components/effects/fxDelay/fxDelayUnit.ts",
-    "../../sources/components/effects/fxDelay/fxEchoUnit.ts",
-    "../../sources/components/effects/fxDelay/fxEchoCircuit.ts",
+    "../../sources/components/effects/fxEcho/fxEchoUnit.ts",
+    "../../sources/components/effects/fxEcho/fxEchoCircuit.ts",
     "../../sources/components/effects/fxOverdrive/fxOverdriveCircuit.ts",
     "../../sources/components/effects/fxOverdrive/fxOverdriveUnit.ts"
 ]
