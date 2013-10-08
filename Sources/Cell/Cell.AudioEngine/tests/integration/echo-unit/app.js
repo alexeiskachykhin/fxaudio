@@ -19,8 +19,8 @@
         var context = new FxAudioEngine.FxRealTimeContext();
 
         var sourceUnit = new FxAudioEngine.FxBufferSourceUnit(context);
+        var echoUnit = new FxAudioEngine.FxEchoUnit(context, 3);
         var destinationUnit = new FxAudioEngine.FxAudioDestinationUnit(context);
-        var echoUnit = new FxAudioEngine.FxEchoUnit(context);
 
         echoUnit.delayTime = 1.5;
         echoUnit.feedbackGain = 0.25;
@@ -28,7 +28,6 @@
 
         sourceUnit.ports.outputs[0].connect(echoUnit.ports.inputs[0]);
         echoUnit.ports.outputs[0].connect(destinationUnit.ports.inputs[0]);
-
 
         var initOperation = sourceUnit.init(audioBuffer);
 
