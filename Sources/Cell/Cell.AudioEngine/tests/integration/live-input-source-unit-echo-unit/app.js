@@ -13,10 +13,10 @@
         var context = new FxAudioEngine.FxRealTimeContext();
 
         var sourceUnit = new FxAudioEngine.FxLiveInputSourceUnit(context);
-        var destinationUnit = new FxAudioEngine.FxAudioDestinationUnit(context);
         var echoUnit = new FxAudioEngine.FxEchoUnit(context);
+        var destinationUnit = new FxAudioEngine.FxAudioDestinationUnit(context);
 
-        echoUnit.delayTime = 3;
+        echoUnit.delayTime = 1;
         echoUnit.feedbackGain = 0.25;
         echoUnit.echoGain = 0.5;
 
