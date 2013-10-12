@@ -8,6 +8,8 @@ module FxAudioEngine {
     class WebAudioAPIUtilities {
 
         public routeLinear(audioGraph: AudioNode[]): void {
+            Contract.isNotNullOrUndefined(audioGraph, 'audioGraph');
+
             for (var i = 0; i <= audioGraph.length - 2; i++) {
                 var audioNode = audioGraph[i];
                 var nextAudioNode = audioGraph[i + 1];
@@ -17,6 +19,9 @@ module FxAudioEngine {
         }
 
         public routeCross(a: AudioNode[], b: AudioNode[]): void {
+            Contract.isNotNullOrUndefined(a, 'a');
+            Contract.isNotNullOrUndefined(b, 'b');
+
             for (var i = 0; i < a.length; i++) {
                 for (var j = 0; j < b.length; j++) {
                     a[i].connect(b[j]);
@@ -25,6 +30,8 @@ module FxAudioEngine {
         }
 
         public createNode(audioContext: AudioContext, nodeType: NodeType, ...args: any[]): AudioNode {
+            Contract.isNotNullOrUndefined(audioContext, 'audioContext');
+
             var factoryMethod: (...args: any[]) => AudioNode;
 
             switch (nodeType) {
@@ -58,6 +65,9 @@ module FxAudioEngine {
     class UnitInterfaceUtilities {
 
         public createPortsFromAudioNode(audioNode: AudioNode, direction: UnitPortDirection, ports: UnitPort[]): void {
+            Contract.isNotNullOrUndefined(audioNode, 'audioNode');
+            Contract.isNotNullOrUndefined(ports, 'ports');
+
             var numberOfPorts: number;
 
             switch (direction) {
@@ -82,6 +92,9 @@ module FxAudioEngine {
         }
 
         public createPortsFromAudioNodes(audioNodes: AudioNode[], direction: UnitPortDirection, ports: UnitPort[]): void {
+            Contract.isNotNullOrUndefined(audioNodes, 'audioNodes');
+            Contract.isNotNullOrUndefined(ports, 'ports');
+
             for (var i = 0; i < audioNodes.length; i++) {
                 var audioNode: AudioNode = audioNodes[i];
                 this.createPortsFromAudioNode(audioNode, direction, ports);

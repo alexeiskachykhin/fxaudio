@@ -16,6 +16,8 @@ module FxAudioEngine {
 
 
         constructor(context: Context) {
+            Contract.isNotNullOrUndefined(context, 'context');
+
             super(new LiveInputSourceCircuit(context));
             
             this._audioSourceController = new LiveInputAudioSourceController();
@@ -23,6 +25,8 @@ module FxAudioEngine {
 
 
         public init(stream: MediaStream): IEventSource {
+            Contract.isNotNullOrUndefined(stream, 'stream');
+
             var asyncCompletionSource = new EventSource();
 
             try {

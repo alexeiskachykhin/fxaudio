@@ -30,11 +30,13 @@ module FxAudioEngine {
 
 
         public start(when: number): void {
+            Contract.isPositiveOrZero(when, 'when');
+
             this._state = AudioSourceState.PLAYING;
         }
 
         public stop(when: number): void {
-            throw new Error('Not supported.');
+            throw Errors.invalidOperation();
         }
     }
 }

@@ -8,6 +8,9 @@ module FxAudioEngine {
     export class ChannelSplitterUnit extends Unit<ChannelSplitterCircuit> {
 
         constructor(context: Context, numberOfOutputs: number = 6) {
+            Contract.isNotNullOrUndefined(context, 'context');
+            Contract.isPositiveOrZero(numberOfOutputs, 'numberOfOutputs');
+
             super(new ChannelSplitterCircuit(context, numberOfOutputs));
         }
     }

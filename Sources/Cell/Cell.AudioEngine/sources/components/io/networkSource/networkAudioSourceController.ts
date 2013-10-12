@@ -38,16 +38,22 @@ module FxAudioEngine {
 
 
         constructor(mediaElement: HTMLMediaElement) {
+            Contract.isNotNullOrUndefined(mediaElement, 'mediaElement');
+
             this._mediaElement = mediaElement;
         }
 
 
         public start(when: number): void {
+            Contract.isPositiveOrZero(when, 'when');
+
             this._mediaElement.play();
             this._state = AudioSourceState.PLAYING;
         }
 
         public stop(when: number): void {
+            Contract.isPositiveOrZero(when, 'when');
+
             this._mediaElement.pause();
             this._state = AudioSourceState.STOPPED;
         }

@@ -13,6 +13,8 @@ module FxAudioEngine {
 
 
         constructor(context: Context) {
+            Contract.isNotNullOrUndefined(context, 'context');
+
             super(context);
 
             this._buildAudioCircuit();
@@ -20,6 +22,8 @@ module FxAudioEngine {
 
 
         public mountStream(stream: MediaStream): void {
+            Contract.isNotNullOrUndefined(stream, 'stream');
+
             this._mediStreamSourceNode = this.context.audioContext.createMediaStreamSource(<any>stream);
             this._mediStreamSourceNode.connect(this._outputGainNode);
         }

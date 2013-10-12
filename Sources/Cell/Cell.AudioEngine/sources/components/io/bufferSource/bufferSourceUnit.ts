@@ -30,6 +30,8 @@ module FxAudioEngine {
 
 
         constructor(context: Context) {
+            Contract.isNotNullOrUndefined(context, 'context');
+
             super(new BufferSourceCircuit(context));
 
             this._audioSourceController = new BufferAudioSourceController(this._audioSourceNode);
@@ -37,6 +39,8 @@ module FxAudioEngine {
 
 
         public init(audioData: ArrayBuffer): IEventSource {
+            Contract.isNotNullOrUndefined(audioData, 'audioData');
+
             this._bufferState = AudioBufferState.DECODING;
 
             var asyncCompletionSource = new EventSource();

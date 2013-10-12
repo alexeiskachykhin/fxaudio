@@ -13,6 +13,8 @@ module FxAudioEngine {
 
 
         constructor(context: Context) {
+            Contract.isNotNullOrUndefined(context, 'context');
+
             super(context);
 
             this._buildAudioCircuit();
@@ -20,6 +22,8 @@ module FxAudioEngine {
 
 
         public mountMediaElement(mediaElement: HTMLMediaElement): void {
+            Contract.isNotNullOrUndefined(mediaElement, 'mediaElement');
+
             this._mediElementSourceNode = this.context.audioContext.createMediaElementSource(mediaElement);
             this._mediElementSourceNode.connect(this._outputGainNode);
         }

@@ -17,6 +17,9 @@ module FxAudioEngine {
 
 
         constructor(context: Context, maxDelayTime: number = 3.0) {
+            Contract.isNotNullOrUndefined(context, 'context');
+            Contract.isPositiveOrZero(maxDelayTime, 'maxDelayTime');
+
             super(new DelayCircuit(context, maxDelayTime));
         }
     }
