@@ -15,12 +15,16 @@ module FxAudioEngine {
         }
 
 
-        constructor (context: Context) {
+        constructor(context: Context) {
+            Contract.isNotNullOrUndefined(context, 'context');
+
             super(new NetworkSourceCircuit(context));
         }
 
 
         public init(mediaElement: HTMLMediaElement): IEventSource {
+            Contract.isNotNullOrUndefined(mediaElement, 'mediaElement');
+
             var asyncCompletionSource = new EventSource();
 
             try {

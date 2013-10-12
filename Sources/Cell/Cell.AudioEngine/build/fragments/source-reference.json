@@ -1,4 +1,9 @@
 [
+    "../../sources/resources/resourceKey.ts",
+    "../../sources/resources/resourceMap.ts",
+    "../../sources/resources/resourceManager.ts",
+    "../../sources/diganostics/errors.ts",
+    "../../sources/diganostics/contract.ts",
     "../../sources/core/eventSource.ts",
     "../../sources/core/context.ts",
     "../../sources/core/offlineContext.ts",

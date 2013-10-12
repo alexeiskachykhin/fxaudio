@@ -11,12 +11,14 @@ module FxAudioEngine {
 
 
         constructor(circuit: TCircuit) {
+            Contract.isNotNullOrUndefined(circuit, 'circuit');
+
             super(circuit);
         }
 
 
         public init(source: TSource): IEventSource {
-            throw new Error('This method is abstract.');
+            throw Errors.abstract();
         }
     }
 }

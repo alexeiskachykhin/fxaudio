@@ -26,6 +26,8 @@ module FxAudioEngine {
 
 
         constructor(circuit: TCircuit) {
+            Contract.isNotNullOrUndefined(circuit, 'circuit');
+
             var audioInterface = new UnitInterface(circuit.inputs, circuit.outputs);
 
             this._ports = audioInterface;

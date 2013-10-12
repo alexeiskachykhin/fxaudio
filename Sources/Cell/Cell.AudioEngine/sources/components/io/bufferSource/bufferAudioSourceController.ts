@@ -32,16 +32,22 @@ module FxAudioEngine {
 
 
         constructor(audioSourceNode: AudioBufferSourceNode) {
+            Contract.isNotNullOrUndefined(audioSourceNode, 'audioSourceNode');
+
             this._audioSourceNode = audioSourceNode;
         }
 
 
         public start(when: number): void {
+            Contract.isPositiveOrZero(when, 'when');
+
             this._audioSourceNode.start(when);
             this._state = AudioSourceState.PLAYING;
         }
 
         public stop(when: number): void {
+            Contract.isPositiveOrZero(when, 'when');
+
             this._audioSourceNode.stop(when);
             this._state = AudioSourceState.STOPPED;
         }

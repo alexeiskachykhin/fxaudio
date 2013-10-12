@@ -21,6 +21,9 @@ module FxAudioEngine {
 
 
         constructor(audioNode: AudioNode, channel: number, direction: UnitPortDirection) {
+            Contract.isNotNullOrUndefined(audioNode, 'audioNode');
+            Contract.isPositiveOrZero(channel, 'channel');
+
             this._audioNode = audioNode;
             this._direction = direction;
             this._channel = channel;
@@ -28,9 +31,9 @@ module FxAudioEngine {
 
 
         public connect(port: UnitPort): void {
-            if (port._direction !== UnitPortDirection.INPUT) {
-                throw new Error('Can`t connect to output node.');
-            }
+            Contract.isNotNullOrUndefined(port, 'port');
+            Contract.requires(port._direction === UnitPortDirection.INPUT, 'port');
+            Contract.requires(this._direction === UnitPortDirection.OUTPUT, 'port');
 
             var sourceAudioNode: AudioNode = this._audioNode;
             var destinationAudioNode: AudioNode = port._audioNode;

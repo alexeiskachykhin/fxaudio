@@ -22,6 +22,9 @@ module FxAudioEngine {
 
 
         constructor(inputs: UnitPort[], outputs: UnitPort[]) {
+            Contract.isNotNullOrUndefined(inputs, 'inputs');
+            Contract.isNotNullOrUndefined(outputs, 'outputs');
+
             this._inputs = inputs;
             this._outputs = outputs;
         }

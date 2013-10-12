@@ -15,7 +15,7 @@ module FxAudioEngine {
 
     export interface IEventCompletionSource extends IEventSource {
 
-         dispatchEvent(eventName, ...eventArgs: any[]): void;
+        dispatchEvent(eventName, ...eventArgs: any[]): void;
     }
 
 
@@ -33,7 +33,6 @@ module FxAudioEngine {
                 return;
             }
 
-
             var eventListeners: Function[] = this._events[eventName];
 
             eventListeners.forEach(
@@ -42,10 +41,8 @@ module FxAudioEngine {
 
 
         public addEventListener(eventName: string, eventListener: Function): EventSource {
-	        if (typeof eventListener !== 'function') {
-	            throw new TypeError('Event listener is not a function.');
-            }
-
+            Contract.isNotNullOrUndefined(eventName, 'eventName');
+            Contract.isNotNullOrUndefined(eventListener, 'eventListener');
 
             var eventListeners: Function[] = this._events[eventName] || [];
             eventListeners.push(eventListener);
@@ -56,10 +53,12 @@ module FxAudioEngine {
         }
 
         public removeEventListener(eventName: string, eventListener: Function): EventSource {
+            Contract.isNotNullOrUndefined(eventName, 'eventName');
+            Contract.isNotNullOrUndefined(eventListener, 'eventListener');
+
             if (!this._events.hasOwnProperty(eventName)) {
                 return;
             }
-
 
             var eventListeners: Function[] = this._events[eventName];
             var eventListenerIndex: number = eventListeners.indexOf(eventListener);
@@ -74,6 +73,8 @@ module FxAudioEngine {
         }
 
         public dispatchEvent(eventName, ...eventArgs: any[]): void {
+            Contract.isNotNullOrUndefined(eventName, 'eventName');
+
             var args = arguments;
 
             this._defer(() => {

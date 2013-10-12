@@ -8,6 +8,9 @@ module FxAudioEngine {
     export class ChannelMergerCircuit extends AdapterCircuit<ChannelMergerNode> {
 
         constructor(context: Context, numberOfInputs: number) {
+            Contract.isNotNullOrUndefined(context, 'context');
+            Contract.isPositiveOrZero(numberOfInputs, 'numberOfInputs');
+
             super(context, NodeType.CHANNEL_MERGER, numberOfInputs);
         }
     }

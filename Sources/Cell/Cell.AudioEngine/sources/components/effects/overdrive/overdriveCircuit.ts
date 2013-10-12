@@ -15,6 +15,8 @@ module FxAudioEngine {
 
 
         constructor(context: Context) {
+            Contract.isNotNullOrUndefined(context, 'context');
+
             super(context);
 
             this._buildAudioCircuit();

@@ -20,6 +20,8 @@ module FxAudioEngine {
 
 
         constructor(context: Context, audioNodeType: NodeType, ...args: any[]) {
+            Contract.isNotNullOrUndefined(context, 'context');
+
             super(context);
 
             this._audioNodeType = audioNodeType;

@@ -24,6 +24,8 @@ module FxAudioEngine {
 
 
         constructor(audioContext: AudioContext) {
+            Contract.isNotNullOrUndefined(audioContext, 'audioContext');
+
             this._audioContext = audioContext;
         }
     }

@@ -8,6 +8,10 @@ module FxAudioEngine {
     export class SignalHubCircuit extends Circuit {
 
         constructor(context: Context, numberOfInputs: number, numberOfOutputs: number) {
+            Contract.isNotNullOrUndefined(context, 'context');
+            Contract.isPositiveOrZero(numberOfInputs, 'numberOfInputs');
+            Contract.isPositiveOrZero(numberOfOutputs, 'numberOfOutputs');
+
             super(context);
 
             this._buildAudioCircuit(numberOfInputs, numberOfOutputs);

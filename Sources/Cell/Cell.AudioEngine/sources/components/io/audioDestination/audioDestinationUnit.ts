@@ -13,6 +13,8 @@ module FxAudioEngine {
 
 
         constructor(context: RealTimeContext) {
+            Contract.isNotNullOrUndefined(context, 'context');
+
             super(new AudioDestinationCircuit(context));
         }
     }

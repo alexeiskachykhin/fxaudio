@@ -8,6 +8,8 @@ module FxAudioEngine {
     export class OverdriveUnit extends Unit<OverdriveCircuit> {
 
         constructor(context: Context) {
+            Contract.isNotNullOrUndefined(context, 'context');
+
             super(new OverdriveCircuit(context));
         }
     }

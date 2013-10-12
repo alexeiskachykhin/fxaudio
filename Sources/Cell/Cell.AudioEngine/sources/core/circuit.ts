@@ -28,6 +28,8 @@ module FxAudioEngine {
 
 
         constructor(context: Context) {
+            Contract.isNotNullOrUndefined(context, 'context');
+
             this._context = context;
 
             this._inputs = [];
@@ -36,19 +38,27 @@ module FxAudioEngine {
 
 
         public _publishInputComponent(audioNode: AudioNode): void {
+            Contract.isNotNullOrUndefined(audioNode, 'audioNode');
+
             AudioUtilities.AudioInterface.createPortsFromAudioNode(audioNode, UnitPortDirection.INPUT, this._inputs);
         }
 
         public _publishInputComponents(audioNodes: AudioNode[]): void {
+            Contract.isNotNullOrUndefined(audioNodes, 'audioNodes');
+
             AudioUtilities.AudioInterface.createPortsFromAudioNodes(audioNodes, UnitPortDirection.INPUT, this._inputs);
         }
 
 
         public _publishOutputComponent(audioNode: AudioNode): void {
+            Contract.isNotNullOrUndefined(audioNode, 'audioNode');
+
             AudioUtilities.AudioInterface.createPortsFromAudioNode(audioNode, UnitPortDirection.OUTPUT, this._outputs);
         }
 
         public _publishOutputComponents(audioNodes: AudioNode[]): void {
+            Contract.isNotNullOrUndefined(audioNodes, 'audioNodes');
+
             AudioUtilities.AudioInterface.createPortsFromAudioNodes(audioNodes, UnitPortDirection.OUTPUT, this._outputs);
         }
     }
