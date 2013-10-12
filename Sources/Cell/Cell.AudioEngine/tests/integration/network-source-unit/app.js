@@ -2,10 +2,10 @@
     'use strict';
 
 
-    var context = new FxAudioEngine.FxRealTimeContext();
+    var context = new FxAudioEngine.RealTimeContext();
 
-    var sourceUnit = new FxAudioEngine.FxNetworkSourceUnit(context);
-    var destinationUnit = new FxAudioEngine.FxAudioDestinationUnit(context);
+    var sourceUnit = new FxAudioEngine.NetworkSourceUnit(context);
+    var destinationUnit = new FxAudioEngine.AudioDestinationUnit(context);
 
     sourceUnit.ports.outputs[0].connect(destinationUnit.ports.inputs[0]);
 

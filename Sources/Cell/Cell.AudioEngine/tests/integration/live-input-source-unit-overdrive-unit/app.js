@@ -10,11 +10,11 @@
 
 
     getInputStream(function (stream) {
-        var context = new FxAudioEngine.FxRealTimeContext();
+        var context = new FxAudioEngine.RealTimeContext();
 
-        var sourceUnit = new FxAudioEngine.FxLiveInputSourceUnit(context);
-        var overdriveUnit = new FxAudioEngine.FxOverdriveUnit(context);
-        var destinationUnit = new FxAudioEngine.FxAudioDestinationUnit(context);
+        var sourceUnit = new FxAudioEngine.LiveInputSourceUnit(context);
+        var overdriveUnit = new FxAudioEngine.OverdriveUnit(context);
+        var destinationUnit = new FxAudioEngine.AudioDestinationUnit(context);
 
         sourceUnit.ports.outputs[0].connect(overdriveUnit.ports.inputs[0]);
         overdriveUnit.ports.outputs[0].connect(destinationUnit.ports.inputs[0]);
