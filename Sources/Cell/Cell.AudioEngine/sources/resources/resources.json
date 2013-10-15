@@ -1,0 +1,10 @@
+﻿{
+    "strings": {
+        "ARGUMENT_ERROR_MESSAGE": "Invalid argument {0}: {1}.",
+        "ARGUMENT_OUT_OF_RANGE_ERROR_MESSAGE": "Argument out of range {0}.",
+        "ARGUMENT_NULL_OR_UNDEFINED_ERROR_MESSAGE": "Argument is null or empty {0}.",
+        "ABSTRACT_ERROR_MESSAGE": "This method is abstract.",
+        "NOT_YET_IMPLEMENTED_ERROR_MESSAGE": "Not implemented.",
+        "INVALID_OPERATION_ERROR_MESSAGE": "Invalid operation: {0}."
+    }
+}

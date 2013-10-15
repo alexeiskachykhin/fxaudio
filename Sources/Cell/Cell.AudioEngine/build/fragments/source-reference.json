@@ -1,6 +1,5 @@
 [
-    "../../sources/resources/resourceKey.ts",
-    "../../sources/resources/resourceMap.ts",
+    "../../sources/resources/resources.generated.ts",
     "../../sources/resources/resourceManager.ts",
     "../../sources/diagnostics/errors.ts",
     "../../sources/diagnostics/contract.ts",
