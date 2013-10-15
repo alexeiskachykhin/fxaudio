@@ -7,13 +7,16 @@
         manifest: {
             rootPath: '../..',
             sourcePath: '<%= manifest.rootPath %>/sources',
+            resourcePath: '<%= manifest.sourcePath %>/resources',
             testPath: '<%= manifest.rootPath %>/tests',
             outputPath: '<%= manifest.rootPath %>/build/output',
 
             sources: {
                 ts: grunt.file.readJSON('../fragments/source-reference.json'),
                 libraries: ['../../libraries/**/*.d.ts']
-            }
+            },
+
+            resources: grunt.file.readJSON('../../sources/resources/resources.json')
         },
 
 
@@ -29,9 +32,21 @@
             ]
         },
 
+        template: {
+            options: {
+                data: '<%= manifest.resources %>',
+            },
+
+            dev: {
+                files: {
+                    '<%= manifest.resourcePath %>/resources.generated.ts': ['<%= manifest.resourcePath %>/resources.tst']
+                }
+            }
+        },
+
         jsonlint: {
             dev: {
-                src: ['.jshintrc', '.tslintrc', '*.json', '../fragments/*.json']
+                src: ['.jshintrc', '.tslintrc', '*.json', '../fragments/*.json', '<%= manifest.resourcePath %>/**/*.json']
             }
         },
 
@@ -82,6 +97,7 @@
 
 
     grunt.loadNpmTasks('grunt-ts');
+    grunt.loadNpmTasks('grunt-template');
     grunt.loadNpmTasks('grunt-jsonlint');
     grunt.loadNpmTasks('grunt-tslint');
     grunt.loadNpmTasks('grunt-contrib-jshint');
@@ -89,5 +105,5 @@
     grunt.loadNpmTasks('grunt-contrib-connect');
 
 
-    grunt.registerTask('default', ['clean:dev', 'jsonlint:dev', 'jshint:dev', 'tslint:dev', 'connect:dev', 'ts:dev']);
+    grunt.registerTask('default', ['clean:dev', 'template:dev', 'jsonlint:dev', 'jshint:dev', 'tslint:dev', 'connect:dev', 'ts:dev']);
 };
