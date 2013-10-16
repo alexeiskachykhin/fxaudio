@@ -7,16 +7,23 @@ module FxAudioEngine {
 
     class WebAudioAPIUtilities {
 
-        public routeLinear(audioGraph: AudioNode[]): void {
-            Contract.isNotNullOrUndefined(audioGraph, 'audioGraph');
+        public routeLinear(chainOfNodes: AudioNode[]): void;
 
-            for (var i = 0; i <= audioGraph.length - 2; i++) {
-                var audioNode = audioGraph[i];
-                var nextAudioNode = audioGraph[i + 1];
+        public routeLinear(...args: AudioNode[]): void;
+
+        public routeLinear(...args: any[]): void {
+            var chainOfNodes = (args[0] instanceof Array)
+                ? args[0]
+                : args;
+
+            for (var i = 0; i <= chainOfNodes.length - 2; i++) {
+                var audioNode = chainOfNodes[i];
+                var nextAudioNode = chainOfNodes[i + 1];
 
                 audioNode.connect(nextAudioNode);
             }
         }
+
 
         public routeCross(a: AudioNode[], b: AudioNode[]): void {
             Contract.isNotNullOrUndefined(a, 'a');

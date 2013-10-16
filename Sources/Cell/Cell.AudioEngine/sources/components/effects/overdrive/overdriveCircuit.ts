@@ -36,13 +36,7 @@ module FxAudioEngine {
             this._gainNode = audioContext.createGain();
 
 
-            var audioGraph: AudioNode[] = [
-                this._lowPassFilterNode,
-                this._waveShaperNode,
-                this._gainNode
-            ];
-
-            AudioUtilities.WebAudioAPI.routeLinear(audioGraph);
+            AudioUtilities.WebAudioAPI.routeLinear(this._lowPassFilterNode, this._waveShaperNode, this._gainNode);
 
             this._publishInputComponent(this._lowPassFilterNode);
             this._publishOutputComponent(this._gainNode);
