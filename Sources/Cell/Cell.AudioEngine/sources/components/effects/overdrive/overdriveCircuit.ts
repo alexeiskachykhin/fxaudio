@@ -24,6 +24,16 @@ module FxAudioEngine {
 
 
         private _buildAudioCircuit(): void {
+            Contract.isNotNullOrUndefined(this.context, 'context');
+
+            this._buildAudioGraph();
+            this._connectAudioGraph();
+            this._publishAudioGraphComponents();
+        }
+
+        private _buildAudioGraph(): void {
+            Contract.isNotNullOrUndefined(this.context, 'context');
+
             var audioContext: AudioContext = this.context.audioContext;
 
             this._lowPassFilterNode = audioContext.createBiquadFilter();
@@ -34,13 +44,24 @@ module FxAudioEngine {
             this._setDrive(audioContext.sampleRate, 120);
 
             this._gainNode = audioContext.createGain();
+        }
 
+        private _connectAudioGraph(): void {
+            Contract.isNotNullOrUndefined(this.context, '_lowPassFilterNode');
+            Contract.isNotNullOrUndefined(this.context, '_waveShaperNode');
+            Contract.isNotNullOrUndefined(this.context, '_gainNode');
 
             AudioUtilities.WebAudioAPI.routeLinear(this._lowPassFilterNode, this._waveShaperNode, this._gainNode);
+        }
+
+        private _publishAudioGraphComponents(): void {
+            Contract.isNotNullOrUndefined(this.context, '_lowPassFilterNode');
+            Contract.isNotNullOrUndefined(this.context, '_gainNode');
 
             this._publishInputComponent(this._lowPassFilterNode);
             this._publishOutputComponent(this._gainNode);
         }
+
 
         private _setDrive(sampleRate: number, value: number): void {
             var k: number = value;
