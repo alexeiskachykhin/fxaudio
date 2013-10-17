@@ -47,16 +47,16 @@ module FxAudioEngine {
         }
 
         private _connectAudioGraph(): void {
-            Contract.isNotNullOrUndefined(this.context, '_lowPassFilterNode');
-            Contract.isNotNullOrUndefined(this.context, '_waveShaperNode');
-            Contract.isNotNullOrUndefined(this.context, '_gainNode');
+            Contract.isNotNullOrUndefined(this._lowPassFilterNode, '_lowPassFilterNode');
+            Contract.isNotNullOrUndefined(this._waveShaperNode, '_waveShaperNode');
+            Contract.isNotNullOrUndefined(this._gainNode, '_gainNode');
 
             AudioUtilities.WebAudioAPI.routeLinear(this._lowPassFilterNode, this._waveShaperNode, this._gainNode);
         }
 
         private _publishAudioGraphComponents(): void {
-            Contract.isNotNullOrUndefined(this.context, '_lowPassFilterNode');
-            Contract.isNotNullOrUndefined(this.context, '_gainNode');
+            Contract.isNotNullOrUndefined(this._lowPassFilterNode, '_lowPassFilterNode');
+            Contract.isNotNullOrUndefined(this._gainNode, '_gainNode');
 
             this._publishInputComponent(this._lowPassFilterNode);
             this._publishOutputComponent(this._gainNode);
