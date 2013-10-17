@@ -39,17 +39,17 @@ module FxAudioEngine {
         }
 
 
-        constructor(context: FxContext, maxDelayTime) {
+        constructor(context: FxContext, maxDelayTime: number) {
             super(context);
 
             this._buildAudioCircuit(maxDelayTime);
         }
 
 
-        private _buildAudioCircuit(maxDelayTime): void {
+        private _buildAudioCircuit(maxDelayTime: number): void {
             var audioContext: AudioContext = this.context.audioContext;
 
-            this._inputGainNode = audioContext.createGain()
+            this._inputGainNode = audioContext.createGain();
             this._delayNode = audioContext.createDelay(maxDelayTime);
             this._feedbackGainNode = audioContext.createGain();
             this._echoGainNode = audioContext.createGain();
