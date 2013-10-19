@@ -39,5 +39,7 @@
     "../../sources/components/effects/delay/delayCircuit.ts",
     "../../sources/components/effects/delay/delayUnit.ts",
     "../../sources/components/effects/overdrive/overdriveCircuit.ts",
-    "../../sources/components/effects/overdrive/overdriveUnit.ts"
+    "../../sources/components/effects/overdrive/overdriveUnit.ts",
+    "../../sources/components/effects/flanger/flangerCircuit.ts",
+    "../../sources/components/effects/flanger/flangerUnit.ts"
 ]
