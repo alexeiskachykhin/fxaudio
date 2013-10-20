@@ -9,7 +9,7 @@ module FxAudioEngine {
     var DEFAULT_RATE = 0.25;
 
 
-    export class ChorusUnit extends Unit<FlangerCircuit> {
+    export class ChorusUnit extends Unit<ChorusCircuit> {
 
         public get rate(): number {
             return this.circuit.lfoNode.frequency.value;
