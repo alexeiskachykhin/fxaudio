@@ -27,6 +27,8 @@
     "../../sources/components/io/networkSource/networkAudioSourceController.ts",
     "../../sources/components/io/networkSource/networkSourceCircuit.ts",
     "../../sources/components/io/networkSource/networkSourceUnit.ts",
+    "../../sources/components/metering/volume/volumeCircuit.ts",
+    "../../sources/components/metering/volume/volumeUnit.ts",
     "../../sources/components/routing/channelMerger/channelMergerCircuit.ts",
     "../../sources/components/routing/channelMerger/channelMergerUnit.ts",
     "../../sources/components/routing/channelSplitter/channelSplitterCircuit.ts",
