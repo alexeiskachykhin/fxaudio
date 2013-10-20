@@ -44,6 +44,8 @@
     "../../sources/components/effects/overdrive/overdriveUnit.ts",
     "../../sources/components/effects/comboFilter/comboFilterCircuit.ts",
     "../../sources/components/effects/modulatedComboFilter/modulatedComboFilterCircuit.ts",
+    "../../sources/components/effects/chorus/chorusCircuit.ts",
+    "../../sources/components/effects/chorus/chorusUnit.ts",
     "../../sources/components/effects/flanger/flangerCircuit.ts",
     "../../sources/components/effects/flanger/flangerUnit.ts"
 ]
