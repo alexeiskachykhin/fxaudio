@@ -13,6 +13,17 @@ module FxAudioEngine {
 
         private _gainNode: GainNode;
 
+        private _drive: number;
+
+
+        public get gainNode(): GainNode {
+            return this._gainNode;
+        }
+
+        public get lowPassFilterNode(): BiquadFilterNode {
+            return this._lowPassFilterNode;
+        }
+
 
         constructor(context: Context) {
             Contract.isNotNullOrUndefined(context, 'context');
@@ -22,6 +33,29 @@ module FxAudioEngine {
             this._createOverdriveComponents();
             this._connectOverdriveComponents();
             this._publishOverdriveComponents();
+        }
+
+
+        public getDrive(): number {
+            return this._drive;
+        }
+
+        public setDrive(value: number): void {
+            Contract.isPositiveOrZero(value, 'value');
+
+            var k: number = value;
+            var deg: number = Math.PI / 180;
+
+            var sampleRate: number = this.context.sampleRate;
+            var shapingCurve = new Float32Array(sampleRate);
+
+            for (var i: number = 0; i < sampleRate; i += 1) {
+                var x: number = i * 2 / sampleRate - 1;
+                shapingCurve[i] = (3 + k) * x * 20 * deg / (Math.PI + k * Math.abs(x));
+            }
+
+            this._waveShaperNode.curve = shapingCurve;
+            this._drive = value;
         }
 
 
@@ -35,7 +69,7 @@ module FxAudioEngine {
             this._lowPassFilterNode.frequency.value = 3000;
 
             this._waveShaperNode = audioContext.createWaveShaper();
-            this._setDrive(120);
+            this.setDrive(120);
 
             this._gainNode = audioContext.createGain();
         }
@@ -54,24 +88,6 @@ module FxAudioEngine {
 
             this._publishInputComponent(this._lowPassFilterNode);
             this._publishOutputComponent(this._gainNode);
-        }
-
-
-        private _setDrive(value: number): void {
-            Contract.isPositiveOrZero(value, 'value');
-
-            var k: number = value;
-            var deg: number = Math.PI / 180;
-
-            var sampleRate: number = this.context.sampleRate;
-            var shapingCurve = new Float32Array(sampleRate);
-
-            for (var i: number = 0; i < sampleRate; i += 1) {
-                var x: number = i * 2 / sampleRate - 1;
-                shapingCurve[i] = (3 + k) * x * 20 * deg / (Math.PI + k * Math.abs(x));
-            }
-
-            this._waveShaperNode.curve = shapingCurve;
         }
     }
 }
