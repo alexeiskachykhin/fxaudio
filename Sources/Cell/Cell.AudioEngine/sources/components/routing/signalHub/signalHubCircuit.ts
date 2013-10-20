@@ -19,6 +19,9 @@ module FxAudioEngine {
 
 
         private _createSignalHubCircuit(numberOfInputs: number, numberOfOutputs: number): void {
+            Contract.isPositiveOrZero(numberOfInputs, 'numberOfInputs');
+            Contract.isPositiveOrZero(numberOfOutputs, 'numberOfOutputs');
+
             var inputs = this._creatComponentGroup(numberOfInputs);
             var outputs = this._creatComponentGroup(numberOfOutputs);
 
@@ -28,7 +31,9 @@ module FxAudioEngine {
             this._publishOutputComponents(outputs);
         }
 
-        private _creatComponentGroup(numberOfNodes: number): AudioNode[] {
+        private _creatComponentGroup(numberOfNodes: number): AudioNode[]{
+            Contract.isPositiveOrZero(numberOfNodes, 'numberOfNodes');
+
             var nodes: AudioNode[] = [];
 
             for (var i = 0; i < numberOfNodes; i++) {

@@ -45,6 +45,10 @@ module FxAudioEngine {
 
 
         private _createNode(): TNode {
+            Contract.isNotNullOrUndefined(this.context, 'context');
+            Contract.isNotNullOrUndefined(this._audioNodeType, '_audioNodeType');
+            Contract.isNotNullOrUndefined(this._audioNodeFactoryMethodArguments, '_audioNodeFactoryMethodArguments');
+
             var audioContext: AudioContext = this.context.audioContext;
             var audioNodeType: NodeType = this._audioNodeType;
             var audioNodeArguments: any[] = this._audioNodeFactoryMethodArguments;

@@ -29,6 +29,8 @@ module FxAudioEngine {
         }
 
         private _dispatchEvent(eventName, ...eventArgs: any[]): void {
+            Contract.isNotNullOrUndefined(eventName, 'eventName');
+
             if (!this._events.hasOwnProperty(eventName)) {
                 return;
             }
