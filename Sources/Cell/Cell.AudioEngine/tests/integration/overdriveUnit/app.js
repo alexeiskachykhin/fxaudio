@@ -14,6 +14,22 @@
         request.send();
     }
 
+    function initUI(overdriveUnit) {
+        var observeProperty = function (propertyName, inputId) {
+            var inputElement = document.getElementById(inputId);
+
+            inputElement.addEventListener('change', function () {
+                overdriveUnit[propertyName] = Number(this.value);
+            });
+
+            inputElement.value = overdriveUnit[propertyName];
+        };
+
+        observeProperty('level', 'overdrive-level');
+        observeProperty('tone', 'overdrive-tone');
+        observeProperty('drive', 'overdrive-drive');
+    }
+
 
     loadSound('../../fixtures/audio/sample.mp3', function (audioBuffer) {
         var context = new FxAudioEngine.RealTimeContext();
@@ -31,5 +47,8 @@
         initOperation.addEventListener('success', function () {
             sourceUnit.stream.start(0);
         });
+
+
+        initUI(overdriveUnit);
     });
 }());

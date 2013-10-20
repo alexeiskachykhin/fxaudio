@@ -8,6 +8,22 @@
         }, callback, function () { });
     }
 
+    function initUI(overdriveUnit) {
+        var observeProperty = function (propertyName, inputId) {
+            var inputElement = document.getElementById(inputId);
+
+            inputElement.addEventListener('change', function () {
+                overdriveUnit[propertyName] = Number(this.value);
+            });
+
+            inputElement.value = overdriveUnit[propertyName];
+        };
+
+        observeProperty('level', 'overdrive-level');
+        observeProperty('tone', 'overdrive-tone');
+        observeProperty('drive', 'overdrive-drive');
+    }
+
 
     getInputStream(function (stream) {
         var context = new FxAudioEngine.RealTimeContext();
@@ -29,5 +45,8 @@
         initOperation.addEventListener('error', function () {
             throw new Error('Initialization of source node has failed.');
         });
+
+
+        initUI(overdriveUnit);
     });
 }());

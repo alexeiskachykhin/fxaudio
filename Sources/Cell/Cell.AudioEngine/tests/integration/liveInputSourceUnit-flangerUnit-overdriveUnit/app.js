@@ -9,21 +9,25 @@
     }
 
 
-    function initUI(flangerUnit) {
-        var observeProperty = function (propertyName, inputId) {
+    function initUI(flangerUnit, overdriveUnit) {
+        var observeProperty = function (unit, propertyName, inputId) {
             var inputElement = document.getElementById(inputId);
 
             inputElement.addEventListener('change', function () {
-                flangerUnit[propertyName] = Number(this.value);
+                unit[propertyName] = Number(this.value);
             });
 
-            inputElement.value = flangerUnit[propertyName];
+            inputElement.value = unit[propertyName];
         };
 
-        observeProperty('speed', 'flanger-speed');
-        observeProperty('delayTime', 'flanger-delay');
-        observeProperty('depth', 'flanger-depth');
-        observeProperty('feedback', 'flanger-feedback');
+        observeProperty(flangerUnit, 'speed', 'flanger-speed');
+        observeProperty(flangerUnit, 'delayTime', 'flanger-delay');
+        observeProperty(flangerUnit, 'depth', 'flanger-depth');
+        observeProperty(flangerUnit, 'feedback', 'flanger-feedback');
+
+        observeProperty(overdriveUnit, 'level', 'overdrive-level');
+        observeProperty(overdriveUnit, 'tone', 'overdrive-tone');
+        observeProperty(overdriveUnit, 'drive', 'overdrive-drive');
     }
 
 
@@ -52,6 +56,6 @@
         });
 
 
-        initUI(flangerUnit);
+        initUI(flangerUnit, overdriveUnit);
     });
 }());
