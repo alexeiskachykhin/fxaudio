@@ -23,6 +23,7 @@ module FxAudioEngine {
         constructor(audioNode: AudioNode, channel: number, direction: UnitPortDirection) {
             Contract.isNotNullOrUndefined(audioNode, 'audioNode');
             Contract.isPositiveOrZero(channel, 'channel');
+            Contract.isNotNullOrUndefined(direction, 'direction');
 
             this._audioNode = audioNode;
             this._direction = direction;

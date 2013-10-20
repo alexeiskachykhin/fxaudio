@@ -35,7 +35,7 @@ module FxAudioEngine {
             this._lowPassFilterNode.frequency.value = 3000;
 
             this._waveShaperNode = audioContext.createWaveShaper();
-            this._setDrive(audioContext.sampleRate, 120);
+            this._setDrive(120);
 
             this._gainNode = audioContext.createGain();
         }
@@ -57,18 +57,21 @@ module FxAudioEngine {
         }
 
 
-        private _setDrive(sampleRate: number, value: number): void {
+        private _setDrive(value: number): void {
+            Contract.isPositiveOrZero(value, 'value');
+
             var k: number = value;
             var deg: number = Math.PI / 180;
 
-            var wsCurve = new Float32Array(sampleRate);
+            var sampleRate: number = this.context.sampleRate;
+            var shapingCurve = new Float32Array(sampleRate);
 
             for (var i: number = 0; i < sampleRate; i += 1) {
                 var x: number = i * 2 / sampleRate - 1;
-                wsCurve[i] = (3 + k) * x * 20 * deg / (Math.PI + k * Math.abs(x));
+                shapingCurve[i] = (3 + k) * x * 20 * deg / (Math.PI + k * Math.abs(x));
             }
 
-            this._waveShaperNode.curve = wsCurve;
+            this._waveShaperNode.curve = shapingCurve;
         }
     }
 }
