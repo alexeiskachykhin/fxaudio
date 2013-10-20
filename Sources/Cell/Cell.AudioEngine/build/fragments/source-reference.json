@@ -40,6 +40,8 @@
     "../../sources/components/routing/signalSplitter/signalSplitterUnit.ts",
     "../../sources/components/effects/delay/delayCircuit.ts",
     "../../sources/components/effects/delay/delayUnit.ts",
+    "../../sources/components/effects/echo/echoUnit.ts",
+    "../../sources/components/effects/echo/echoCircuit.ts",
     "../../sources/components/effects/overdrive/overdriveCircuit.ts",
     "../../sources/components/effects/overdrive/overdriveUnit.ts",
     "../../sources/components/effects/comboFilter/comboFilterCircuit.ts",
