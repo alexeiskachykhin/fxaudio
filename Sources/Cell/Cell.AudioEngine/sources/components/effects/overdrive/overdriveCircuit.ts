@@ -19,19 +19,13 @@ module FxAudioEngine {
 
             super(context);
 
-            this._buildAudioCircuit();
+            this._createOverdriveComponents();
+            this._connectOverdriveComponents();
+            this._publishOverdriveComponents();
         }
 
 
-        private _buildAudioCircuit(): void {
-            Contract.isNotNullOrUndefined(this.context, 'context');
-
-            this._buildAudioGraph();
-            this._connectAudioGraph();
-            this._publishAudioGraphComponents();
-        }
-
-        private _buildAudioGraph(): void {
+        private _createOverdriveComponents(): void {
             Contract.isNotNullOrUndefined(this.context, 'context');
 
             var audioContext: AudioContext = this.context.audioContext;
@@ -46,7 +40,7 @@ module FxAudioEngine {
             this._gainNode = audioContext.createGain();
         }
 
-        private _connectAudioGraph(): void {
+        private _connectOverdriveComponents(): void {
             Contract.isNotNullOrUndefined(this._lowPassFilterNode, '_lowPassFilterNode');
             Contract.isNotNullOrUndefined(this._waveShaperNode, '_waveShaperNode');
             Contract.isNotNullOrUndefined(this._gainNode, '_gainNode');
@@ -54,7 +48,7 @@ module FxAudioEngine {
             AudioUtilities.WebAudioAPI.routeLinear(this._lowPassFilterNode, this._waveShaperNode, this._gainNode);
         }
 
-        private _publishAudioGraphComponents(): void {
+        private _publishOverdriveComponents(): void {
             Contract.isNotNullOrUndefined(this._lowPassFilterNode, '_lowPassFilterNode');
             Contract.isNotNullOrUndefined(this._gainNode, '_gainNode');
 

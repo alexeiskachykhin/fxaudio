@@ -17,7 +17,7 @@ module FxAudioEngine {
 
             super(context);
 
-            this._buildAudioCircuit();
+            this._createLiveInputSourceCircuit();
         }
 
 
@@ -29,7 +29,7 @@ module FxAudioEngine {
         }
 
 
-        private _buildAudioCircuit(): void {
+        private _createLiveInputSourceCircuit(): void {
             this._outputGainNode = this.context.audioContext.createGain();
             this._publishOutputComponent(this._outputGainNode);
         }
