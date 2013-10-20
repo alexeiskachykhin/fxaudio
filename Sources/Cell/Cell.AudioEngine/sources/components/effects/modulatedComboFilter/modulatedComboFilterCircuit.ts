@@ -5,10 +5,6 @@ module FxAudioEngine {
     'use strict';
 
 
-    var DEFAULT_DEPTH = 0.002;
-    var DEFAULT_SPEED = 0.25;
-
-
     export class ModulatedComboFilterCircuit extends ComboFilterCircuit {
 
         private _depthNode: GainNode;
@@ -41,10 +37,8 @@ module FxAudioEngine {
             var audioContext: AudioContext = this.context.audioContext;
 
             this._depthNode = audioContext.createGain();
-            this._depthNode.gain.value = DEFAULT_DEPTH;
 
             this._lfoNode = audioContext.createOscillator();
-            this._lfoNode.frequency.value = DEFAULT_SPEED;
             this._lfoNode.start(0);
         }
 

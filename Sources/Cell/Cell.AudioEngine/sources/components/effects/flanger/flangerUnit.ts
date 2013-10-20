@@ -5,6 +5,12 @@ module FxAudioEngine {
     'use strict';
 
 
+    var DEFAULT_DEPTH = 0.002;
+    var DEFAULT_SPEED = 0.25;
+    var DEFAULT_FEEDBACK = 0.5;
+    var DEFAULT_DELAY_TIME = 0.005;
+
+
     export class FlangerUnit extends Unit<FlangerCircuit> {
 
         public get speed(): number {
@@ -44,6 +50,11 @@ module FxAudioEngine {
             Contract.isNotNullOrUndefined(context, 'context');
 
             super(new FlangerCircuit(context));
+
+            this.delayTime = DEFAULT_DELAY_TIME;
+            this.feedback = DEFAULT_FEEDBACK;
+            this.depth = DEFAULT_DEPTH;
+            this.speed = DEFAULT_SPEED;
         }
     }
 }

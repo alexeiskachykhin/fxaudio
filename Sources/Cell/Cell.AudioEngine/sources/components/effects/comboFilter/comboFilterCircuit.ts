@@ -5,8 +5,6 @@ module FxAudioEngine {
     'use strict';
 
 
-    var DEFAULT_FEEDBACK = 0.5;
-    var DEFAULT_DELAY_TIME = 0.005;
     var MAX_DELAY_TIME = 0.05;
 
 
@@ -57,9 +55,7 @@ module FxAudioEngine {
             this._inputNode = audioContext.createGain();
             this._outputNode = audioContext.createGain();
             this._delayNode = audioContext.createDelay(MAX_DELAY_TIME);
-            this._delayNode.delayTime.value = DEFAULT_DELAY_TIME;
             this._feedbackNode = audioContext.createGain();
-            this._feedbackNode.gain.value = DEFAULT_FEEDBACK;
         }
 
         private _connectComboFilterComponents(): void {
