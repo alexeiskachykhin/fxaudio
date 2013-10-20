@@ -14,13 +14,13 @@ module FxAudioEngine {
 
             super(context);
 
-            this._buildAudioCircuit(numberOfInputs, numberOfOutputs);
+            this._createSignalHubCircuit(numberOfInputs, numberOfOutputs);
         }
 
 
-        private _buildAudioCircuit(numberOfInputs: number, numberOfOutputs: number): void {
-            var inputs = this._createNodeGroup(numberOfInputs);
-            var outputs = this._createNodeGroup(numberOfOutputs);
+        private _createSignalHubCircuit(numberOfInputs: number, numberOfOutputs: number): void {
+            var inputs = this._creatComponentGroup(numberOfInputs);
+            var outputs = this._creatComponentGroup(numberOfOutputs);
 
             AudioUtilities.WebAudioAPI.routeCross(inputs, outputs);
 
@@ -28,7 +28,7 @@ module FxAudioEngine {
             this._publishOutputComponents(outputs);
         }
 
-        private _createNodeGroup(numberOfNodes: number): AudioNode[] {
+        private _creatComponentGroup(numberOfNodes: number): AudioNode[] {
             var nodes: AudioNode[] = [];
 
             for (var i = 0; i < numberOfNodes; i++) {

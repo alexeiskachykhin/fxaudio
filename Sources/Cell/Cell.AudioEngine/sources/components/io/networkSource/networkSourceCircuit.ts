@@ -17,7 +17,7 @@ module FxAudioEngine {
 
             super(context);
 
-            this._buildAudioCircuit();
+            this._createNetworkSourceCircuit();
         }
 
 
@@ -28,7 +28,7 @@ module FxAudioEngine {
             this._mediElementSourceNode.connect(this._outputGainNode);
         }
 
-        private _buildAudioCircuit(): void {
+        private _createNetworkSourceCircuit(): void {
             this._outputGainNode = this.context.audioContext.createGain();
             this._publishOutputComponent(this._outputGainNode);
         }

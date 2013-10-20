@@ -27,16 +27,22 @@ module FxAudioEngine {
             this._audioNodeType = audioNodeType;
             this._audioNodeFactoryMethodArguments = args;
 
-            this._buildAudioCircuit();
+            this._createAdapterComponents();
+            this._publishAdapterComponents();
         }
 
 
-        private _buildAudioCircuit(): void {
+        private _createAdapterComponents(): void {
             this._audioNode = this._createNode();
+        }
+
+        private _publishAdapterComponents(): void {
+            Contract.isNotNullOrUndefined(this._audioNode, '_audioNode');
 
             this._publishInputComponent(this._audioNode);
             this._publishOutputComponent(this._audioNode);
         }
+
 
         private _createNode(): TNode {
             var audioContext: AudioContext = this.context.audioContext;
