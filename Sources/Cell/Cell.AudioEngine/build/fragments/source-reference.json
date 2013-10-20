@@ -47,5 +47,7 @@
     "../../sources/components/effects/chorus/chorusCircuit.ts",
     "../../sources/components/effects/chorus/chorusUnit.ts",
     "../../sources/components/effects/flanger/flangerCircuit.ts",
-    "../../sources/components/effects/flanger/flangerUnit.ts"
+    "../../sources/components/effects/flanger/flangerUnit.ts",
+    "../../sources/components/effects/reverb/reverbCircuit.ts",
+    "../../sources/components/effects/reverb/reverbUnit.ts"
 ]
