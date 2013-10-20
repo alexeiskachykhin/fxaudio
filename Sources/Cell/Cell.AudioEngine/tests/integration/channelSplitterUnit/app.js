@@ -14,14 +14,14 @@
         request.send();
     }
 
-    function initUI(leftGain, rightGain) {
-        var channels = [leftGain, rightGain];
+    function initUI(leftVolumeUnit, rightVolumeUnit) {
+        var channels = [leftVolumeUnit, rightVolumeUnit];
         var channelSwitches = document.getElementsByTagName('input');
 
 
         var channelSwitchChangeHandler = function () {
             var channel = channels[this.dataset.channel];
-            channel.gain.value = Number(this.checked);
+            channel.level = Number(this.checked);
         };
 
         for (var i = 0; i <= channelSwitches.length - 1; i++) {
@@ -37,16 +37,14 @@
         var sourceUnit = new FxAudioEngine.BufferSourceUnit(context);
         var destinationUnit = new FxAudioEngine.AudioDestinationUnit(context);
         var splitterUnit = new FxAudioEngine.ChannelSplitterUnit(context, 2);
-
-        var leftGain = context.audioContext.createGain();
-        var rightGain = context.audioContext.createGain();
+        var leftVolumeUnit = new FxAudioEngine.VolumeUnit(context);
+        var rightVolumeUnit = new FxAudioEngine.VolumeUnit(context);
 
         sourceUnit.ports.outputs[0].connect(splitterUnit.ports.inputs[0]);
-        splitterUnit.ports.outputs[0]._audioNode.connect(leftGain, 0, 0);
-        splitterUnit.ports.outputs[0]._audioNode.connect(rightGain, 1, 0);
-
-        leftGain.connect(destinationUnit.ports.inputs[0]._audioNode);
-        rightGain.connect(destinationUnit.ports.inputs[0]._audioNode);
+        splitterUnit.ports.outputs[0].connect(leftVolumeUnit.ports.inputs[0]);
+        splitterUnit.ports.outputs[1].connect(rightVolumeUnit.ports.inputs[0]);
+        leftVolumeUnit.ports.outputs[0].connect(destinationUnit.ports.inputs[0]);
+        rightVolumeUnit.ports.outputs[0].connect(destinationUnit.ports.inputs[0]);
 
 
         var initOperation = sourceUnit.init(audioBuffer);
@@ -56,6 +54,6 @@
         });
 
 
-        initUI(leftGain, rightGain);
+        initUI(leftVolumeUnit, rightVolumeUnit);
     });
 }());
