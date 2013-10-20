@@ -44,6 +44,8 @@
     "../../sources/components/effects/echo/echoCircuit.ts",
     "../../sources/components/effects/overdrive/overdriveCircuit.ts",
     "../../sources/components/effects/overdrive/overdriveUnit.ts",
+    "../../sources/components/effects/tremolo/tremoloCircuit.ts",
+    "../../sources/components/effects/tremolo/tremoloUnit.ts",
     "../../sources/components/effects/comboFilter/comboFilterCircuit.ts",
     "../../sources/components/effects/modulatedComboFilter/modulatedComboFilterCircuit.ts",
     "../../sources/components/effects/chorus/chorusCircuit.ts",
