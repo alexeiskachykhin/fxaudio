@@ -13,27 +13,30 @@ module FxAudioEngine.Test {
 
 
         public execute(environment: TestEnvironment): void {
+            var audioData = environment.audioData;
             var components = environment.components;
 
-            for (var componentId in components) {
-                if (!components.hasOwnProperty(componentId)) {
-                    continue;
-                }
+            // FIXME: Make it work with multiple units.
 
+            this._enumerateBufferSourceUnits(components, component => {
+                var initOperation = component.init(audioData);
+
+                initOperation.addEventListener('success', () => {
+                    component.stream.start(0);
+                    this.complete();
+                });
+            });
+        }
+
+
+        private _enumerateBufferSourceUnits(components: any, callback: (component: BufferSourceUnit) => void) {
+            Object.keys(components).forEach(componentId => {
                 var component = components[componentId];
 
                 if (component instanceof BufferSourceUnit) {
-                    var bufferSourceUnit = <BufferSourceUnit>component;
-                    var audioData = environment.audioData;
-
-                    var initOperation = bufferSourceUnit.init(audioData);
-
-                    initOperation.addEventListener('success', () => {
-                        bufferSourceUnit.stream.start(0);
-                        this.complete();
-                    });
+                    callback(component);
                 }
-            }
+            });
         }
     }
 }
