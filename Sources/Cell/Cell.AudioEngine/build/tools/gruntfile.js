@@ -12,7 +12,8 @@
             outputPath: '<%= manifest.rootPath %>/build/output',
 
             sources: {
-                ts: grunt.file.readJSON('../fragments/source-reference.json'),
+                main: grunt.file.readJSON('../fragments/source-reference.json'),
+                test: grunt.file.readJSON('../fragments/test-reference.json'),
                 libraries: ['../../libraries/**/*.d.ts']
             },
 
@@ -48,7 +49,11 @@
 
         exists: {
             dev: {
-                files: ['<%= manifest.sources.ts %>']
+                files: ['<%= manifest.sources.main %>']
+            },
+
+            test: {
+                files: ['<%= manifest.sources.test %>']
             }
         },
 
@@ -74,7 +79,11 @@
             },
 
             dev: {
-                files: ['<%= manifest.sources.ts %>']
+                files: ['<%= manifest.sources.main %>']
+            },
+
+            test: {
+                files: ['<%= manifest.sources.test %>']
             }
         },
 
@@ -86,10 +95,14 @@
             },
 
             dev: {
-                src: ['<%= manifest.sources.ts %>', '<%= manifest.sources.libraries %>'],
-                watch: '<%= manifest.sourcePath %>',
+                src: ['<%= manifest.sources.main %>', '<%= manifest.sources.libraries %>'],
                 out: '<%= manifest.outputPath %>/fxAudio.js',
                 reference: '<%= manifest.sourcePath %>/_references.ts'
+            },
+
+            test: {
+                src: ['<%= manifest.sources.test %>'],
+                out: '<%= manifest.outputPath %>/fxTest.js'
             }
         },
 
@@ -97,7 +110,8 @@
             dev: {
                 options: {
                     base: ['<%= manifest.rootPath %>'],
-                    open: true
+                    open: true,
+                    keepalive: true
                 }
             }
         }
@@ -115,5 +129,13 @@
     grunt.loadNpmTasks('grunt-contrib-connect');
 
 
-    grunt.registerTask('default', ['clean:dev', 'template:dev', 'exists:dev', 'jsonlint:dev', 'jshint:dev', 'tslint:dev', 'connect:dev', 'ts:dev']);
+    grunt.registerTask('pre-build', ['clean:dev', 'template:dev', 'exists']);
+    grunt.registerTask('lint', ['jsonlint:dev', 'jshint:dev', 'tslint']);
+    grunt.registerTask('compile', ['ts']);
+    grunt.registerTask('test', ['connect:dev']);
+
+    grunt.registerTask('default', ['pre-build', 'lint', 'compile', 'test']);
+
+    //grunt.registerTask('default', ['clean:dev', 'template:dev', 'exists:dev', 'jsonlint:dev', 'jshint:dev', 'tslint:dev', 'connect:dev', 'ts:dev']);
+    //grunt.registerTask('test', ['exists:test', 'tslint:test', 'ts:test']);
 };
