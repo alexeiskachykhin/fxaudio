@@ -16,21 +16,22 @@ module FxAudioEngine.Test {
             var components = environment.components;
             var connectionDeclarations = environment.configuration.connections;
 
-            for (var componentId in connectionDeclarations) {
-                if (!connectionDeclarations.hasOwnProperty(componentId)) {
-                    continue;
-                }
-
+            Object.keys(connectionDeclarations).forEach(componentId => {
                 var connectionDeclaration: Array = connectionDeclarations[componentId];
                 var sourceComponent = components[componentId];
 
-                connectionDeclaration.forEach((targetComponentId: string) => {
-                    var targetComponent = components[targetComponentId];
-                    sourceComponent.ports.outputs[0].connect(targetComponent.ports.inputs[0]);
+                connectionDeclaration.forEach(destinationComponentId => {
+                    var destinationComponent = components[destinationComponentId];
+                    this._connectComponents(sourceComponent, destinationComponent);
                 });
-            }
+            });
 
             this.complete();
+        }
+
+
+        private _connectComponents(source: Unit<Circuit>, destination: Unit<Circuit>): void {
+            source.ports.outputs[0].connect(destination.ports.inputs[0]);
         }
     }
 }
