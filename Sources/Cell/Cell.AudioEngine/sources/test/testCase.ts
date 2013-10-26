@@ -7,8 +7,8 @@ module FxAudioEngine.Test {
 
     export class TestCase {
 
-        static run() {
-            var testRunner = new TestRunner();
+        static run(testCaseName: string) {
+            var testRunner = new TestRunner(testCaseName);
             testRunner.execute();
         }
     }

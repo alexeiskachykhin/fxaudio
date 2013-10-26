@@ -21,7 +21,6 @@ module FxAudioEngine.Test {
 
 
         constructor() {
-            this.configurationFileUrl = '../nova/bufferSourceUnit.json';
             this.audioDataFileUrl = '../fixtures/audio/sample.mp3';
             this._components = [];
         }

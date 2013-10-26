@@ -14,8 +14,9 @@ module FxAudioEngine.Test {
         private _stateProgression: TestExecutionState[];
 
 
-        constructor() {
+        constructor(testCaseName: string) {
             this._environment = new TestEnvironment();
+            this._environment.configurationFileUrl = testCaseName;
 
             this._stateProgression = [
                 new LoadTestConfigurationState(this),
