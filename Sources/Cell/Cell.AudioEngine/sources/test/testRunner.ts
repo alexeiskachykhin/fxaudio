@@ -1,4 +1,4 @@
-﻿/// <reference path="../../build/output/fxAudio.d.ts" />
+﻿/// <reference path="_references.ts" />
 
 
 module FxAudioEngine.Test {

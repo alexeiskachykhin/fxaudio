@@ -101,8 +101,9 @@
             },
 
             test: {
-                src: ['<%= manifest.sources.test %>'],
-                out: '<%= manifest.outputPath %>/fxTest.js'
+                src: ['<%= manifest.sources.test %>', '<%= manifest.outputPath %>/fxAudio.d.ts'],
+                out: '<%= manifest.outputPath %>/fxTest.js',
+                reference: '<%= manifest.sourcePath %>/test/_references.ts'
             }
         },
 
