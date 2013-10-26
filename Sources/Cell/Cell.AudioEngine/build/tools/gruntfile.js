@@ -151,7 +151,7 @@
     grunt.loadNpmTasks('grunt-contrib-watch');
 
 
-    grunt.registerTask('pre-build', ['clean:dev', 'template:dev', 'exists:*']);
+    grunt.registerTask('pre-build', ['clean:dev', 'template:*', 'exists:*']);
     grunt.registerTask('lint', ['jsonlint:dev', 'jshint:dev', 'tslint:*']);
     grunt.registerTask('compile', ['ts:*']);
     grunt.registerTask('test', ['connect:dev']);
