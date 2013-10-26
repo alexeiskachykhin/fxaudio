@@ -17,7 +17,7 @@ module FxAudioEngine.Test {
 
         private _context: Context;
 
-        private _components: Unit<Circuit>[];
+        private _components: any;
 
 
         constructor() {
@@ -67,11 +67,11 @@ module FxAudioEngine.Test {
             this._context = value;
         }
 
-        public get components(): Unit<Circuit>[] {
+        public get components(): any {
             return this._components;
         }
 
-        public set components(value: Unit<Circuit>[]) {
+        public set components(value: any) {
             this._components = value;
         }
     }

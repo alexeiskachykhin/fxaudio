@@ -5,6 +5,11 @@ module FxAudioEngine.Test {
     'use strict';
 
 
+    interface ComponentDeclarationEnumerationCallback {
+        (componentId: string, componentDeclaration: any): void
+    }
+
+
     export class CreateComponentsState extends TestExecutionState {
 
         constructor(testRunner: TestRunner) {
@@ -16,20 +21,30 @@ module FxAudioEngine.Test {
             var componentDeclarations = environment.configuration.components;
             var componentContext = environment.context;
 
-            for (var componentId in componentDeclarations) {
-                if (!componentDeclarations.hasOwnProperty(componentId)) {
-                    continue;
-                }
-
-                var componentDeclaration = componentDeclarations[componentId];
-                var componentConstructor = this._resolveObject(componentDeclaration.type);
-
-                var component = new componentConstructor(componentContext);
-
-                environment.components[componentId] = component;
-            }
+            environment.components = this._createComponentsFromComponentDeclarations(componentDeclarations, componentContext);
 
             this.complete();
+        }
+
+
+        private _createComponentFromComponentDeclaration(componentDeclaration: any, context: Context) {
+            var componentConstructor = this._resolveObject(componentDeclaration.type);
+            var component = new componentConstructor(context);
+
+            return component;
+        }
+
+        private _createComponentsFromComponentDeclarations(componentDeclarations: any, context: Context) {
+            var components = {};
+
+            Object.keys(componentDeclarations).forEach(componentId => {
+                var componentDeclaration = componentDeclarations[componentId];
+                var component = this._createComponentFromComponentDeclaration(componentDeclaration, context);
+
+                components[componentId] = component;
+            });
+
+            return components;
         }
 
 
