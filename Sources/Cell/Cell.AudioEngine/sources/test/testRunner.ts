@@ -5,24 +5,13 @@ module FxAudioEngine.Test {
     'use strict';
 
 
-    export interface ITestRunner {
-        environment: TestEnvironment;
-        executeNext();
-    }
-
-
-    export class TestRunner implements ITestRunner {
+    export class TestRunner {
 
         private _environment: TestEnvironment;
 
         private _activeStateIndex: number;
 
-        private _stateProgression: ITestRunnerState[];
-
-
-        public get environment(): TestEnvironment {
-            return this._environment;
-        }
+        private _stateProgression: TestExecutionState[];
 
 
         constructor() {
@@ -52,7 +41,7 @@ module FxAudioEngine.Test {
             var nextState = this._stateProgression[this._activeStateIndex];
 
             if (nextState) {
-                nextState.execute();
+                nextState.execute(this._environment);
             }
         }
     }

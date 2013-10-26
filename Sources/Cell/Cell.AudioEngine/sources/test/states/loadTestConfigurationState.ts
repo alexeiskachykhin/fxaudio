@@ -7,7 +7,7 @@ module FxAudioEngine.Test {
 
     export class LoadTestConfigurationState extends LoadAbstractResourceState {
 
-        constructor(testRunner: ITestRunner) {
+        constructor(testRunner: TestRunner) {
             super(testRunner, 'configurationFileUrl', 'configuration', ResourceType.JSON);
         }
     }

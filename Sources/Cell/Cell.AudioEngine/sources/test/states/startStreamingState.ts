@@ -5,18 +5,15 @@ module FxAudioEngine.Test {
     'use strict';
 
 
-    export class StartStreamingState implements ITestRunnerState {
+    export class StartStreamingState extends TestExecutionState {
 
-        private _testRunner: ITestRunner;
-
-
-        constructor(testRunner: ITestRunner) {
-            this._testRunner = testRunner;
+        constructor(testRunner: TestRunner) {
+            super(testRunner);
         }
 
 
-        public execute(): void {
-            var components = this._testRunner.environment.components;
+        public execute(environment: TestEnvironment): void {
+            var components = environment.components;
 
             for (var componentId in components) {
                 if (!components.hasOwnProperty(componentId)) {
@@ -27,13 +24,13 @@ module FxAudioEngine.Test {
 
                 if (component instanceof BufferSourceUnit) {
                     var bufferSourceUnit = <BufferSourceUnit>component;
-                    var audioData = this._testRunner.environment.audioData;
+                    var audioData = environment.audioData;
 
                     var initOperation = bufferSourceUnit.init(audioData);
 
                     initOperation.addEventListener('success', () => {
                         bufferSourceUnit.stream.start(0);
-                        this._testRunner.executeNext();
+                        this.complete();
                     });
                 }
             }

@@ -5,20 +5,16 @@ module FxAudioEngine.Test {
     'use strict';
 
 
-    export class SetPageTitleState implements ITestRunnerState {
+    export class SetPageTitleState extends TestExecutionState {
 
-        private _testRunner: ITestRunner;
-
-
-        constructor(testRunner: ITestRunner) {
-            this._testRunner = testRunner;
+        constructor(testRunner: TestRunner) {
+            super(testRunner);
         }
 
 
-        public execute(): void {
-            document.title = this._testRunner.environment.configuration.title;
-
-            this._testRunner.executeNext();
+        public execute(environment: TestEnvironment): void {
+            document.title = environment.configuration.title;
+            this.complete();
         }
     }
 }

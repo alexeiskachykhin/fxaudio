@@ -5,19 +5,16 @@ module FxAudioEngine.Test {
     'use strict';
 
 
-    export class ConnectComponentsState implements ITestRunnerState {
+    export class ConnectComponentsState extends TestExecutionState {
 
-        private _testRunner: ITestRunner;
-
-
-        constructor(testRunner: ITestRunner) {
-            this._testRunner = testRunner;
+        constructor(testRunner: TestRunner) {
+            super(testRunner);
         }
 
 
-        public execute(): void {
-            var components = this._testRunner.environment.components;
-            var connectionDeclarations = this._testRunner.environment.configuration.connections;
+        public execute(environment: TestEnvironment): void {
+            var components = environment.components;
+            var connectionDeclarations = environment.configuration.connections;
 
             for (var componentId in connectionDeclarations) {
                 if (!connectionDeclarations.hasOwnProperty(componentId)) {
@@ -33,7 +30,7 @@ module FxAudioEngine.Test {
                 });
             }
 
-            this._testRunner.executeNext();
+            this.complete();
         }
     }
 }

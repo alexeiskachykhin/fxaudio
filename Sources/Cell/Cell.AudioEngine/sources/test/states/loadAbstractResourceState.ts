@@ -11,36 +11,35 @@ module FxAudioEngine.Test {
     }
 
 
-    export class LoadAbstractResourceState implements ITestRunnerState {
+    export class LoadAbstractResourceState extends TestExecutionState {
         
-        private _testRunner: ITestRunner;
-
         private _resourceUrlProperty: string;
 
         private _resourceProperty: string;
 
         private _resourceType: ResourceType;
 
+        private _environment: TestEnvironment;
 
-        constructor(testRunner: ITestRunner, resourceUrlProperty: string, resourceProperty: string, resourceType: ResourceType) {
-            this._testRunner = testRunner;
+
+        constructor(testRunner: TestRunner, resourceUrlProperty: string, resourceProperty: string, resourceType: ResourceType) {
+            super(testRunner);
+
             this._resourceUrlProperty = resourceUrlProperty;
             this._resourceProperty = resourceProperty;
             this._resourceType = resourceType;
         }
 
 
-        public execute(): void {
-            this._loadResource(response => {
+        public execute(environment: TestEnvironment): void {
+            var resourceUrl = environment[this._resourceUrlProperty];
+
+            this._loadResource(resourceUrl, response => {
                 var resource = this._deserializeResponse(response);
-                this._setResource(resource); 
+                environment[this._resourceProperty] = resource;
             });
         }
 
-
-        private _getResourceUrl(): string {
-            return this._testRunner.environment[this._resourceUrlProperty];
-        }
 
         private _getResponseType(): string {
             switch(this._resourceType) {
@@ -67,12 +66,7 @@ module FxAudioEngine.Test {
             return <T>deserializedResponse;
         }
 
-        private _setResource(resource: any): void {
-            this._testRunner.environment[this._resourceProperty] = resource;
-        }
-
-        private _loadResource(callback: (response) => void) {
-            var resourceUrl: string = this._getResourceUrl();
+        private _loadResource(resourceUrl: string, callback: (response) => void) {
             var request = new XMLHttpRequest();
 
             request.open('GET', resourceUrl, true);
@@ -80,7 +74,7 @@ module FxAudioEngine.Test {
 
             request.addEventListener('load', () => {
                 callback(request.response);
-                this._testRunner.executeNext();
+                this.complete();
             });
 
             request.send();

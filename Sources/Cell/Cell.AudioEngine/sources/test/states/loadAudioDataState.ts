@@ -7,7 +7,7 @@ module FxAudioEngine.Test {
 
     export class LoadAudioDataState extends LoadAbstractResourceState {
 
-        constructor(testRunner: ITestRunner) {
+        constructor(testRunner: TestRunner) {
             super(testRunner, 'audioDataFileUrl', 'audioData', ResourceType.ARRAY_BUFFER);
         }
     }
