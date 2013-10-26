@@ -8,16 +8,18 @@
             rootPath: '../..',
             sourcePath: '<%= manifest.rootPath %>/sources',
             resourcePath: '<%= manifest.sourcePath %>/resources',
-            testPath: '<%= manifest.rootPath %>/tests',
+            testPath: '<%= manifest.rootPath %>/tests/nova',
             outputPath: '<%= manifest.rootPath %>/build/output',
 
             sources: {
                 main: grunt.file.readJSON('../fragments/source-reference.json'),
                 test: grunt.file.readJSON('../fragments/test-reference.json'),
+                
                 libraries: ['../../libraries/**/*.d.ts']
             },
 
-            resources: grunt.file.readJSON('../../sources/resources/resources.json')
+            resources: grunt.file.readJSON('../../sources/resources/resources.json'),
+            testCases: grunt.file.expand({ cwd: '../../tests/nova' }, '*.json')
         },
 
 
@@ -36,13 +38,25 @@
         },
 
         template: {
-            options: {
-                data: '<%= manifest.resources %>',
-            },
-
             dev: {
+                options: {
+                    data: '<%= manifest.resources %>',
+                },
+
                 files: {
                     '<%= manifest.resourcePath %>/resources.generated.ts': ['<%= manifest.resourcePath %>/resources.tst']
+                }
+            },
+
+            test: {
+                options: {
+                    data: {
+                        files: '<%= manifest.testCases %>'
+                    }
+                },
+
+                files: {
+                    '<%= manifest.testPath %>/runner.generated.html': ['<%= manifest.testPath %>/runner.htmlt']
                 }
             }
         },

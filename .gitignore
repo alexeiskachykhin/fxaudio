@@ -16,7 +16,7 @@ _references.ts
 
 # Auto-generated files #
 ########################
-*.generated.ts
+*.generated.*
 
 # Visual Studio user preferences #
 ##################################

@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+
+    <title></title>
+</head>
+<body>
+    <nav>
+        <ul>
+            <% _.forEach(files, function(fileName) { %>
+                <li><a href="?testCase=<%= fileName %>"><%= fileName %></a></li>
+            <% }); %>
+        </ul>
+    </nav>
+
+    <script src="../../../build/output/fxAudio.js"></script>
+    <script src="../../../build/output/fxTest.js"></script>
+
+    <script>
+        (function () {
+            'use strict';
+
+
+            function getParameterByName(name) {
+                var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+                var pairs = regex.exec(location.search);
+
+                if (!pairs) {
+                    return '';
+                }
+
+                var value = decodeURIComponent(pairs[1].replace(/\+/g, ' '));
+
+                return value;
+            }
+
+
+            var testCaseName = getParameterByName('testCase');
+
+            if (testCaseName) {
+                FxAudioEngine.Test.TestCase.run(testCaseName);
+            }
+        }());
+    </script>
+</body>
+</html>
