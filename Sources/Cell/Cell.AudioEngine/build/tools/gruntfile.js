@@ -106,12 +106,18 @@
             }
         },
 
+        watch: {
+            sources: {
+                files: ['<%= manifest.sources.main %>', '<%= manifest.sources.test %>'],
+                tasks: ['compile']
+            }
+        },
+
         connect: {
             dev: {
                 options: {
                     base: ['<%= manifest.rootPath %>'],
-                    open: true,
-                    keepalive: true
+                    open: true
                 }
             }
         }
@@ -127,15 +133,14 @@
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-connect');
+    grunt.loadNpmTasks('grunt-contrib-watch');
 
 
-    grunt.registerTask('pre-build', ['clean:dev', 'template:dev', 'exists']);
-    grunt.registerTask('lint', ['jsonlint:dev', 'jshint:dev', 'tslint']);
-    grunt.registerTask('compile', ['ts']);
+    grunt.registerTask('pre-build', ['clean:dev', 'template:dev', 'exists:*']);
+    grunt.registerTask('lint', ['jsonlint:dev', 'jshint:dev', 'tslint:*']);
+    grunt.registerTask('compile', ['ts:*']);
     grunt.registerTask('test', ['connect:dev']);
+    grunt.registerTask('post-build', ['watch']);
 
-    grunt.registerTask('default', ['pre-build', 'lint', 'compile', 'test']);
-
-    //grunt.registerTask('default', ['clean:dev', 'template:dev', 'exists:dev', 'jsonlint:dev', 'jshint:dev', 'tslint:dev', 'connect:dev', 'ts:dev']);
-    //grunt.registerTask('test', ['exists:test', 'tslint:test', 'ts:test']);
+    grunt.registerTask('default', ['pre-build', 'lint', 'compile', 'test', 'post-build']);
 };
