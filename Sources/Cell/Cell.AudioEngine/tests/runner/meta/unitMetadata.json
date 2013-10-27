@@ -64,5 +64,39 @@
                 "step": 0.05
             }
         }
+    },
+
+    "FxAudioEngine.FlangerUnit": {
+        "title": "Flanger Unit",
+
+        "properties": {
+            "speed": {
+                "type": "range",
+                "min": 0.05,
+                "max": 5,
+                "step": 0.05
+            },
+
+            "delay": {
+                "type": "range",
+                "min": 0.001,
+                "max": 0.02,
+                "step": 0.001
+            },
+
+            "depth": {
+                "type": "range",
+                "min": 0.0005,
+                "max": 0.005,
+                "step": 0.00025
+            },
+
+            "feedback": {
+                "type": "range",
+                "min": 0,
+                "max": 1,
+                "step": 0.01
+            }
+        }
     }
 }
