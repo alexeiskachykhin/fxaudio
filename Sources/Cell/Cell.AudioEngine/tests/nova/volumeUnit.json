@@ -1,0 +1,22 @@
+﻿{
+    "title": "Volume Unit integration test",
+
+    "components": {
+        "0": {
+            "type": "FxAudioEngine.BufferSourceUnit"
+        },
+
+        "1": {
+            "type": "FxAudioEngine.VolumeUnit"
+        },
+
+        "2": {
+            "type": "FxAudioEngine.AudioDestinationUnit"
+        }
+    },
+
+    "connections": {
+        "0": ["1"],
+        "1": ["2"]
+    }
+}
