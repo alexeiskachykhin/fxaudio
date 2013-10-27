@@ -20,10 +20,12 @@ module FxAudioEngine.Test {
 
             this._stateProgression = [
                 new LoadTestConfigurationState(this),
+                new LoadUnitMetadataState(this),
                 new SetPageTitleState(this),
                 new CreateContextState(this),
                 new CreateComponentsState(this),
                 new ConnectComponentsState(this),
+                new CreateControlsState(this),
                 new LoadAudioDataState(this),
                 new StartStreamingState(this)
             ];

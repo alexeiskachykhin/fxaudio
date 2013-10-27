@@ -4,10 +4,12 @@
     "../../sources/test/states/testExecutionState.ts",
     "../../sources/test/states/loadAbstractResourceState.ts",
     "../../sources/test/states/loadTestConfigurationState.ts",
+    "../../sources/test/states/loadUnitMetadataState.ts",
     "../../sources/test/states/setPageTitleState.ts",
     "../../sources/test/states/createContextState.ts",
     "../../sources/test/states/createComponentsState.ts",
     "../../sources/test/states/connectComponentsState.ts",
+    "../../sources/test/states/createControlsState.ts",
     "../../sources/test/states/loadAudioDataState.ts",
     "../../sources/test/states/startStreamingState.ts",
     "../../sources/test/testCase.ts"

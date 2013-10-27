@@ -8,7 +8,7 @@
             rootPath: '../..',
             sourcePath: '<%= manifest.rootPath %>/sources',
             resourcePath: '<%= manifest.sourcePath %>/resources',
-            testPath: '<%= manifest.rootPath %>/tests/nova',
+            testPath: '<%= manifest.rootPath %>/tests',
             outputPath: '<%= manifest.rootPath %>/build/output',
 
             sources: {
@@ -19,7 +19,7 @@
             },
 
             resources: grunt.file.readJSON('../../sources/resources/resources.json'),
-            testCases: grunt.file.expand({ cwd: '../../tests/nova' }, '*.json')
+            testCases: grunt.file.expand('../../tests/nova/*.json')
         },
 
 
@@ -56,7 +56,7 @@
                 },
 
                 files: {
-                    '<%= manifest.testPath %>/runner.generated.html': ['<%= manifest.testPath %>/runner.htmlt']
+                    '<%= manifest.testPath %>/runner/runner.generated.html': ['<%= manifest.testPath %>/runner/runner.htmlt']
                 }
             }
         },
@@ -83,7 +83,7 @@
             },
 
             dev: {
-                src: ['gruntfile.js', '<%= manifest.testPath %>']
+                src: ['gruntfile.js', '<%= manifest.testPath %>/integration']
             }
         },
 

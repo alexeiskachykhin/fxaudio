@@ -15,8 +15,11 @@
         </ul>
     </nav>
 
-    <script src="../../../build/output/fxAudio.js"></script>
-    <script src="../../../build/output/fxTest.js"></script>
+    <main></main>
+
+
+    <script src="../../../../build/output/fxAudio.js"></script>
+    <script src="../../../../build/output/fxTest.js"></script>
 
     <script>
         (function () {

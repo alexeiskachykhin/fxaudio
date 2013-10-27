@@ -15,15 +15,13 @@ module FxAudioEngine.Test {
 
         private _audioData: ArrayBuffer;
 
+        private _unitMetadataFileUrl: string;
+
+        private _unitMetadata: any;
+
         private _context: Context;
 
         private _components: any;
-
-
-        constructor() {
-            this.audioDataFileUrl = '../fixtures/audio/sample.mp3';
-            this._components = [];
-        }
 
 
         public get configurationFileUrl(): string {
@@ -58,6 +56,22 @@ module FxAudioEngine.Test {
             this._audioData = value;
         }
 
+        public get unitMetadataFileUrl(): string {
+            return this._unitMetadataFileUrl;
+        }
+
+        public set unitMetadataFileUrl(value: string) {
+            this._unitMetadataFileUrl = value;
+        }
+
+        public get unitMetadata(): any {
+            return this._unitMetadata;
+        }
+
+        public set unitMetadata(value: any) {
+            this._unitMetadata = value;
+        }
+
         public get context(): Context {
             return this._context;
         }
@@ -72,6 +86,13 @@ module FxAudioEngine.Test {
 
         public set components(value: any) {
             this._components = value;
+        }
+
+
+        constructor() {
+            this.audioDataFileUrl = '../fixtures/audio/sample.mp3';
+            this.unitMetadataFileUrl = 'meta/unitMetadata.json';
+            this._components = [];
         }
     }
 }
