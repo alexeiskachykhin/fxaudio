@@ -98,5 +98,18 @@
                 "step": 0.01
             }
         }
+    },
+
+    "FxAudioEngine.DelayUnit": {
+        "title": "Delay Unit",
+
+        "properties": {
+            "time": {
+                "type": "range",
+                "min": 0,
+                "max": 3.0,
+                "step": 0.05
+            }
+        }
     }
 }
