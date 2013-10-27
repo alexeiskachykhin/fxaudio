@@ -24,6 +24,7 @@ module FxAudioEngine.Test {
                 new SetPageTitleState(this),
                 new CreateContextState(this),
                 new CreateComponentsState(this),
+                new SetComponentsDefaultsState(this),
                 new ConnectComponentsState(this),
                 new CreateControlsState(this),
                 new LoadAudioDataState(this),

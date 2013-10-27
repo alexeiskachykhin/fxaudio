@@ -8,6 +8,7 @@
     "../../sources/test/states/setPageTitleState.ts",
     "../../sources/test/states/createContextState.ts",
     "../../sources/test/states/createComponentsState.ts",
+    "../../sources/test/states/setComponentsDefaultsState.ts",
     "../../sources/test/states/connectComponentsState.ts",
     "../../sources/test/states/createControlsState.ts",
     "../../sources/test/states/loadAudioDataState.ts",
