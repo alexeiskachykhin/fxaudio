@@ -46,10 +46,8 @@
             }
         },
 
-        exists: {
-            dev: {
-                files: ['<%= manifest.sources.ts %>']
-            }
+        fileExists: {
+            dev: ['<%= manifest.sources.ts %>']
         },
 
         jsonlint: {
@@ -74,7 +72,7 @@
             },
 
             dev: {
-                files: ['<%= manifest.sources.ts %>']
+                src: '<%= manifest.sources.ts %>'
             }
         },
 
@@ -104,8 +102,6 @@
     });
 
 
-    grunt.loadTasks('tasks');
-
     grunt.loadNpmTasks('grunt-ts');
     grunt.loadNpmTasks('grunt-template');
     grunt.loadNpmTasks('grunt-jsonlint');
@@ -114,6 +110,8 @@
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-connect');
 
+    grunt.loadNpmTasks('grunt-file-exists');
 
-    grunt.registerTask('default', ['clean:dev', 'template:dev', 'exists:dev', 'jsonlint:dev', 'jshint:dev', 'tslint:dev', 'connect:dev', 'ts:dev']);
+
+    grunt.registerTask('default', ['clean:dev', 'template:dev', 'fileExists:dev', 'jsonlint:dev', 'jshint:dev', 'tslint:dev', 'connect:dev', 'ts:dev']);
 };
