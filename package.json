@@ -1,5 +1,5 @@
 {
-  "name": "Cell",
+  "name": "cell",
   "version": "0.0.1",
   "description": "Cell is an audio library of popular Guitar FX written on top of Web Audio API. It normalizes differences between built-in nodes and custom nodes for the benefit of faster app development.",
   "main": "",

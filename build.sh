@@ -1,2 +1,2 @@
 #!/bin/sh
-(cd build/tools && npm install && grunt)
+(npm install && cd build/tools && grunt)
