@@ -16,11 +16,11 @@
 
 
     loadSound('../../fixtures/audio/sample.mp3', function (audioBuffer) {
-        var context = new FxAudioEngine.RealTimeContext();
+        var context = new FXAudio.RealTimeContext();
 
-        var sourceUnit = new FxAudioEngine.BufferSourceUnit(context);
-        var echoUnit = new FxAudioEngine.EchoUnit(context, 3);
-        var destinationUnit = new FxAudioEngine.AudioDestinationUnit(context);
+        var sourceUnit = new FXAudio.BufferSourceUnit(context);
+        var echoUnit = new FXAudio.EchoUnit(context, 3);
+        var destinationUnit = new FXAudio.AudioDestinationUnit(context);
 
         echoUnit.delayTime = 1.5;
         echoUnit.feedback = 0.25;

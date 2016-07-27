@@ -26,11 +26,11 @@
 
 
     getInputStream(function (stream) {
-        var context = new FxAudioEngine.RealTimeContext();
+        var context = new FXAudio.RealTimeContext();
 
-        var sourceUnit = new FxAudioEngine.LiveInputSourceUnit(context);
-        var destinationUnit = new FxAudioEngine.AudioDestinationUnit(context);
-        var reverbUnit = new FxAudioEngine.ReverbUnit(context);
+        var sourceUnit = new FXAudio.LiveInputSourceUnit(context);
+        var destinationUnit = new FXAudio.AudioDestinationUnit(context);
+        var reverbUnit = new FXAudio.ReverbUnit(context);
 
         sourceUnit.ports.outputs[0].connect(reverbUnit.ports.inputs[0]);
         reverbUnit.ports.outputs[0].connect(destinationUnit.ports.inputs[0]);

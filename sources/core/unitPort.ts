@@ -1,7 +1,7 @@
 /// <reference path="../_references.ts" />
 
 
-module FxAudioEngine {
+module FXAudio {
     'use strict';
 
    

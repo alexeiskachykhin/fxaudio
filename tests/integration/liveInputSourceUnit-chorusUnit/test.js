@@ -27,11 +27,11 @@
 
 
     getInputStream(function (stream) {
-        var context = new FxAudioEngine.RealTimeContext();
+        var context = new FXAudio.RealTimeContext();
 
-        var sourceUnit = new FxAudioEngine.LiveInputSourceUnit(context);
-        var destinationUnit = new FxAudioEngine.AudioDestinationUnit(context);
-        var chorusUnit = new FxAudioEngine.ChorusUnit(context);
+        var sourceUnit = new FXAudio.LiveInputSourceUnit(context);
+        var destinationUnit = new FXAudio.AudioDestinationUnit(context);
+        var chorusUnit = new FXAudio.ChorusUnit(context);
 
         sourceUnit.ports.outputs[0].connect(chorusUnit.ports.inputs[0]);
         chorusUnit.ports.outputs[0].connect(destinationUnit.ports.inputs[0]);

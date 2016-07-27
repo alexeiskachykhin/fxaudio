@@ -39,12 +39,12 @@
 
 
     loadSound('../../fixtures/audio/sample.mp3', function (audioBuffer) {
-        var context = new FxAudioEngine.RealTimeContext();
+        var context = new FXAudio.RealTimeContext();
 
-        var sourceUnit = new FxAudioEngine.BufferSourceUnit(context);
-        var destinationUnit = new FxAudioEngine.AudioDestinationUnit(context);
-        var flangerUnit = new FxAudioEngine.FlangerUnit(context);
-        var overdriveUnit = new FxAudioEngine.OverdriveUnit(context);
+        var sourceUnit = new FXAudio.BufferSourceUnit(context);
+        var destinationUnit = new FXAudio.AudioDestinationUnit(context);
+        var flangerUnit = new FXAudio.FlangerUnit(context);
+        var overdriveUnit = new FXAudio.OverdriveUnit(context);
 
         sourceUnit.ports.outputs[0].connect(flangerUnit.ports.inputs[0]);
         flangerUnit.ports.outputs[0].connect(overdriveUnit.ports.inputs[0]);

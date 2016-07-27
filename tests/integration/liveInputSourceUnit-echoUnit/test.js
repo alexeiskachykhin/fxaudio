@@ -10,11 +10,11 @@
 
 
     getInputStream(function (stream) {
-        var context = new FxAudioEngine.RealTimeContext();
+        var context = new FXAudio.RealTimeContext();
 
-        var sourceUnit = new FxAudioEngine.LiveInputSourceUnit(context);
-        var echoUnit = new FxAudioEngine.EchoUnit(context);
-        var destinationUnit = new FxAudioEngine.AudioDestinationUnit(context);
+        var sourceUnit = new FXAudio.LiveInputSourceUnit(context);
+        var echoUnit = new FXAudio.EchoUnit(context);
+        var destinationUnit = new FXAudio.AudioDestinationUnit(context);
 
         echoUnit.delayTime = 1;
         echoUnit.feedback = 0.25;

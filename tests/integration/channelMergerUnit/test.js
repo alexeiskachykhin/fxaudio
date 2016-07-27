@@ -16,12 +16,12 @@
 
 
     loadSound('../../fixtures/audio/sample.mp3', function (audioBuffer) {
-        var context = new FxAudioEngine.RealTimeContext();
+        var context = new FXAudio.RealTimeContext();
 
-        var sourceUnit = new FxAudioEngine.BufferSourceUnit(context);
-        var destinationUnit = new FxAudioEngine.AudioDestinationUnit(context);
-        var splitterUnit = new FxAudioEngine.ChannelSplitterUnit(context, 2);
-        var mergerUnit = new FxAudioEngine.ChannelMergerUnit(context, 2);
+        var sourceUnit = new FXAudio.BufferSourceUnit(context);
+        var destinationUnit = new FXAudio.AudioDestinationUnit(context);
+        var splitterUnit = new FXAudio.ChannelSplitterUnit(context, 2);
+        var mergerUnit = new FXAudio.ChannelMergerUnit(context, 2);
 
 
         sourceUnit.ports.outputs[0].connect(splitterUnit.ports.inputs[0]);

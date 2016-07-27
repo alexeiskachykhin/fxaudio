@@ -66,6 +66,6 @@
     "white": false,
     "globals": {
         "module": true,
-        "FxAudioEngine": true
+        "FXAudio": true
     }
 }
