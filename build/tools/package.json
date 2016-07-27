@@ -1,17 +1,17 @@
 {
-  "name": "Cell.AudioEngine",
+  "name": "Cell",
   "version": "0.0.1",
-  "description": "Audio Engine for Cell project.",
-  "main": "bootstrapper.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "description": "Cell is an audio library of popular Guitar FX written on top of Web Audio API. It normalizes differences between built-in nodes and custom nodes for the benefit of faster app development.",
+  "main": "",
   "repository": {
     "type": "git",
-    "url": "git@bitbucket.org:cell-project/cell.git"
+    "url": "git@github.com:alexeiskachykhin/cell.git"
   },
-  "author": "Cell Team",
-  "license": "BSD",
+  "contirbutors": [
+    "Alexei Skachykhin <alexei.skachykhin@live.com>",
+    "Alexei Kostevich <alexei.kostevich@live.com>"
+  ],
+  "license": "MIT",
   "devDependencies": {
     "grunt": "~0.4.5",
     "grunt-contrib-clean": "~0.5.0",
