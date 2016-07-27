@@ -86,7 +86,7 @@
             dev: {
                 src: ['<%= manifest.sources.ts %>', '<%= manifest.sources.libraries %>'],
                 watch: '<%= manifest.sourcePath %>',
-                out: '<%= manifest.outputPath %>/fxAudio.js',
+                out: '<%= manifest.outputPath %>/fxaudio.js',
                 reference: '<%= manifest.sourcePath %>/_references.ts'
             }
         },
