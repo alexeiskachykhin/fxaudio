@@ -12,7 +12,7 @@
             outputPath: '<%= manifest.rootPath %>/build/output',
 
             sources: {
-                ts: grunt.file.readJSON('../fragments/source-reference.json'),
+                ts: grunt.file.readJSON('../../sources/source-reference.json'),
                 libraries: ['../../libraries/**/*.d.ts']
             },
 
@@ -52,7 +52,7 @@
 
         jsonlint: {
             dev: {
-                src: ['.jshintrc', '.tslintrc', '*.json', '../fragments/*.json', '<%= manifest.resourcePath %>/**/*.json']
+                src: ['.jshintrc', '.tslintrc', '*.json', '<%= manifest.sourcePath %>/**/*.json', '<%= manifest.resourcePath %>/**/*.json']
             }
         },
 
