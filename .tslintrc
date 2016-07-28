@@ -1,0 +1,14 @@
+{
+  "extends": "tslint:recommended",
+  "rules": {
+    "triple-equals": true,
+    "indent": [true, 4],
+    "max-line-length": [true, 140],
+    "oneline": [
+      true,
+      "check-open-brace",
+      "check-whitespace"
+    ],
+    "quotemark": [true, "single"]
+  }
+}

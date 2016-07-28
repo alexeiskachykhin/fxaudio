@@ -6,17 +6,17 @@
 
         manifest: {
             rootPath: '../..',
-            sourcePath: '<%= manifest.rootPath %>/sources',
-            resourcePath: '<%= manifest.sourcePath %>/resources',
-            testPath: '<%= manifest.rootPath %>/tests',
-            outputPath: '<%= manifest.rootPath %>/build/output',
+            sourcePath: 'sources',
+            resourcePath: 'sources/resources',
+            testPath: 'tests',
+            outputPath: 'build/output',
 
             sources: {
-                ts: grunt.file.readJSON('../../sources/source-reference.json'),
-                libraries: ['../../libraries/**/*.d.ts']
+                ts: grunt.file.readJSON('sources/source-reference.json'),
+                libraries: ['libraries/**/*.d.ts']
             },
 
-            resources: grunt.file.readJSON('../../sources/resources/resources.json')
+            resources: grunt.file.readJSON('sources/resources/resources.json')
         },
 
 
@@ -94,7 +94,6 @@
         connect: {
             dev: {
                 options: {
-                    base: ['<%= manifest.rootPath %>'],
                     open: true
                 }
             }

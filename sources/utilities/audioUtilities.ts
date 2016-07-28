@@ -5,7 +5,7 @@ module FXAudio {
     'use strict';
 
 
-    class WebAudioAPIUtilities {
+    export class WebAudioAPIUtilities {
 
         public routeLinear(chainOfNodes: AudioNode[]): void;
 
@@ -74,7 +74,7 @@ module FXAudio {
     }
 
 
-    class UnitInterfaceUtilities {
+    export class UnitInterfaceUtilities {
 
         public createPortsFromAudioNode(audioNode: AudioNode, direction: UnitPortDirection, ports: UnitPort[]): void {
             Contract.isNotNullOrUndefined(audioNode, 'audioNode');

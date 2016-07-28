@@ -65,7 +65,7 @@ module FXAudio {
             var audioContext: AudioContext = this.context.audioContext;
 
             this._lowPassFilterNode = audioContext.createBiquadFilter();
-            this._lowPassFilterNode.type = 0;
+            this._lowPassFilterNode.type = 'lowpass';
             this._lowPassFilterNode.frequency.value = 3000;
 
             this._waveShaperNode = audioContext.createWaveShaper();

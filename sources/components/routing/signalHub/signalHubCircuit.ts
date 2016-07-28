@@ -31,7 +31,7 @@ module FXAudio {
             this._publishOutputComponents(outputs);
         }
 
-        private _creatComponentGroup(numberOfNodes: number): AudioNode[]{
+        private _creatComponentGroup(numberOfNodes: number): AudioNode[] {
             Contract.isPositiveOrZero(numberOfNodes, 'numberOfNodes');
 
             var nodes: AudioNode[] = [];
