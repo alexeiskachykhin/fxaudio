@@ -895,7 +895,7 @@ interface DynamicsCompressorNode extends AudioNode {
 
 }
 
-declare enum BiquadFilterType {
+declare const enum BiquadFilterType {
     /**
      * A lowpass filter allows frequencies below the cutoff frequency to pass through and attenuates frequencies above the cutoff. It implements a standard second-order resonant lowpass filter with 12dB/octave rolloff.
      *

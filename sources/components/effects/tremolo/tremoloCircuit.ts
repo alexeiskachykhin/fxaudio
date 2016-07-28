@@ -54,7 +54,7 @@ module FXAudio {
         private _connectTremoloComponents(): void {
             Contract.isNotNullOrUndefined(this._lfoNode, '_lfoNode');
             Contract.isNotNullOrUndefined(this._depthNode, '_depthNode');
-            Contract.isNotNullOrUndefined(this._depthNode, '_gainNode');
+            Contract.isNotNullOrUndefined(this._gainNode, '_gainNode');
 
             this._lfoNode.connect(this._depthNode);
             this._depthNode.connect(this._gainNode.gain);

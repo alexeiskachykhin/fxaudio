@@ -22,6 +22,6 @@ module FXAudio {
         MEDIA_STREAM_SOURCE,
         OSCILLATOR,
         PANNER,
-        WAVE_SHAPER,
+        WAVE_SHAPER
     }
 }

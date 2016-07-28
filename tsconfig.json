@@ -1,4 +1,13 @@
-[
+{
+  "compilerOptions": {
+    "module": "amd",
+    "target": "es5",
+    "outFile": "build/output/fxaudio.js",
+    "declaration": true,
+    "noLib": true,
+    "skipDefaultLibCheck": true
+  },
+  "files": [
     "sources/resources/resources.generated.ts",
     "sources/resources/resourceManager.ts",
     "sources/diagnostics/errors.ts",
@@ -53,5 +62,11 @@
     "sources/components/effects/flanger/flangerCircuit.ts",
     "sources/components/effects/flanger/flangerUnit.ts",
     "sources/components/effects/reverb/reverbCircuit.ts",
-    "sources/components/effects/reverb/reverbUnit.ts"
-]
+    "sources/components/effects/reverb/reverbUnit.ts",
+
+    "libraries/lib.d.ts",
+    "libraries/es6-promise.d.ts",
+    "libraries/MediaStream.d.ts",
+    "libraries/waa.d.ts"
+  ]
+}

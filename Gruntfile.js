@@ -1,6 +1,8 @@
 ﻿module.exports = function (grunt) {
     'use strict';
 
+    var path = require('path');
+
 
     grunt.initConfig({
 
@@ -9,13 +11,9 @@
             sourcePath: 'sources',
             resourcePath: 'sources/resources',
             testPath: 'tests',
-            outputPath: 'build/output',
+            outputPath: path.dirname(grunt.file.readJSON('tsconfig.json').compilerOptions.outFile),
 
-            sources: {
-                ts: grunt.file.readJSON('sources/source-reference.json'),
-                libraries: ['libraries/**/*.d.ts']
-            },
-
+            sources: grunt.file.readJSON('tsconfig.json').files,
             resources: grunt.file.readJSON('sources/resources/resources.json')
         },
 
@@ -47,7 +45,7 @@
         },
 
         fileExists: {
-            dev: ['<%= manifest.sources.ts %>']
+            dev: ['<%= manifest.sources %>']
         },
 
         jsonlint: {
@@ -72,7 +70,8 @@
             },
 
             dev: {
-                src: '<%= manifest.sources.ts %>'
+                src: '<%= manifest.sources %>',
+                filter: file => !file.endsWith('.d.ts')
             }
         },
 
@@ -84,9 +83,8 @@
             },
 
             dev: {
-                src: ['<%= manifest.sources.ts %>', '<%= manifest.sources.libraries %>'],
+                tsconfig: true,
                 watch: '<%= manifest.sourcePath %>',
-                out: '<%= manifest.outputPath %>/fxaudio.js',
                 reference: '<%= manifest.sourcePath %>/_references.ts'
             }
         },

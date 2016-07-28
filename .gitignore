@@ -69,3 +69,5 @@ Thumbs.db
 build/output
 sources/**/*.js
 sources/**/*.map
+.tscache
+tscommand*
