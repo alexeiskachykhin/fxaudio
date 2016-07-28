@@ -7,7 +7,6 @@
     grunt.initConfig({
 
         manifest: {
-            rootPath: '../..',
             sourcePath: 'sources',
             resourcePath: 'sources/resources',
             testPath: 'tests',
