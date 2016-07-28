@@ -1,7 +1,7 @@
 ﻿module.exports = function (grunt) {
     'use strict';
 
-    var path = require('path');
+    const path = require('path');
 
 
     grunt.initConfig({
