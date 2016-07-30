@@ -24,8 +24,6 @@
             },
 
             dev: [
-                '<%= manifest.sourcePath %>/**/*.js',
-                '<%= manifest.sourcePath %>/**/*.map',
                 '<%= manifest.sourcePath %>/**/*.generated.ts',
                 '<%= manifest.outputPath %>/*'
             ]
