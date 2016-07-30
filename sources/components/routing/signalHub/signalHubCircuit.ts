@@ -22,8 +22,8 @@ namespace FXAudio {
             Contract.isPositiveOrZero(numberOfInputs, 'numberOfInputs');
             Contract.isPositiveOrZero(numberOfOutputs, 'numberOfOutputs');
 
-            var inputs = this._creatComponentGroup(numberOfInputs);
-            var outputs = this._creatComponentGroup(numberOfOutputs);
+            const inputs = this._creatComponentGroup(numberOfInputs);
+            const outputs = this._creatComponentGroup(numberOfOutputs);
 
             AudioUtilities.WebAudioAPI.routeCross(inputs, outputs);
 
@@ -34,10 +34,10 @@ namespace FXAudio {
         private _creatComponentGroup(numberOfNodes: number): AudioNode[] {
             Contract.isPositiveOrZero(numberOfNodes, 'numberOfNodes');
 
-            var nodes: AudioNode[] = [];
+            const nodes: AudioNode[] = [];
 
-            for (var i = 0; i < numberOfNodes; i++) {
-                var node = AudioUtilities.WebAudioAPI.createNode(this.context.audioContext, NodeType.GAIN);
+            for (let i = 0; i < numberOfNodes; i++) {
+                const node = AudioUtilities.WebAudioAPI.createNode(this.context.audioContext, NodeType.GAIN);
                 nodes.push(node);
             }
 

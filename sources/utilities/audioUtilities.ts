@@ -12,13 +12,13 @@ namespace FXAudio {
         public routeLinear(...args: AudioNode[]): void;
 
         public routeLinear(...args: any[]): void {
-            var chainOfNodes = (args[0] instanceof Array)
+            const chainOfNodes = (args[0] instanceof Array)
                 ? args[0]
                 : args;
 
-            for (var i = 0; i <= chainOfNodes.length - 2; i++) {
-                var audioNode = chainOfNodes[i];
-                var nextAudioNode = chainOfNodes[i + 1];
+            for (let i = 0; i <= chainOfNodes.length - 2; i++) {
+                const audioNode = chainOfNodes[i];
+                const nextAudioNode = chainOfNodes[i + 1];
 
                 audioNode.connect(nextAudioNode);
             }
@@ -29,8 +29,8 @@ namespace FXAudio {
             Contract.isNotNullOrUndefined(a, 'a');
             Contract.isNotNullOrUndefined(b, 'b');
 
-            for (var i = 0; i < a.length; i++) {
-                for (var j = 0; j < b.length; j++) {
+            for (let i = 0; i < a.length; i++) {
+                for (let j = 0; j < b.length; j++) {
                     a[i].connect(b[j]);
                 }
             }
@@ -44,7 +44,7 @@ namespace FXAudio {
         public createNode(audioContext: AudioContext, nodeType: NodeType, ...args: any[]): AudioNode {
             Contract.isNotNullOrUndefined(audioContext, 'audioContext');
 
-            var factoryMethod: (...args: any[]) => AudioNode;
+            let factoryMethod: (...args: any[]) => AudioNode;
 
             switch (nodeType) {
                 case NodeType.ANALYSER: factoryMethod = audioContext.createAnalyser; break;
@@ -67,7 +67,7 @@ namespace FXAudio {
             }
 
 
-            var audioNode = factoryMethod.apply(audioContext, args);
+            const audioNode = factoryMethod.apply(audioContext, args);
 
             return audioNode;
         }
@@ -80,7 +80,7 @@ namespace FXAudio {
             Contract.isNotNullOrUndefined(audioNode, 'audioNode');
             Contract.isNotNullOrUndefined(ports, 'ports');
 
-            var numberOfPorts: number;
+            let numberOfPorts: number;
 
             switch (direction) {
                 case UnitPortDirection.INPUT:
@@ -97,8 +97,8 @@ namespace FXAudio {
             }
 
 
-            for (var portIndex = 0; portIndex < numberOfPorts; portIndex++) {
-                var port = new UnitPort(audioNode, portIndex, direction);
+            for (let portIndex = 0; portIndex < numberOfPorts; portIndex++) {
+                const port = new UnitPort(audioNode, portIndex, direction);
                 ports.push(port);
             }
         }
@@ -107,8 +107,8 @@ namespace FXAudio {
             Contract.isNotNullOrUndefined(audioNodes, 'audioNodes');
             Contract.isNotNullOrUndefined(ports, 'ports');
 
-            for (var i = 0; i < audioNodes.length; i++) {
-                var audioNode: AudioNode = audioNodes[i];
+            for (let i = 0; i < audioNodes.length; i++) {
+                const audioNode: AudioNode = audioNodes[i];
                 this.createPortsFromAudioNode(audioNode, direction, ports);
             }
         }

@@ -36,8 +36,8 @@ namespace FXAudio {
             Contract.requires(port._direction === UnitPortDirection.INPUT, 'port');
             Contract.requires(this._direction === UnitPortDirection.OUTPUT, 'port');
 
-            var sourceAudioNode: AudioNode = this._audioNode;
-            var destinationAudioNode: AudioNode = port._audioNode;
+            const sourceAudioNode: AudioNode = this._audioNode;
+            const destinationAudioNode: AudioNode = port._audioNode;
 
             sourceAudioNode.connect(destinationAudioNode, this._channel, port._channel);
         }

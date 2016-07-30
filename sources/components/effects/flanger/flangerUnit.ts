@@ -5,10 +5,10 @@ namespace FXAudio {
     'use strict';
 
 
-    var DEFAULT_DEPTH = 0.002;
-    var DEFAULT_SPEED = 0.25;
-    var DEFAULT_FEEDBACK = 0.5;
-    var DEFAULT_DELAY_TIME = 0.005;
+    const DEFAULT_DEPTH = 0.002;
+    const DEFAULT_SPEED = 0.25;
+    const DEFAULT_FEEDBACK = 0.5;
+    const DEFAULT_DELAY_TIME = 0.005;
 
 
     export class FlangerUnit extends Unit<FlangerCircuit> {

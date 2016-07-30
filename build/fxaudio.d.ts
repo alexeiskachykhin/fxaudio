@@ -9,7 +9,7 @@ declare namespace FXAudio {
     interface IResourceMap {
         strings: IStringResourceMap;
     }
-    var ResourceMap: IResourceMap;
+    const ResourceMap: IResourceMap;
     enum ResourceKey {
         ARGUMENT_ERROR_MESSAGE = 0,
         ARGUMENT_OUT_OF_RANGE_ERROR_MESSAGE = 1,

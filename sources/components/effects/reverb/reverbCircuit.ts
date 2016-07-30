@@ -5,9 +5,9 @@ namespace FXAudio {
     'use strict';
 
 
-    var NUMBER_OF_CHANNELS = 2;
-    var DEFAULT_DECAY = 2.0;
-    var DEFAULT_TIME = 3;
+    const NUMBER_OF_CHANNELS = 2;
+    const DEFAULT_DECAY = 2.0;
+    const DEFAULT_TIME = 3;
 
 
     export class ReverbCircuit extends Circuit {
@@ -59,7 +59,7 @@ namespace FXAudio {
         private _createReverbComponents(): void {
             Contract.isNotNullOrUndefined(this.context, 'context');
 
-            var audioContext = this.context.audioContext;
+            var audioContext: AudioContext = this.context.audioContext;
 
             this._convolverNode = audioContext.createConvolver();
             this._gainNode = audioContext.createGain();
@@ -90,18 +90,18 @@ namespace FXAudio {
             Contract.isNotNullOrUndefined(this.context, 'context');
             Contract.isNotNullOrUndefined(this._convolverNode, '_convolverNode');
 
-            var audioContext = this.context.audioContext;
+            const audioContext = this.context.audioContext;
 
-            var rate = audioContext.sampleRate;
-            var decay = this._decay;
-            var numberOfSamples = rate * this._time;
+            const rate = audioContext.sampleRate;
+            const decay = this._decay;
+            const numberOfSamples = rate * this._time;
 
-            var impulseResponse: AudioBuffer = audioContext.createBuffer(NUMBER_OF_CHANNELS, numberOfSamples, rate);
-            var impulseResponseLeft: Float32Array = impulseResponse.getChannelData(0);
-            var impulseResponseRight: Float32Array = impulseResponse.getChannelData(1);
+            const impulseResponse: AudioBuffer = audioContext.createBuffer(NUMBER_OF_CHANNELS, numberOfSamples, rate);
+            const impulseResponseLeft: Float32Array = impulseResponse.getChannelData(0);
+            const impulseResponseRight: Float32Array = impulseResponse.getChannelData(1);
 
-            for (var i = 0; i < numberOfSamples; i++) {
-                var factor = Math.pow(1 - i / numberOfSamples, decay);
+            for (let i = 0; i < numberOfSamples; i++) {
+                const factor = Math.pow(1 - i / numberOfSamples, decay);
 
                 impulseResponseLeft[i] = (Math.random() * 2 - 1) * factor;
                 impulseResponseRight[i] = (Math.random() * 2 - 1) * factor;

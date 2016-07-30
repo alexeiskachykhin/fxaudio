@@ -8,16 +8,16 @@ namespace FXAudio {
     export class ResourceManager {
         
         public static getString(resourceKey: ResourceKey, args: any[]): string {
-            var resourceStringFormat = ResourceMap.strings[resourceKey];
-            var resourceString = ResourceManager.formatString(resourceStringFormat, args);
+            const resourceStringFormat = ResourceMap.strings[resourceKey];
+            const resourceString = ResourceManager.formatString(resourceStringFormat, args);
 
             return resourceString;
         }
 
 
         private static formatString(s: string, args: any[]) {
-            var formattedString = s.replace(/{(\d+)}/g, function (match, matchedNumber) {
-                var replacement = args[matchedNumber] || match;
+            const formattedString = s.replace(/{(\d+)}/g, function (match, matchedNumber) {
+                const replacement = args[matchedNumber] || match;
                 return replacement;
             });
 

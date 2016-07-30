@@ -49,12 +49,12 @@ namespace FXAudio {
             Contract.isNotNullOrUndefined(this._audioNodeType, '_audioNodeType');
             Contract.isNotNullOrUndefined(this._audioNodeFactoryMethodArguments, '_audioNodeFactoryMethodArguments');
 
-            var audioContext: AudioContext = this.context.audioContext;
-            var audioNodeType: NodeType = this._audioNodeType;
-            var audioNodeArguments: any[] = this._audioNodeFactoryMethodArguments;
+            const audioContext: AudioContext = this.context.audioContext;
+            const audioNodeType: NodeType = this._audioNodeType;
+            const audioNodeArguments: any[] = this._audioNodeFactoryMethodArguments;
 
 
-            var audioNode: TNode = <TNode>AudioUtilities.WebAudioAPI.createNode(
+            const audioNode: TNode = <TNode>AudioUtilities.WebAudioAPI.createNode(
                 audioContext, audioNodeType, audioNodeArguments);
 
             return audioNode;

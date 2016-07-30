@@ -5,8 +5,8 @@ namespace FXAudio {
     'use strict';
 
 
-    var DEFAULT_SPEED = 0.5;
-    var DEFAULT_DEPTH = 1;
+    const DEFAULT_SPEED = 0.5;
+    const DEFAULT_DEPTH = 1;
 
 
     export class TremoloUnit extends Unit<TremoloCircuit> {

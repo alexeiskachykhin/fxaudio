@@ -27,7 +27,7 @@ namespace FXAudio {
         public init(stream: MediaStream): IEventSource {
             Contract.isNotNullOrUndefined(stream, 'stream');
 
-            var asyncCompletionSource = new EventSource();
+            const asyncCompletionSource = new EventSource();
 
             try {
                 this.circuit.mountStream(stream);

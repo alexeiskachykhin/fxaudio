@@ -5,7 +5,7 @@ namespace FXAudio {
     'use strict';
 
 
-    declare var window: any;
+    declare const window: any;
 
 
     var OfflineAudioContext =

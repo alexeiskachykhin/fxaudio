@@ -5,7 +5,7 @@ namespace FXAudio {
     'use strict';
 
 
-    var MAX_DELAY_TIME = 0.05;
+    const MAX_DELAY_TIME = 0.05;
 
 
     export class ComboFilterCircuit extends Circuit {
@@ -50,7 +50,7 @@ namespace FXAudio {
         private _createComboFilterComponents(): void {
             Contract.isNotNullOrUndefined(this.context, 'context');
 
-            var audioContext: AudioContext = this.context.audioContext;
+            const audioContext: AudioContext = this.context.audioContext;
 
             this._inputNode = audioContext.createGain();
             this._outputNode = audioContext.createGain();

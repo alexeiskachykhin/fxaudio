@@ -43,7 +43,7 @@ namespace FXAudio {
 
             this._bufferState = AudioBufferState.DECODING;
 
-            var asyncCompletionSource = new EventSource();
+            const asyncCompletionSource = new EventSource();
            
             this.context.audioContext.decodeAudioData(
                 audioData,

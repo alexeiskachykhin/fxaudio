@@ -25,7 +25,7 @@ namespace FXAudio {
         public init(mediaElement: HTMLMediaElement): IEventSource {
             Contract.isNotNullOrUndefined(mediaElement, 'mediaElement');
 
-            var asyncCompletionSource = new EventSource();
+            const asyncCompletionSource = new EventSource();
 
             try {
                 this.circuit.mountMediaElement(mediaElement);

@@ -35,7 +35,7 @@ namespace FXAudio {
                 return;
             }
 
-            var eventListeners: Function[] = this._events[eventName];
+            const eventListeners: Function[] = this._events[eventName];
 
             eventListeners.forEach(
                 (eventListener) => eventListener.apply(null, eventArgs));
@@ -46,7 +46,7 @@ namespace FXAudio {
             Contract.isNotNullOrUndefined(eventName, 'eventName');
             Contract.isNotNullOrUndefined(eventListener, 'eventListener');
 
-            var eventListeners: Function[] = this._events[eventName] || [];
+            const eventListeners: Function[] = this._events[eventName] || [];
             eventListeners.push(eventListener);
 
             this._events[eventName] = eventListeners;
@@ -62,8 +62,8 @@ namespace FXAudio {
                 return;
             }
 
-            var eventListeners: Function[] = this._events[eventName];
-            var eventListenerIndex: number = eventListeners.indexOf(eventListener);
+            const eventListeners: Function[] = this._events[eventName];
+            const eventListenerIndex: number = eventListeners.indexOf(eventListener);
 
             if (eventListenerIndex < 0) {
                 return;
@@ -77,7 +77,7 @@ namespace FXAudio {
         public dispatchEvent(eventName, ...eventArgs: any[]): void {
             Contract.isNotNullOrUndefined(eventName, 'eventName');
 
-            var args = arguments;
+            const args = arguments;
 
             this._defer(() => {
                 this._dispatchEvent.apply(this, args);

@@ -28,7 +28,7 @@ namespace FXAudio {
         constructor(circuit: TCircuit) {
             Contract.isNotNullOrUndefined(circuit, 'circuit');
 
-            var audioInterface = new UnitInterface(circuit.inputs, circuit.outputs);
+            const audioInterface = new UnitInterface(circuit.inputs, circuit.outputs);
 
             this._ports = audioInterface;
             this._circuit = circuit;

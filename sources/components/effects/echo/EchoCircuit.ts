@@ -53,7 +53,7 @@ namespace FXAudio {
         private _createEchoComponents(maxDelayTime: number): void {
             Contract.isPositiveOrZero(maxDelayTime, 'maxDelayTime');
 
-            var audioContext: AudioContext = this.context.audioContext;
+            const audioContext: AudioContext = this.context.audioContext;
 
             this._inputNode = audioContext.createGain();
             this._delayNode = audioContext.createDelay(maxDelayTime);

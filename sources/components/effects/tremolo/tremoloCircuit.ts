@@ -41,7 +41,7 @@ namespace FXAudio {
         private _createTremoloComponents(): void {
             Contract.isNotNullOrUndefined(this.context, 'context');
 
-            var audioContext: AudioContext = this.context.audioContext;
+            const audioContext: AudioContext = this.context.audioContext;
 
             this._depthNode = audioContext.createGain();
 

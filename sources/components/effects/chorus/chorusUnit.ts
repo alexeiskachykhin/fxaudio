@@ -5,8 +5,8 @@ namespace FXAudio {
     'use strict';
 
 
-    var DEFAULT_DEPTH = 0.002;
-    var DEFAULT_RATE = 0.25;
+    const DEFAULT_DEPTH = 0.002;
+    const DEFAULT_RATE = 0.25;
 
 
     export class ChorusUnit extends Unit<ChorusCircuit> {

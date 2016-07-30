@@ -5,8 +5,8 @@ namespace FXAudio {
     'use strict';
 
 
-    var DEFAULT_FEEDBACK = 0;
-    var DEFAULT_DELAY_TIME = 0.010;
+    const DEFAULT_FEEDBACK = 0;
+    const DEFAULT_DELAY_TIME = 0.010;
 
 
     export class ChorusCircuit extends ModulatedComboFilterCircuit {

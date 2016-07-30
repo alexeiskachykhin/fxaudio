@@ -43,14 +43,14 @@ namespace FXAudio {
         public setDrive(value: number): void {
             Contract.isPositiveOrZero(value, 'value');
 
-            var k: number = value;
-            var deg: number = Math.PI / 180;
+            const k: number = value;
+            const deg: number = Math.PI / 180;
 
-            var sampleRate: number = this.context.sampleRate;
-            var shapingCurve = new Float32Array(sampleRate);
+            const sampleRate: number = this.context.sampleRate;
+            const shapingCurve = new Float32Array(sampleRate);
 
-            for (var i: number = 0; i < sampleRate; i += 1) {
-                var x: number = i * 2 / sampleRate - 1;
+            for (let i: number = 0; i < sampleRate; i += 1) {
+                const x: number = i * 2 / sampleRate - 1;
                 shapingCurve[i] = (3 + k) * x * 20 * deg / (Math.PI + k * Math.abs(x));
             }
 
@@ -62,7 +62,7 @@ namespace FXAudio {
         private _createOverdriveComponents(): void {
             Contract.isNotNullOrUndefined(this.context, 'context');
 
-            var audioContext: AudioContext = this.context.audioContext;
+            const audioContext: AudioContext = this.context.audioContext;
 
             this._lowPassFilterNode = audioContext.createBiquadFilter();
             this._lowPassFilterNode.type = BiquadFilterType.lowpass;

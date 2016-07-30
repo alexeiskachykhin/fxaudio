@@ -16,7 +16,7 @@ namespace FXAudio {
 
 
 
-    export var ResourceMap: IResourceMap = {
+    export const ResourceMap: IResourceMap = {
         strings: {}
     };
 
