@@ -87,11 +87,7 @@
         },
 
         connect: {
-            dev: {
-                options: {
-                    open: true
-                }
-            }
+            dev: {}
         }
     });
 
