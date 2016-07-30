@@ -37,26 +37,26 @@ module FXAudio {
         }
 
 
-        public _publishInputComponent(audioNode: AudioNode): void {
+        protected _publishInputComponent(audioNode: AudioNode): void {
             Contract.isNotNullOrUndefined(audioNode, 'audioNode');
 
             AudioUtilities.AudioInterface.createPortsFromAudioNode(audioNode, UnitPortDirection.INPUT, this._inputs);
         }
 
-        public _publishInputComponents(audioNodes: AudioNode[]): void {
+        protected _publishInputComponents(audioNodes: AudioNode[]): void {
             Contract.isNotNullOrUndefined(audioNodes, 'audioNodes');
 
             AudioUtilities.AudioInterface.createPortsFromAudioNodes(audioNodes, UnitPortDirection.INPUT, this._inputs);
         }
 
 
-        public _publishOutputComponent(audioNode: AudioNode): void {
+        protected _publishOutputComponent(audioNode: AudioNode): void {
             Contract.isNotNullOrUndefined(audioNode, 'audioNode');
 
             AudioUtilities.AudioInterface.createPortsFromAudioNode(audioNode, UnitPortDirection.OUTPUT, this._outputs);
         }
 
-        public _publishOutputComponents(audioNodes: AudioNode[]): void {
+        protected _publishOutputComponents(audioNodes: AudioNode[]): void {
             Contract.isNotNullOrUndefined(audioNodes, 'audioNodes');
 
             AudioUtilities.AudioInterface.createPortsFromAudioNodes(audioNodes, UnitPortDirection.OUTPUT, this._outputs);

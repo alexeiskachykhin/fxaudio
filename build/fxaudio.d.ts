@@ -87,10 +87,10 @@ declare module FXAudio {
         inputs: UnitPort[];
         outputs: UnitPort[];
         constructor(context: Context);
-        _publishInputComponent(audioNode: AudioNode): void;
-        _publishInputComponents(audioNodes: AudioNode[]): void;
-        _publishOutputComponent(audioNode: AudioNode): void;
-        _publishOutputComponents(audioNodes: AudioNode[]): void;
+        protected _publishInputComponent(audioNode: AudioNode): void;
+        protected _publishInputComponents(audioNodes: AudioNode[]): void;
+        protected _publishOutputComponent(audioNode: AudioNode): void;
+        protected _publishOutputComponents(audioNodes: AudioNode[]): void;
     }
 }
 declare module FXAudio {
