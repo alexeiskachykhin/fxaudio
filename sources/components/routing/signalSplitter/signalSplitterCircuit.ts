@@ -1,7 +1,7 @@
 ﻿/// <reference path="../../../_references.ts" />
 
 
-module FXAudio {
+namespace FXAudio {
     'use strict';
 
 

@@ -5,6 +5,7 @@
     "declaration": true,
     "sourceMap": true,
     "noLib": true,
+    "noEmitOnError": true,
     "skipDefaultLibCheck": true
   },
   "files": [
