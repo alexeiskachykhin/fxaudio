@@ -2,7 +2,7 @@
 
 FXAudio is an audio library of popular Guitar FX written on top of Web Audio API. It normalizes differences between built-in nodes and custom nodes for the benefit of faster app development.
 
-## Why use FXAudio?
+## Why FXAudio?
 
 ### Ease of use
 
@@ -34,7 +34,7 @@ See how custom *EchoUnit* is no different than *LiveInputSourceUnit* and *AudioD
 
 ### Popular Guitar FX out of the box
 
-FXAudio ships with set of popular Guitar FX units. With dozen lines of code you can setup decent chain of FX.
+FXAudio ships with set of popular Guitar FX units. With dozen lines of code you can hook up your guitar to decent chain of FX.
 
 ```javascript
 const sourceUnit = new FXAudio.LiveInputSourceUnit(context);
