@@ -73,12 +73,6 @@
         },
 
         ts: {
-            options: {
-                target: 'es5',
-                module: 'amd',
-                declaration: true
-            },
-
             dev: {
                 tsconfig: true,
                 watch: '<%= manifest.sourcePath %>',
