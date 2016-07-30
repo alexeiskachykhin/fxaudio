@@ -2,8 +2,9 @@
   "compilerOptions": {
     "module": "amd",
     "target": "es5",
-    "outFile": "build/output/fxaudio.js",
+    "outFile": "build/fxaudio.js",
     "declaration": true,
+    "sourceMap": true,
     "noLib": true,
     "skipDefaultLibCheck": true
   },

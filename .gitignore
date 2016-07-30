@@ -9,7 +9,6 @@
 *.pdb
 *.min.js
 *.min.js.map
-*.map
 bin/
 obj/
 _references.ts
@@ -41,7 +40,6 @@ Thumbs.db
 
 # Project Specific Excludes #
 #############################
-build/output
 *.generated.ts
 .tscache
 *.sln
