@@ -1,2 +1,2 @@
 #!/bin/sh
-npm install && grunt
+npm ci && npx grunt

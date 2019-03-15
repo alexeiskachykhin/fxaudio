@@ -4,7 +4,7 @@
     "triple-equals": true,
     "indent": [true, 4],
     "max-line-length": [true, 140],
-    "oneline": [
+    "one-line": [
       true,
       "check-open-brace",
       "check-whitespace"
