@@ -1,14 +1,23 @@
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var FXAudio;
 (function (FXAudio) {
     'use strict';
     FXAudio.ResourceMap = {
         strings: {}
     };
+    var ResourceKey;
     (function (ResourceKey) {
         ResourceKey[ResourceKey["ARGUMENT_ERROR_MESSAGE"] = 0] = "ARGUMENT_ERROR_MESSAGE";
         ResourceKey[ResourceKey["ARGUMENT_OUT_OF_RANGE_ERROR_MESSAGE"] = 1] = "ARGUMENT_OUT_OF_RANGE_ERROR_MESSAGE";
@@ -16,8 +25,7 @@ var FXAudio;
         ResourceKey[ResourceKey["ABSTRACT_ERROR_MESSAGE"] = 3] = "ABSTRACT_ERROR_MESSAGE";
         ResourceKey[ResourceKey["NOT_YET_IMPLEMENTED_ERROR_MESSAGE"] = 4] = "NOT_YET_IMPLEMENTED_ERROR_MESSAGE";
         ResourceKey[ResourceKey["INVALID_OPERATION_ERROR_MESSAGE"] = 5] = "INVALID_OPERATION_ERROR_MESSAGE";
-    })(FXAudio.ResourceKey || (FXAudio.ResourceKey = {}));
-    var ResourceKey = FXAudio.ResourceKey;
+    })(ResourceKey = FXAudio.ResourceKey || (FXAudio.ResourceKey = {}));
     FXAudio.ResourceMap.strings[ResourceKey.ARGUMENT_ERROR_MESSAGE] = 'Invalid argument {0}: {1}.';
     FXAudio.ResourceMap.strings[ResourceKey.ARGUMENT_OUT_OF_RANGE_ERROR_MESSAGE] = 'Argument out of range {0}.';
     FXAudio.ResourceMap.strings[ResourceKey.ARGUMENT_NULL_OR_UNDEFINED_ERROR_MESSAGE] = 'Argument is null or empty {0}.';
@@ -208,10 +216,12 @@ var FXAudio;
     var OfflineContext = (function (_super) {
         __extends(OfflineContext, _super);
         function OfflineContext(numberOfChannels, length, sampleRate) {
+            var _this = this;
             FXAudio.Contract.isPositiveOrZero(numberOfChannels, 'numberOfChannels');
             FXAudio.Contract.isPositiveOrZero(length, 'length');
             FXAudio.Contract.isPositiveOrZero(sampleRate, 'sampleRate');
-            _super.call(this, new OfflineAudioContext(numberOfChannels, length, sampleRate));
+            _this = _super.call(this, new OfflineAudioContext(numberOfChannels, length, sampleRate)) || this;
+            return _this;
         }
         return OfflineContext;
     }(FXAudio.Context));
@@ -226,7 +236,7 @@ var FXAudio;
     var RealTimeContext = (function (_super) {
         __extends(RealTimeContext, _super);
         function RealTimeContext() {
-            _super.call(this, new AudioContext());
+            return _super.call(this, new AudioContext()) || this;
         }
         return RealTimeContext;
     }(FXAudio.Context));
@@ -321,11 +331,11 @@ var FXAudio;
 var FXAudio;
 (function (FXAudio) {
     'use strict';
+    var UnitPortDirection;
     (function (UnitPortDirection) {
         UnitPortDirection[UnitPortDirection["INPUT"] = 0] = "INPUT";
         UnitPortDirection[UnitPortDirection["OUTPUT"] = 1] = "OUTPUT";
-    })(FXAudio.UnitPortDirection || (FXAudio.UnitPortDirection = {}));
-    var UnitPortDirection = FXAudio.UnitPortDirection;
+    })(UnitPortDirection = FXAudio.UnitPortDirection || (FXAudio.UnitPortDirection = {}));
     var UnitPort = (function () {
         function UnitPort(audioNode, channel, direction) {
             FXAudio.Contract.isNotNullOrUndefined(audioNode, 'audioNode');
@@ -381,6 +391,7 @@ var FXAudio;
 var FXAudio;
 (function (FXAudio) {
     'use strict';
+    var NodeType;
     (function (NodeType) {
         NodeType[NodeType["ANALYSER"] = 0] = "ANALYSER";
         NodeType[NodeType["BIQUAD_FILTER"] = 1] = "BIQUAD_FILTER";
@@ -399,8 +410,7 @@ var FXAudio;
         NodeType[NodeType["OSCILLATOR"] = 14] = "OSCILLATOR";
         NodeType[NodeType["PANNER"] = 15] = "PANNER";
         NodeType[NodeType["WAVE_SHAPER"] = 16] = "WAVE_SHAPER";
-    })(FXAudio.NodeType || (FXAudio.NodeType = {}));
-    var NodeType = FXAudio.NodeType;
+    })(NodeType = FXAudio.NodeType || (FXAudio.NodeType = {}));
 })(FXAudio || (FXAudio = {}));
 var FXAudio;
 (function (FXAudio) {
@@ -411,7 +421,7 @@ var FXAudio;
         WebAudioAPIUtilities.prototype.routeLinear = function () {
             var args = [];
             for (var _i = 0; _i < arguments.length; _i++) {
-                args[_i - 0] = arguments[_i];
+                args[_i] = arguments[_i];
             }
             var chainOfNodes = (args[0] instanceof Array)
                 ? args[0]
@@ -554,12 +564,14 @@ var FXAudio;
             for (var _i = 2; _i < arguments.length; _i++) {
                 args[_i - 2] = arguments[_i];
             }
+            var _this = this;
             FXAudio.Contract.isNotNullOrUndefined(context, 'context');
-            _super.call(this, context);
-            this._audioNodeType = audioNodeType;
-            this._audioNodeFactoryMethodArguments = args;
-            this._createAdapterComponents();
-            this._publishAdapterComponents();
+            _this = _super.call(this, context) || this;
+            _this._audioNodeType = audioNodeType;
+            _this._audioNodeFactoryMethodArguments = args;
+            _this._createAdapterComponents();
+            _this._publishAdapterComponents();
+            return _this;
         }
         Object.defineProperty(AdapterCircuit.prototype, "audioNode", {
             get: function () {
@@ -596,8 +608,10 @@ var FXAudio;
     var AudioDestinationCircuit = (function (_super) {
         __extends(AudioDestinationCircuit, _super);
         function AudioDestinationCircuit(context) {
+            var _this = this;
             FXAudio.Contract.isNotNullOrUndefined(context, 'context');
-            _super.call(this, context, FXAudio.NodeType.DESTINATION);
+            _this = _super.call(this, context, FXAudio.NodeType.DESTINATION) || this;
+            return _this;
         }
         return AudioDestinationCircuit;
     }(FXAudio.AdapterCircuit));
@@ -609,8 +623,10 @@ var FXAudio;
     var AudioDestinationUnit = (function (_super) {
         __extends(AudioDestinationUnit, _super);
         function AudioDestinationUnit(context) {
+            var _this = this;
             FXAudio.Contract.isNotNullOrUndefined(context, 'context');
-            _super.call(this, new FXAudio.AudioDestinationCircuit(context));
+            _this = _super.call(this, new FXAudio.AudioDestinationCircuit(context)) || this;
+            return _this;
         }
         Object.defineProperty(AudioDestinationUnit.prototype, "maxChannelCount", {
             get: function () {
@@ -626,13 +642,13 @@ var FXAudio;
 var FXAudio;
 (function (FXAudio) {
     'use strict';
+    var AudioSourceState;
     (function (AudioSourceState) {
         AudioSourceState[AudioSourceState["PLAYING"] = 0] = "PLAYING";
         AudioSourceState[AudioSourceState["STOPPED"] = 1] = "STOPPED";
         AudioSourceState[AudioSourceState["PAUSED"] = 2] = "PAUSED";
         AudioSourceState[AudioSourceState["AWAITING"] = 3] = "AWAITING";
-    })(FXAudio.AudioSourceState || (FXAudio.AudioSourceState = {}));
-    var AudioSourceState = FXAudio.AudioSourceState;
+    })(AudioSourceState = FXAudio.AudioSourceState || (FXAudio.AudioSourceState = {}));
     ;
 })(FXAudio || (FXAudio = {}));
 var FXAudio;
@@ -641,8 +657,10 @@ var FXAudio;
     var AudioSourceUnit = (function (_super) {
         __extends(AudioSourceUnit, _super);
         function AudioSourceUnit(circuit) {
+            var _this = this;
             FXAudio.Contract.isNotNullOrUndefined(circuit, 'circuit');
-            _super.call(this, circuit);
+            _this = _super.call(this, circuit) || this;
+            return _this;
         }
         AudioSourceUnit.prototype.init = function (source) {
             throw FXAudio.Errors.abstract();
@@ -708,8 +726,10 @@ var FXAudio;
     var BufferSourceCircuit = (function (_super) {
         __extends(BufferSourceCircuit, _super);
         function BufferSourceCircuit(context) {
+            var _this = this;
             FXAudio.Contract.isNotNullOrUndefined(context, 'context');
-            _super.call(this, context, FXAudio.NodeType.BUFFER_SOURCE);
+            _this = _super.call(this, context, FXAudio.NodeType.BUFFER_SOURCE) || this;
+            return _this;
         }
         return BufferSourceCircuit;
     }(FXAudio.AdapterCircuit));
@@ -718,19 +738,21 @@ var FXAudio;
 var FXAudio;
 (function (FXAudio) {
     'use strict';
+    var AudioBufferState;
     (function (AudioBufferState) {
         AudioBufferState[AudioBufferState["NODATA"] = 0] = "NODATA";
         AudioBufferState[AudioBufferState["DECODING"] = 1] = "DECODING";
         AudioBufferState[AudioBufferState["READY"] = 2] = "READY";
-    })(FXAudio.AudioBufferState || (FXAudio.AudioBufferState = {}));
-    var AudioBufferState = FXAudio.AudioBufferState;
+    })(AudioBufferState = FXAudio.AudioBufferState || (FXAudio.AudioBufferState = {}));
     ;
     var BufferSourceUnit = (function (_super) {
         __extends(BufferSourceUnit, _super);
         function BufferSourceUnit(context) {
+            var _this = this;
             FXAudio.Contract.isNotNullOrUndefined(context, 'context');
-            _super.call(this, new FXAudio.BufferSourceCircuit(context));
-            this._audioSourceController = new FXAudio.BufferAudioSourceController(this._audioSourceNode);
+            _this = _super.call(this, new FXAudio.BufferSourceCircuit(context)) || this;
+            _this._audioSourceController = new FXAudio.BufferAudioSourceController(_this._audioSourceNode);
+            return _this;
         }
         Object.defineProperty(BufferSourceUnit.prototype, "_audioSourceNode", {
             get: function () {
@@ -818,9 +840,11 @@ var FXAudio;
     var LiveInputSourceCircuit = (function (_super) {
         __extends(LiveInputSourceCircuit, _super);
         function LiveInputSourceCircuit(context) {
+            var _this = this;
             FXAudio.Contract.isNotNullOrUndefined(context, 'context');
-            _super.call(this, context);
-            this._createLiveInputSourceCircuit();
+            _this = _super.call(this, context) || this;
+            _this._createLiveInputSourceCircuit();
+            return _this;
         }
         LiveInputSourceCircuit.prototype.mountStream = function (stream) {
             FXAudio.Contract.isNotNullOrUndefined(stream, 'stream');
@@ -843,9 +867,11 @@ var FXAudio;
     var LiveInputSourceUnit = (function (_super) {
         __extends(LiveInputSourceUnit, _super);
         function LiveInputSourceUnit(context) {
+            var _this = this;
             FXAudio.Contract.isNotNullOrUndefined(context, 'context');
-            _super.call(this, new FXAudio.LiveInputSourceCircuit(context));
-            this._audioSourceController = new FXAudio.LiveInputAudioSourceController();
+            _this = _super.call(this, new FXAudio.LiveInputSourceCircuit(context)) || this;
+            _this._audioSourceController = new FXAudio.LiveInputAudioSourceController();
+            return _this;
         }
         Object.defineProperty(LiveInputSourceUnit.prototype, "stream", {
             get: function () {
@@ -937,9 +963,11 @@ var FXAudio;
     var NetworkSourceCircuit = (function (_super) {
         __extends(NetworkSourceCircuit, _super);
         function NetworkSourceCircuit(context) {
+            var _this = this;
             FXAudio.Contract.isNotNullOrUndefined(context, 'context');
-            _super.call(this, context);
-            this._createNetworkSourceCircuit();
+            _this = _super.call(this, context) || this;
+            _this._createNetworkSourceCircuit();
+            return _this;
         }
         NetworkSourceCircuit.prototype.mountMediaElement = function (mediaElement) {
             FXAudio.Contract.isNotNullOrUndefined(mediaElement, 'mediaElement');
@@ -962,8 +990,10 @@ var FXAudio;
     var NetworkSourceUnit = (function (_super) {
         __extends(NetworkSourceUnit, _super);
         function NetworkSourceUnit(context) {
+            var _this = this;
             FXAudio.Contract.isNotNullOrUndefined(context, 'context');
-            _super.call(this, new FXAudio.NetworkSourceCircuit(context));
+            _this = _super.call(this, new FXAudio.NetworkSourceCircuit(context)) || this;
+            return _this;
         }
         Object.defineProperty(NetworkSourceUnit.prototype, "stream", {
             get: function () {
@@ -995,8 +1025,10 @@ var FXAudio;
     var VolumeCircuit = (function (_super) {
         __extends(VolumeCircuit, _super);
         function VolumeCircuit(context) {
+            var _this = this;
             FXAudio.Contract.isNotNullOrUndefined(context, 'context');
-            _super.call(this, context, FXAudio.NodeType.GAIN);
+            _this = _super.call(this, context, FXAudio.NodeType.GAIN) || this;
+            return _this;
         }
         return VolumeCircuit;
     }(FXAudio.AdapterCircuit));
@@ -1008,8 +1040,10 @@ var FXAudio;
     var VolumeUnit = (function (_super) {
         __extends(VolumeUnit, _super);
         function VolumeUnit(context) {
+            var _this = this;
             FXAudio.Contract.isNotNullOrUndefined(context, 'context');
-            _super.call(this, new FXAudio.VolumeCircuit(context));
+            _this = _super.call(this, new FXAudio.VolumeCircuit(context)) || this;
+            return _this;
         }
         Object.defineProperty(VolumeUnit.prototype, "level", {
             get: function () {
@@ -1031,9 +1065,11 @@ var FXAudio;
     var ChannelMergerCircuit = (function (_super) {
         __extends(ChannelMergerCircuit, _super);
         function ChannelMergerCircuit(context, numberOfInputs) {
+            var _this = this;
             FXAudio.Contract.isNotNullOrUndefined(context, 'context');
             FXAudio.Contract.isPositiveOrZero(numberOfInputs, 'numberOfInputs');
-            _super.call(this, context, FXAudio.NodeType.CHANNEL_MERGER, numberOfInputs);
+            _this = _super.call(this, context, FXAudio.NodeType.CHANNEL_MERGER, numberOfInputs) || this;
+            return _this;
         }
         return ChannelMergerCircuit;
     }(FXAudio.AdapterCircuit));
@@ -1046,9 +1082,11 @@ var FXAudio;
         __extends(ChannelMergerUnit, _super);
         function ChannelMergerUnit(context, numberOfInputs) {
             if (numberOfInputs === void 0) { numberOfInputs = 6; }
+            var _this = this;
             FXAudio.Contract.isNotNullOrUndefined(context, 'context');
             FXAudio.Contract.isPositiveOrZero(numberOfInputs, 'numberOfInputs');
-            _super.call(this, new FXAudio.ChannelMergerCircuit(context, numberOfInputs));
+            _this = _super.call(this, new FXAudio.ChannelMergerCircuit(context, numberOfInputs)) || this;
+            return _this;
         }
         return ChannelMergerUnit;
     }(FXAudio.Unit));
@@ -1060,9 +1098,11 @@ var FXAudio;
     var ChannelSplitterCircuit = (function (_super) {
         __extends(ChannelSplitterCircuit, _super);
         function ChannelSplitterCircuit(context, numberOfOutputs) {
+            var _this = this;
             FXAudio.Contract.isNotNullOrUndefined(context, 'context');
             FXAudio.Contract.isPositiveOrZero(numberOfOutputs, 'numberOfOutputs');
-            _super.call(this, context, FXAudio.NodeType.CHANNEL_SPLITTER, numberOfOutputs);
+            _this = _super.call(this, context, FXAudio.NodeType.CHANNEL_SPLITTER, numberOfOutputs) || this;
+            return _this;
         }
         return ChannelSplitterCircuit;
     }(FXAudio.AdapterCircuit));
@@ -1075,9 +1115,11 @@ var FXAudio;
         __extends(ChannelSplitterUnit, _super);
         function ChannelSplitterUnit(context, numberOfOutputs) {
             if (numberOfOutputs === void 0) { numberOfOutputs = 6; }
+            var _this = this;
             FXAudio.Contract.isNotNullOrUndefined(context, 'context');
             FXAudio.Contract.isPositiveOrZero(numberOfOutputs, 'numberOfOutputs');
-            _super.call(this, new FXAudio.ChannelSplitterCircuit(context, numberOfOutputs));
+            _this = _super.call(this, new FXAudio.ChannelSplitterCircuit(context, numberOfOutputs)) || this;
+            return _this;
         }
         return ChannelSplitterUnit;
     }(FXAudio.Unit));
@@ -1089,11 +1131,13 @@ var FXAudio;
     var SignalHubCircuit = (function (_super) {
         __extends(SignalHubCircuit, _super);
         function SignalHubCircuit(context, numberOfInputs, numberOfOutputs) {
+            var _this = this;
             FXAudio.Contract.isNotNullOrUndefined(context, 'context');
             FXAudio.Contract.isPositiveOrZero(numberOfInputs, 'numberOfInputs');
             FXAudio.Contract.isPositiveOrZero(numberOfOutputs, 'numberOfOutputs');
-            _super.call(this, context);
-            this._createSignalHubCircuit(numberOfInputs, numberOfOutputs);
+            _this = _super.call(this, context) || this;
+            _this._createSignalHubCircuit(numberOfInputs, numberOfOutputs);
+            return _this;
         }
         SignalHubCircuit.prototype._createSignalHubCircuit = function (numberOfInputs, numberOfOutputs) {
             FXAudio.Contract.isPositiveOrZero(numberOfInputs, 'numberOfInputs');
@@ -1123,9 +1167,11 @@ var FXAudio;
     var SignalMergerCircuit = (function (_super) {
         __extends(SignalMergerCircuit, _super);
         function SignalMergerCircuit(context, numberOfInputs) {
+            var _this = this;
             FXAudio.Contract.isNotNullOrUndefined(context, 'context');
             FXAudio.Contract.isPositiveOrZero(numberOfInputs, 'numberOfInputs');
-            _super.call(this, context, numberOfInputs, 1);
+            _this = _super.call(this, context, numberOfInputs, 1) || this;
+            return _this;
         }
         return SignalMergerCircuit;
     }(FXAudio.SignalHubCircuit));
@@ -1138,9 +1184,11 @@ var FXAudio;
         __extends(SignalMergerUnit, _super);
         function SignalMergerUnit(context, numberOfInputs) {
             if (numberOfInputs === void 0) { numberOfInputs = 6; }
+            var _this = this;
             FXAudio.Contract.isNotNullOrUndefined(context, 'context');
             FXAudio.Contract.isPositiveOrZero(numberOfInputs, 'numberOfInputs');
-            _super.call(this, new FXAudio.SignalMergerCircuit(context, numberOfInputs));
+            _this = _super.call(this, new FXAudio.SignalMergerCircuit(context, numberOfInputs)) || this;
+            return _this;
         }
         return SignalMergerUnit;
     }(FXAudio.Unit));
@@ -1152,9 +1200,11 @@ var FXAudio;
     var SignalSplitterCircuit = (function (_super) {
         __extends(SignalSplitterCircuit, _super);
         function SignalSplitterCircuit(context, numberOfOutputs) {
+            var _this = this;
             FXAudio.Contract.isNotNullOrUndefined(context, 'context');
             FXAudio.Contract.isPositiveOrZero(numberOfOutputs, 'numberOfOutputs');
-            _super.call(this, context, 1, numberOfOutputs);
+            _this = _super.call(this, context, 1, numberOfOutputs) || this;
+            return _this;
         }
         return SignalSplitterCircuit;
     }(FXAudio.SignalHubCircuit));
@@ -1167,9 +1217,11 @@ var FXAudio;
         __extends(SignalSplitterUnit, _super);
         function SignalSplitterUnit(context, numberOfOutputs) {
             if (numberOfOutputs === void 0) { numberOfOutputs = 6; }
+            var _this = this;
             FXAudio.Contract.isNotNullOrUndefined(context, 'context');
             FXAudio.Contract.isPositiveOrZero(numberOfOutputs, 'numberOfOutputs');
-            _super.call(this, new FXAudio.SignalSplitterCircuit(context, numberOfOutputs));
+            _this = _super.call(this, new FXAudio.SignalSplitterCircuit(context, numberOfOutputs)) || this;
+            return _this;
         }
         return SignalSplitterUnit;
     }(FXAudio.Unit));
@@ -1181,9 +1233,11 @@ var FXAudio;
     var DelayCircuit = (function (_super) {
         __extends(DelayCircuit, _super);
         function DelayCircuit(context, maxDelayTime) {
+            var _this = this;
             FXAudio.Contract.isNotNullOrUndefined(context, 'context');
             FXAudio.Contract.isPositiveOrZero(maxDelayTime, 'maxDelayTime');
-            _super.call(this, context, FXAudio.NodeType.DELAY, maxDelayTime);
+            _this = _super.call(this, context, FXAudio.NodeType.DELAY, maxDelayTime) || this;
+            return _this;
         }
         return DelayCircuit;
     }(FXAudio.AdapterCircuit));
@@ -1196,9 +1250,11 @@ var FXAudio;
         __extends(DelayUnit, _super);
         function DelayUnit(context, maxDelayTime) {
             if (maxDelayTime === void 0) { maxDelayTime = 3.0; }
+            var _this = this;
             FXAudio.Contract.isNotNullOrUndefined(context, 'context');
             FXAudio.Contract.isPositiveOrZero(maxDelayTime, 'maxDelayTime');
-            _super.call(this, new FXAudio.DelayCircuit(context, maxDelayTime));
+            _this = _super.call(this, new FXAudio.DelayCircuit(context, maxDelayTime)) || this;
+            return _this;
         }
         Object.defineProperty(DelayUnit.prototype, "time", {
             get: function () {
@@ -1221,9 +1277,11 @@ var FXAudio;
         __extends(EchoUnit, _super);
         function EchoUnit(context, maxDelayTime) {
             if (maxDelayTime === void 0) { maxDelayTime = 1.0; }
+            var _this = this;
             FXAudio.Contract.isNotNullOrUndefined(context, 'context');
             FXAudio.Contract.isPositiveOrZero(maxDelayTime, 'maxDelayTime');
-            _super.call(this, new FXAudio.EchoCircuit(context, maxDelayTime));
+            _this = _super.call(this, new FXAudio.EchoCircuit(context, maxDelayTime)) || this;
+            return _this;
         }
         Object.defineProperty(EchoUnit.prototype, "delayTime", {
             get: function () {
@@ -1265,12 +1323,14 @@ var FXAudio;
     var EchoCircuit = (function (_super) {
         __extends(EchoCircuit, _super);
         function EchoCircuit(context, maxDelayTime) {
+            var _this = this;
             FXAudio.Contract.isNotNullOrUndefined(context, 'context');
             FXAudio.Contract.isPositiveOrZero(maxDelayTime, 'maxDelayTime');
-            _super.call(this, context);
-            this._createEchoComponents(maxDelayTime);
-            this._connectEchoComponents();
-            this._publishEchoComponents();
+            _this = _super.call(this, context) || this;
+            _this._createEchoComponents(maxDelayTime);
+            _this._connectEchoComponents();
+            _this._publishEchoComponents();
+            return _this;
         }
         Object.defineProperty(EchoCircuit.prototype, "inputNode", {
             get: function () {
@@ -1342,11 +1402,13 @@ var FXAudio;
     var OverdriveCircuit = (function (_super) {
         __extends(OverdriveCircuit, _super);
         function OverdriveCircuit(context) {
+            var _this = this;
             FXAudio.Contract.isNotNullOrUndefined(context, 'context');
-            _super.call(this, context);
-            this._createOverdriveComponents();
-            this._connectOverdriveComponents();
-            this._publishOverdriveComponents();
+            _this = _super.call(this, context) || this;
+            _this._createOverdriveComponents();
+            _this._connectOverdriveComponents();
+            _this._publishOverdriveComponents();
+            return _this;
         }
         Object.defineProperty(OverdriveCircuit.prototype, "gainNode", {
             get: function () {
@@ -1410,8 +1472,10 @@ var FXAudio;
     var OverdriveUnit = (function (_super) {
         __extends(OverdriveUnit, _super);
         function OverdriveUnit(context) {
+            var _this = this;
             FXAudio.Contract.isNotNullOrUndefined(context, 'context');
-            _super.call(this, new FXAudio.OverdriveCircuit(context));
+            _this = _super.call(this, new FXAudio.OverdriveCircuit(context)) || this;
+            return _this;
         }
         Object.defineProperty(OverdriveUnit.prototype, "level", {
             get: function () {
@@ -1453,11 +1517,13 @@ var FXAudio;
     var TremoloCircuit = (function (_super) {
         __extends(TremoloCircuit, _super);
         function TremoloCircuit(context) {
+            var _this = this;
             FXAudio.Contract.isNotNullOrUndefined(context, 'context');
-            _super.call(this, context);
-            this._createTremoloComponents();
-            this._connectTremoloComponents();
-            this._publishTremoloComponents();
+            _this = _super.call(this, context) || this;
+            _this._createTremoloComponents();
+            _this._connectTremoloComponents();
+            _this._publishTremoloComponents();
+            return _this;
         }
         Object.defineProperty(TremoloCircuit.prototype, "lfoNode", {
             get: function () {
@@ -1512,10 +1578,12 @@ var FXAudio;
     var TremoloUnit = (function (_super) {
         __extends(TremoloUnit, _super);
         function TremoloUnit(context) {
+            var _this = this;
             FXAudio.Contract.isNotNullOrUndefined(context, 'context');
-            _super.call(this, new FXAudio.TremoloCircuit(context));
-            this.speed = DEFAULT_SPEED;
-            this.depth = DEFAULT_DEPTH;
+            _this = _super.call(this, new FXAudio.TremoloCircuit(context)) || this;
+            _this.speed = DEFAULT_SPEED;
+            _this.depth = DEFAULT_DEPTH;
+            return _this;
         }
         Object.defineProperty(TremoloUnit.prototype, "speed", {
             get: function () {
@@ -1548,11 +1616,13 @@ var FXAudio;
     var ComboFilterCircuit = (function (_super) {
         __extends(ComboFilterCircuit, _super);
         function ComboFilterCircuit(context) {
+            var _this = this;
             FXAudio.Contract.isNotNullOrUndefined(context, 'context');
-            _super.call(this, context);
-            this._createComboFilterComponents();
-            this._connectComboFilterComponents();
-            this._publishComboFilterComponents();
+            _this = _super.call(this, context) || this;
+            _this._createComboFilterComponents();
+            _this._connectComboFilterComponents();
+            _this._publishComboFilterComponents();
+            return _this;
         }
         Object.defineProperty(ComboFilterCircuit.prototype, "inputNode", {
             get: function () {
@@ -1617,10 +1687,12 @@ var FXAudio;
     var ModulatedComboFilterCircuit = (function (_super) {
         __extends(ModulatedComboFilterCircuit, _super);
         function ModulatedComboFilterCircuit(context) {
+            var _this = this;
             FXAudio.Contract.isNotNullOrUndefined(context, 'context');
-            _super.call(this, context);
-            this._createModulatedComboFilterComponents();
-            this._connectModulatedComboFilterComponents();
+            _this = _super.call(this, context) || this;
+            _this._createModulatedComboFilterComponents();
+            _this._connectModulatedComboFilterComponents();
+            return _this;
         }
         Object.defineProperty(ModulatedComboFilterCircuit.prototype, "lfoNode", {
             get: function () {
@@ -1662,10 +1734,12 @@ var FXAudio;
     var ChorusCircuit = (function (_super) {
         __extends(ChorusCircuit, _super);
         function ChorusCircuit(context) {
+            var _this = this;
             FXAudio.Contract.isNotNullOrUndefined(context, 'context');
-            _super.call(this, context);
-            this.feedbackNode.gain.value = DEFAULT_FEEDBACK;
-            this.delayNode.delayTime.value = DEFAULT_DELAY_TIME;
+            _this = _super.call(this, context) || this;
+            _this.feedbackNode.gain.value = DEFAULT_FEEDBACK;
+            _this.delayNode.delayTime.value = DEFAULT_DELAY_TIME;
+            return _this;
         }
         return ChorusCircuit;
     }(FXAudio.ModulatedComboFilterCircuit));
@@ -1679,10 +1753,12 @@ var FXAudio;
     var ChorusUnit = (function (_super) {
         __extends(ChorusUnit, _super);
         function ChorusUnit(context) {
+            var _this = this;
             FXAudio.Contract.isNotNullOrUndefined(context, 'context');
-            _super.call(this, new FXAudio.ChorusCircuit(context));
-            this.depth = DEFAULT_DEPTH;
-            this.rate = DEFAULT_RATE;
+            _this = _super.call(this, new FXAudio.ChorusCircuit(context)) || this;
+            _this.depth = DEFAULT_DEPTH;
+            _this.rate = DEFAULT_RATE;
+            return _this;
         }
         Object.defineProperty(ChorusUnit.prototype, "rate", {
             get: function () {
@@ -1714,8 +1790,10 @@ var FXAudio;
     var FlangerCircuit = (function (_super) {
         __extends(FlangerCircuit, _super);
         function FlangerCircuit(context) {
+            var _this = this;
             FXAudio.Contract.isNotNullOrUndefined(context, 'context');
-            _super.call(this, context);
+            _this = _super.call(this, context) || this;
+            return _this;
         }
         return FlangerCircuit;
     }(FXAudio.ModulatedComboFilterCircuit));
@@ -1731,12 +1809,14 @@ var FXAudio;
     var FlangerUnit = (function (_super) {
         __extends(FlangerUnit, _super);
         function FlangerUnit(context) {
+            var _this = this;
             FXAudio.Contract.isNotNullOrUndefined(context, 'context');
-            _super.call(this, new FXAudio.FlangerCircuit(context));
-            this.delayTime = DEFAULT_DELAY_TIME;
-            this.feedback = DEFAULT_FEEDBACK;
-            this.depth = DEFAULT_DEPTH;
-            this.speed = DEFAULT_SPEED;
+            _this = _super.call(this, new FXAudio.FlangerCircuit(context)) || this;
+            _this.delayTime = DEFAULT_DELAY_TIME;
+            _this.feedback = DEFAULT_FEEDBACK;
+            _this.depth = DEFAULT_DEPTH;
+            _this.speed = DEFAULT_SPEED;
+            return _this;
         }
         Object.defineProperty(FlangerUnit.prototype, "speed", {
             get: function () {
@@ -1791,11 +1871,13 @@ var FXAudio;
     var ReverbCircuit = (function (_super) {
         __extends(ReverbCircuit, _super);
         function ReverbCircuit(context) {
+            var _this = this;
             FXAudio.Contract.isNotNullOrUndefined(context, 'context');
-            _super.call(this, context);
-            this._createReverbComponents();
-            this._connectReverbComponents();
-            this._publishReverbComponents();
+            _this = _super.call(this, context) || this;
+            _this._createReverbComponents();
+            _this._connectReverbComponents();
+            _this._publishReverbComponents();
+            return _this;
         }
         Object.defineProperty(ReverbCircuit.prototype, "gainNode", {
             get: function () {
@@ -1865,8 +1947,10 @@ var FXAudio;
     var ReverbUnit = (function (_super) {
         __extends(ReverbUnit, _super);
         function ReverbUnit(context) {
+            var _this = this;
             FXAudio.Contract.isNotNullOrUndefined(context, 'context');
-            _super.call(this, new FXAudio.ReverbCircuit(context));
+            _this = _super.call(this, new FXAudio.ReverbCircuit(context)) || this;
+            return _this;
         }
         Object.defineProperty(ReverbUnit.prototype, "time", {
             get: function () {

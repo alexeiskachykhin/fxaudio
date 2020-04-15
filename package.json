@@ -13,16 +13,16 @@
   ],
   "license": "MIT",
   "devDependencies": {
-    "grunt": "^1.0.3",
-    "grunt-contrib-clean": "^1.0.0",
-    "grunt-contrib-connect": "^1.0.2",
-    "grunt-contrib-jshint": "^1.0.0",
+    "grunt": "^1.1.0",
+    "grunt-contrib-clean": "^2.0.0",
+    "grunt-contrib-connect": "^2.1.0",
+    "grunt-contrib-jshint": "^2.1.0",
     "grunt-file-exists": "^0.1.4",
-    "grunt-jsonlint": "^1.1.0",
+    "grunt-jsonlint": "^2.1.2",
     "grunt-template": "^1.0.0",
-    "grunt-ts": "^6.0.0-beta.3",
-    "grunt-tslint": "^3.1.1",
-    "tslint": "^3.14.0",
-    "typescript": "^1.8.10"
+    "grunt-ts": "^6.0.0-beta.22",
+    "grunt-tslint": "^5.0.2",
+    "tslint": "^6.1.1",
+    "typescript": "^3.8.3"
   }
 }

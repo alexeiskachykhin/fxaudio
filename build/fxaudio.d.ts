@@ -16,13 +16,13 @@ declare namespace FXAudio {
         ARGUMENT_NULL_OR_UNDEFINED_ERROR_MESSAGE = 2,
         ABSTRACT_ERROR_MESSAGE = 3,
         NOT_YET_IMPLEMENTED_ERROR_MESSAGE = 4,
-        INVALID_OPERATION_ERROR_MESSAGE = 5,
+        INVALID_OPERATION_ERROR_MESSAGE = 5
     }
 }
 declare namespace FXAudio {
     class ResourceManager {
         static getString(resourceKey: ResourceKey, args: any[]): string;
-        private static formatString(s, args);
+        private static formatString;
     }
 }
 declare namespace FXAudio {
@@ -52,8 +52,8 @@ declare namespace FXAudio {
     }
     class EventSource implements IEventCompletionSource {
         private _events;
-        private _defer(f);
-        private _dispatchEvent(eventName, ...eventArgs);
+        private _defer;
+        private _dispatchEvent;
         addEventListener(eventName: string, eventListener: Function): EventSource;
         removeEventListener(eventName: string, eventListener: Function): EventSource;
         dispatchEvent(eventName: any, ...eventArgs: any[]): void;
@@ -62,9 +62,9 @@ declare namespace FXAudio {
 declare namespace FXAudio {
     class Context {
         private _audioContext;
-        audioContext: AudioContext;
-        sampleRate: number;
-        currentTime: number;
+        get audioContext(): AudioContext;
+        get sampleRate(): number;
+        get currentTime(): number;
         constructor(audioContext: AudioContext);
     }
 }
@@ -83,9 +83,9 @@ declare namespace FXAudio {
         private _context;
         private _inputs;
         private _outputs;
-        context: Context;
-        inputs: UnitPort[];
-        outputs: UnitPort[];
+        get context(): Context;
+        get inputs(): UnitPort[];
+        get outputs(): UnitPort[];
         constructor(context: Context);
         protected _publishInputComponent(audioNode: AudioNode): void;
         protected _publishInputComponents(audioNodes: AudioNode[]): void;
@@ -97,16 +97,16 @@ declare namespace FXAudio {
     class Unit<TCircuit extends Circuit> {
         private _ports;
         private _circuit;
-        ports: UnitInterface;
-        circuit: TCircuit;
-        context: Context;
+        get ports(): UnitInterface;
+        get circuit(): TCircuit;
+        get context(): Context;
         constructor(circuit: TCircuit);
     }
 }
 declare namespace FXAudio {
     enum UnitPortDirection {
         INPUT = 0,
-        OUTPUT = 1,
+        OUTPUT = 1
     }
     class UnitPort {
         private _audioNode;
@@ -121,8 +121,8 @@ declare namespace FXAudio {
     class UnitInterface {
         private _inputs;
         private _outputs;
-        inputs: UnitPort[];
-        outputs: UnitPort[];
+        get inputs(): UnitPort[];
+        get outputs(): UnitPort[];
         constructor(inputs: UnitPort[], outputs: UnitPort[]);
     }
 }
@@ -144,7 +144,7 @@ declare namespace FXAudio {
         MEDIA_STREAM_SOURCE = 13,
         OSCILLATOR = 14,
         PANNER = 15,
-        WAVE_SHAPER = 16,
+        WAVE_SHAPER = 16
     }
 }
 declare namespace FXAudio {
@@ -169,11 +169,11 @@ declare namespace FXAudio {
         private _audioNode;
         private _audioNodeType;
         private _audioNodeFactoryMethodArguments;
-        audioNode: TNode;
+        get audioNode(): TNode;
         constructor(context: Context, audioNodeType: NodeType, ...args: any[]);
-        private _createAdapterComponents();
-        private _publishAdapterComponents();
-        private _createNode();
+        private _createAdapterComponents;
+        private _publishAdapterComponents;
+        private _createNode;
     }
 }
 declare namespace FXAudio {
@@ -183,7 +183,7 @@ declare namespace FXAudio {
 }
 declare namespace FXAudio {
     class AudioDestinationUnit extends Unit<AudioDestinationCircuit> {
-        maxChannelCount: number;
+        get maxChannelCount(): number;
         constructor(context: RealTimeContext);
     }
 }
@@ -192,7 +192,7 @@ declare namespace FXAudio {
         PLAYING = 0,
         STOPPED = 1,
         PAUSED = 2,
-        AWAITING = 3,
+        AWAITING = 3
     }
     interface IAudioSourceController {
         state: AudioSourceState;
@@ -215,10 +215,10 @@ declare namespace FXAudio {
     class BufferAudioSourceController implements IAudioSourceController {
         private _state;
         private _audioSourceNode;
-        state: AudioSourceState;
-        canStart: boolean;
-        canStop: boolean;
-        canRewind: boolean;
+        get state(): AudioSourceState;
+        get canStart(): boolean;
+        get canStop(): boolean;
+        get canRewind(): boolean;
         time: number;
         constructor(audioSourceNode: AudioBufferSourceNode);
         start(when: number): void;
@@ -234,13 +234,13 @@ declare namespace FXAudio {
     enum AudioBufferState {
         NODATA = 0,
         DECODING = 1,
-        READY = 2,
+        READY = 2
     }
     class BufferSourceUnit extends AudioSourceUnit<BufferSourceCircuit, ArrayBuffer> {
         private _bufferState;
         private _audioSourceController;
-        private _audioSourceNode;
-        stream: IAudioSourceController;
+        private get _audioSourceNode();
+        get stream(): IAudioSourceController;
         constructor(context: Context);
         init(audioData: ArrayBuffer): IEventSource;
     }
@@ -248,10 +248,10 @@ declare namespace FXAudio {
 declare namespace FXAudio {
     class LiveInputAudioSourceController implements IAudioSourceController {
         private _state;
-        state: AudioSourceState;
-        canStart: boolean;
-        canStop: boolean;
-        canRewind: boolean;
+        get state(): AudioSourceState;
+        get canStart(): boolean;
+        get canStop(): boolean;
+        get canRewind(): boolean;
         time: number;
         start(when: number): void;
         stop(when: number): void;
@@ -263,13 +263,13 @@ declare namespace FXAudio {
         private _mediStreamSourceNode;
         constructor(context: Context);
         mountStream(stream: MediaStream): void;
-        private _createLiveInputSourceCircuit();
+        private _createLiveInputSourceCircuit;
     }
 }
 declare namespace FXAudio {
     class LiveInputSourceUnit extends AudioSourceUnit<LiveInputSourceCircuit, MediaStream> {
         private _audioSourceController;
-        stream: IAudioSourceController;
+        get stream(): IAudioSourceController;
         constructor(context: Context);
         init(stream: MediaStream): IEventSource;
     }
@@ -278,11 +278,12 @@ declare namespace FXAudio {
     class NetworkAudioSourceController implements IAudioSourceController {
         private _state;
         private _mediaElement;
-        state: AudioSourceState;
-        canStart: boolean;
-        canStop: boolean;
-        canRewind: boolean;
-        time: number;
+        get state(): AudioSourceState;
+        get canStart(): boolean;
+        get canStop(): boolean;
+        get canRewind(): boolean;
+        get time(): number;
+        set time(value: number);
         constructor(mediaElement: HTMLMediaElement);
         start(when: number): void;
         stop(when: number): void;
@@ -294,13 +295,13 @@ declare namespace FXAudio {
         private _mediElementSourceNode;
         constructor(context: Context);
         mountMediaElement(mediaElement: HTMLMediaElement): void;
-        private _createNetworkSourceCircuit();
+        private _createNetworkSourceCircuit;
     }
 }
 declare namespace FXAudio {
     class NetworkSourceUnit extends AudioSourceUnit<NetworkSourceCircuit, HTMLMediaElement> {
         private _audioSourceController;
-        stream: IAudioSourceController;
+        get stream(): IAudioSourceController;
         constructor(context: Context);
         init(mediaElement: HTMLMediaElement): IEventSource;
     }
@@ -312,7 +313,8 @@ declare namespace FXAudio {
 }
 declare namespace FXAudio {
     class VolumeUnit extends Unit<VolumeCircuit> {
-        level: number;
+        get level(): number;
+        set level(value: number);
         constructor(context: Context);
     }
 }
@@ -339,8 +341,8 @@ declare namespace FXAudio {
 declare namespace FXAudio {
     class SignalHubCircuit extends Circuit {
         constructor(context: Context, numberOfInputs: number, numberOfOutputs: number);
-        private _createSignalHubCircuit(numberOfInputs, numberOfOutputs);
-        private _creatComponentGroup(numberOfNodes);
+        private _createSignalHubCircuit;
+        private _creatComponentGroup;
     }
 }
 declare namespace FXAudio {
@@ -370,15 +372,19 @@ declare namespace FXAudio {
 }
 declare namespace FXAudio {
     class DelayUnit extends Unit<DelayCircuit> {
-        time: number;
+        get time(): number;
+        set time(value: number);
         constructor(context: Context, maxDelayTime?: number);
     }
 }
 declare namespace FXAudio {
     class EchoUnit extends Unit<EchoCircuit> {
-        delayTime: number;
-        feedback: number;
-        balance: number;
+        get delayTime(): number;
+        set delayTime(value: number);
+        get feedback(): number;
+        set feedback(value: number);
+        get balance(): number;
+        set balance(value: number);
         constructor(context: Context, maxDelayTime?: number);
     }
 }
@@ -389,15 +395,15 @@ declare namespace FXAudio {
         private _feedbackNode;
         private _balanceNode;
         private _outputNode;
-        inputNode: GainNode;
-        delayNode: DelayNode;
-        feedbackNode: GainNode;
-        balanceNode: GainNode;
-        outputNode: GainNode;
+        get inputNode(): GainNode;
+        get delayNode(): DelayNode;
+        get feedbackNode(): GainNode;
+        get balanceNode(): GainNode;
+        get outputNode(): GainNode;
         constructor(context: Context, maxDelayTime: number);
-        private _createEchoComponents(maxDelayTime);
-        private _connectEchoComponents();
-        private _publishEchoComponents();
+        private _createEchoComponents;
+        private _connectEchoComponents;
+        private _publishEchoComponents;
     }
 }
 declare namespace FXAudio {
@@ -406,21 +412,24 @@ declare namespace FXAudio {
         private _lowPassFilterNode;
         private _gainNode;
         private _drive;
-        gainNode: GainNode;
-        lowPassFilterNode: BiquadFilterNode;
+        get gainNode(): GainNode;
+        get lowPassFilterNode(): BiquadFilterNode;
         constructor(context: Context);
         getDrive(): number;
         setDrive(value: number): void;
-        private _createOverdriveComponents();
-        private _connectOverdriveComponents();
-        private _publishOverdriveComponents();
+        private _createOverdriveComponents;
+        private _connectOverdriveComponents;
+        private _publishOverdriveComponents;
     }
 }
 declare namespace FXAudio {
     class OverdriveUnit extends Unit<OverdriveCircuit> {
-        level: number;
-        tone: number;
-        drive: number;
+        get level(): number;
+        set level(value: number);
+        get tone(): number;
+        set tone(value: number);
+        get drive(): number;
+        set drive(value: number);
         constructor(context: Context);
     }
 }
@@ -429,19 +438,21 @@ declare namespace FXAudio {
         private _depthNode;
         private _lfoNode;
         private _gainNode;
-        lfoNode: OscillatorNode;
-        depthNode: GainNode;
-        gainNode: GainNode;
+        get lfoNode(): OscillatorNode;
+        get depthNode(): GainNode;
+        get gainNode(): GainNode;
         constructor(context: Context);
-        private _createTremoloComponents();
-        private _connectTremoloComponents();
-        private _publishTremoloComponents();
+        private _createTremoloComponents;
+        private _connectTremoloComponents;
+        private _publishTremoloComponents;
     }
 }
 declare namespace FXAudio {
     class TremoloUnit extends Unit<TremoloCircuit> {
-        speed: number;
-        depth: number;
+        get speed(): number;
+        set speed(value: number);
+        get depth(): number;
+        set depth(value: number);
         constructor(context: Context);
     }
 }
@@ -451,25 +462,25 @@ declare namespace FXAudio {
         private _outputNode;
         private _delayNode;
         private _feedbackNode;
-        inputNode: GainNode;
-        outputNode: GainNode;
-        delayNode: DelayNode;
-        feedbackNode: GainNode;
+        get inputNode(): GainNode;
+        get outputNode(): GainNode;
+        get delayNode(): DelayNode;
+        get feedbackNode(): GainNode;
         constructor(context: Context);
-        private _createComboFilterComponents();
-        private _connectComboFilterComponents();
-        private _publishComboFilterComponents();
+        private _createComboFilterComponents;
+        private _connectComboFilterComponents;
+        private _publishComboFilterComponents;
     }
 }
 declare namespace FXAudio {
     class ModulatedComboFilterCircuit extends ComboFilterCircuit {
         private _depthNode;
         private _lfoNode;
-        lfoNode: OscillatorNode;
-        depthNode: GainNode;
+        get lfoNode(): OscillatorNode;
+        get depthNode(): GainNode;
         constructor(context: Context);
-        private _createModulatedComboFilterComponents();
-        private _connectModulatedComboFilterComponents();
+        private _createModulatedComboFilterComponents;
+        private _connectModulatedComboFilterComponents;
     }
 }
 declare namespace FXAudio {
@@ -479,8 +490,10 @@ declare namespace FXAudio {
 }
 declare namespace FXAudio {
     class ChorusUnit extends Unit<ChorusCircuit> {
-        rate: number;
-        depth: number;
+        get rate(): number;
+        set rate(value: number);
+        get depth(): number;
+        set depth(value: number);
         constructor(context: Context);
     }
 }
@@ -491,10 +504,14 @@ declare namespace FXAudio {
 }
 declare namespace FXAudio {
     class FlangerUnit extends Unit<FlangerCircuit> {
-        speed: number;
-        delayTime: number;
-        depth: number;
-        feedback: number;
+        get speed(): number;
+        set speed(value: number);
+        get delayTime(): number;
+        set delayTime(value: number);
+        get depth(): number;
+        set depth(value: number);
+        get feedback(): number;
+        set feedback(value: number);
         constructor(context: Context);
     }
 }
@@ -504,23 +521,26 @@ declare namespace FXAudio {
         private _gainNode;
         private _time;
         private _decay;
-        gainNode: GainNode;
+        get gainNode(): GainNode;
         constructor(context: Context);
         getTime(): number;
         setTime(value: number): void;
         getDecay(): number;
         setDecay(value: number): void;
-        private _createReverbComponents();
-        private _connectReverbComponents();
-        private _publishReverbComponents();
-        private _buildImpulseResponse();
+        private _createReverbComponents;
+        private _connectReverbComponents;
+        private _publishReverbComponents;
+        private _buildImpulseResponse;
     }
 }
 declare namespace FXAudio {
     class ReverbUnit extends Unit<ReverbCircuit> {
-        time: number;
-        decay: number;
-        level: number;
+        get time(): number;
+        set time(value: number);
+        get decay(): number;
+        set decay(value: number);
+        get level(): number;
+        set level(value: number);
         constructor(context: Context);
     }
 }
